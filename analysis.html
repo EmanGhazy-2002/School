@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تحليل النتائج - نظام تحليل النتائج</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header-section">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center py-3">
+          <button class="btn btn-outline-light" onclick="goHome()">
+            <i class="fas fa-home"></i> الرئيسية
+          </button>
+          <h1 class="main-title mb-0">تحليل النتائج</h1>
+          <div></div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container my-5">
+      <!-- Input Form -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3><i class="fas fa-info-circle"></i> معلومات الاختبار</h3>
+        </div>
+        <div class="card-body">
+          <form id="examForm">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">اسم المدرسة</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="schoolName"
+                  value="ثانوية دار التوحيد"
+                  required
+                />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">اسم المعلم</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="teacherName"
+                  placeholder="أدخل اسم المعلم"
+                  required
+                />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">المادة</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="subjectName"
+                  placeholder="أدخل اسم المادة"
+                  required
+                />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">الدرجة النهائية</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="totalGrade"
+                  placeholder="20"
+                  required
+                />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">الفصل الدراسي</label>
+                <select class="form-control" id="semester" required>
+                  <option value="">اختر الفصل</option>
+                  <option value="الأول">الفصل الأول</option>
+                  <option value="الثاني">الفصل الثاني</option>
+                  <option value="الثالث">الفصل الثالث</option>
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">نوع الاختبار</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="examType"
+                  placeholder="الاختبار التشخيصي القبلي"
+                  required
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Data Input Methods -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3><i class="fas fa-upload"></i> إدخال البيانات</h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <h5>رفع ملف Excel</h5>
+              <input
+                type="file"
+                class="form-control"
+                id="excelFile"
+                accept=".xlsx,.xls"
+                onchange="handleFileUpload(event)"
+              />
+              <small class="text-muted"
+                >يجب أن يحتوي الملف على عمودين: اسم الطالب والدرجة</small
+              >
+            </div>
+            <div class="col-md-6 mb-3">
+              <h5>إدخال يدوي</h5>
+              <button class="btn btn-primary" onclick="showManualInput()">
+                <i class="fas fa-keyboard"></i> إدخال البيانات يدوياً
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Manual Input Section -->
+      <div class="card mb-4" id="manualInputSection" style="display: none">
+        <div class="card-header">
+          <h3><i class="fas fa-edit"></i> إدخال البيانات يدوياً</h3>
+        </div>
+        <div class="card-body">
+          <div class="row mb-3">
+            <div class="col-md-5">
+              <input
+                type="text"
+                class="form-control"
+                id="studentName"
+                placeholder="اسم الطالب"
+              />
+            </div>
+            <div class="col-md-5">
+              <input
+                type="number"
+                class="form-control"
+                id="studentGrade"
+                placeholder="الدرجة"
+                step="0.1"
+              />
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn-success" onclick="addStudent()">
+                <i class="fas fa-plus"></i> إضافة
+              </button>
+            </div>
+          </div>
+          <div id="studentsList"></div>
+        </div>
+      </div>
+
+      <!-- Analysis Button -->
+      <div class="text-center mb-4">
+        <button
+          class="btn btn-lg btn-primary"
+          onclick="analyzeResults()"
+          id="analyzeBtn"
+          disabled
+        >
+          <i class="fas fa-chart-bar"></i> تحليل النتائج
+        </button>
+      </div>
+
+      <!-- Results Section -->
+      <div id="resultsSection" style="display: none">
+        <!-- Summary Cards -->
+        <div class="row mb-4">
+          <div class="col-md-3 mb-3">
+            <div class="summary-card excellent">
+              <h4>ممتاز</h4>
+              <span class="count" id="excellentCount">0</span>
+              <small>90% فأكثر</small>
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="summary-card very-good">
+              <h4>جيد جداً</h4>
+              <span class="count" id="veryGoodCount">0</span>
+              <small>80% - 89%</small>
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="summary-card good">
+              <h4>جيد</h4>
+              <span class="count" id="goodCount">0</span>
+              <small>70% - 79%</small>
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="summary-card acceptable">
+              <h4>مقبول</h4>
+              <span class="count" id="acceptableCount">0</span>
+              <small>60% - 69%</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col-md-3 mb-3">
+            <div class="summary-card weak">
+              <h4>ضعيف</h4>
+              <span class="count" id="weakCount">0</span>
+              <small>أقل من 60%</small>
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="summary-card total">
+              <h4>المجموع</h4>
+              <span class="count" id="totalStudents">0</span>
+              <small>إجمالي الطلاب</small>
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="summary-card average">
+              <h4>المتوسط</h4>
+              <span class="count" id="averageGrade">0</span>
+              <small>متوسط الدرجات</small>
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <div class="summary-card percentage">
+              <h4>النسبة</h4>
+              <span class="count" id="averagePercentage">0%</span>
+              <small>متوسط النسبة</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chart -->
+        <div class="card mb-4">
+          <div class="card-header">
+            <h3><i class="fas fa-chart-column"></i> توزيع الطلاب حسب الفئات</h3>
+          </div>
+          <div class="card-body">
+            <canvas id="resultsChart" width="400" height="200"></canvas>
+          </div>
+        </div>
+
+        <!-- Students List -->
+        <div class="card mb-4">
+          <div class="card-header">
+            <h3><i class="fas fa-list"></i> قائمة الطلاب والدرجات</h3>
+          </div>
+          <div class="card-body">
+            <div id="studentsResults"></div>
+          </div>
+        </div>
+
+        <!-- Export Button -->
+        <div class="text-center">
+          <button class="btn btn-lg btn-success" onclick="exportToPDF()">
+            <i class="fas fa-file-pdf"></i> تصدير التقرير PDF
+          </button>
+        </div>
+      </div>
+
+      <!-- PDF Template (Hidden) -->
+      <div
+        id="pdfTemplate"
+        style="
+          display: none;
+          padding: 40px;
+          background: white;
+          font-family: Arial, sans-serif;
+          direction: rtl;
+          text-align: right;
+        "
+      >
+        <div
+          style="
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 20px;
+          "
+        >
+          <h1 style="color: #007bff; margin: 0; font-size: 28px">
+            وزارة التعليم
+          </h1>
+          <h2 style="color: #6c757d; margin: 10px 0; font-size: 20px">
+            الإدارة العامة للتعليم بمحافظة الطائف
+          </h2>
+          <h3
+            style="
+              color: #007bff;
+              margin: 10px 0;
+              font-size: 24px;
+              background: #f8f9fa;
+              padding: 15px;
+              border-radius: 10px;
+            "
+          >
+            تحليل النتائج
+          </h3>
+        </div>
+
+        <div
+          style="
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+          "
+        >
+          <h3
+            style="
+              color: #007bff;
+              margin-bottom: 15px;
+              border-bottom: 2px solid #007bff;
+              padding-bottom: 10px;
+            "
+          >
+            معلومات الاختبار
+          </h3>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 15px;
+              font-size: 16px;
+            "
+          >
+            <div>
+              <strong>اسم المدرسة:</strong> <span id="pdfSchoolName"></span>
+            </div>
+            <div>
+              <strong>اسم المعلم:</strong> <span id="pdfTeacherName"></span>
+            </div>
+            <div>
+              <strong>المادة:</strong> <span id="pdfSubjectName"></span>
+            </div>
+            <div>
+              <strong>الدرجة النهائية:</strong> <span id="pdfTotalGrade"></span>
+            </div>
+            <div>
+              <strong>الفصل الدراسي:</strong> <span id="pdfSemester"></span>
+            </div>
+            <div>
+              <strong>نوع الاختبار:</strong> <span id="pdfExamType"></span>
+            </div>
+          </div>
+        </div>
+
+        <div
+          style="
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+          "
+        >
+          <h3
+            style="
+              color: #007bff;
+              margin-bottom: 15px;
+              border-bottom: 2px solid #007bff;
+              padding-bottom: 10px;
+            "
+          >
+            الإحصائيات
+          </h3>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: 15px;
+              text-align: center;
+            "
+          >
+            <div
+              style="
+                background: #28a745;
+                color: white;
+                padding: 15px;
+                border-radius: 8px;
+              "
+            >
+              <div style="font-size: 24px; font-weight: bold" id="pdfExcellent">
+                0
+              </div>
+              <div>ممتاز (90% فأكثر)</div>
+            </div>
+            <div
+              style="
+                background: #17a2b8;
+                color: white;
+                padding: 15px;
+                border-radius: 8px;
+              "
+            >
+              <div style="font-size: 24px; font-weight: bold" id="pdfVeryGood">
+                0
+              </div>
+              <div>جيد جداً (80-89%)</div>
+            </div>
+            <div
+              style="
+                background: #ffc107;
+                color: black;
+                padding: 15px;
+                border-radius: 8px;
+              "
+            >
+              <div style="font-size: 24px; font-weight: bold" id="pdfGood">
+                0
+              </div>
+              <div>جيد (70-79%)</div>
+            </div>
+            <div
+              style="
+                background: #fd7e14;
+                color: white;
+                padding: 15px;
+                border-radius: 8px;
+              "
+            >
+              <div
+                style="font-size: 24px; font-weight: bold"
+                id="pdfAcceptable"
+              >
+                0
+              </div>
+              <div>مقبول (60-69%)</div>
+            </div>
+          </div>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 15px;
+              text-align: center;
+              margin-top: 15px;
+            "
+          >
+            <div
+              style="
+                background: #dc3545;
+                color: white;
+                padding: 15px;
+                border-radius: 8px;
+              "
+            >
+              <div style="font-size: 24px; font-weight: bold" id="pdfWeak">
+                0
+              </div>
+              <div>ضعيف (أقل من 60%)</div>
+            </div>
+            <div
+              style="
+                background: #6c757d;
+                color: white;
+                padding: 15px;
+                border-radius: 8px;
+              "
+            >
+              <div style="font-size: 24px; font-weight: bold" id="pdfTotal">
+                0
+              </div>
+              <div>إجمالي الطلاب</div>
+            </div>
+            <div
+              style="
+                background: #007bff;
+                color: white;
+                padding: 15px;
+                border-radius: 8px;
+              "
+            >
+              <div style="font-size: 24px; font-weight: bold" id="pdfAverage">
+                0
+              </div>
+              <div>متوسط الدرجات</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 30px">
+          <h3
+            style="
+              color: #007bff;
+              margin-bottom: 15px;
+              border-bottom: 2px solid #007bff;
+              padding-bottom: 10px;
+            "
+          >
+            قائمة الطلاب والدرجات
+          </h3>
+          <div
+            id="pdfStudentsList"
+            style="background: #f8f9fa; padding: 20px; border-radius: 10px"
+          >
+            <!-- سيتم ملء هذا القسم بواسطة JavaScript -->
+          </div>
+        </div>
+
+        <div
+          style="
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #007bff;
+            color: #6c757d;
+          "
+        >
+          <p>تم إنشاء هذا التقرير بواسطة نظام تحليل النتائج</p>
+          <p>تاريخ الإنشاء: <span id="pdfDate"></span></p>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <!-- استبدال jsPDF بـ html2pdf لدعم النص العربي -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("pdfDate").textContent =
+          new Date().toLocaleDateString("ar-SA");
+      });
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>
