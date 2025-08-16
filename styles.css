@@ -369,41 +369,44 @@ body {
         max-height: 50px;
     }
 
-    /* جعل بطاقات الإحصائيات جنباً إلى جنب وتصغيرها */
+    /* تصغير بطاقات الإحصائيات جداً وجعلها في grid من اثنين */
     .row.mb-4 {
-        display: flex;
-        gap: 0.5rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.3rem;
+        margin-bottom: 0.5rem !important;
     }
 
     .row.mb-4 .col-md-6 {
-        flex: 1;
-        max-width: 50%;
+        max-width: 100%;
     }
 
     .stat-card {
-        padding: 0.4rem;
-        margin-bottom: 0.5rem;
+        padding: 0.3rem;
+        margin-bottom: 0;
         flex-direction: column;
         text-align: center;
         min-height: auto;
+        border-radius: 8px;
     }
 
     .stat-icon {
-        width: 30px;
-        height: 30px;
-        font-size: 0.8rem;
+        width: 20px;
+        height: 20px;
+        font-size: 0.6rem;
         margin-left: 0;
-        margin-bottom: 0.3rem;
+        margin-bottom: 0.2rem;
     }
 
     .stat-content h4 {
-        font-size: 0.7rem;
+        font-size: 0.6rem;
         margin-bottom: 0.1rem;
-        line-height: 1.2;
+        line-height: 1.1;
     }
 
     .stat-number {
-        font-size: 1rem;
+        font-size: 0.8rem;
+        font-weight: bold;
     }
 
     /* تصغير الأزرار الرئيسية */
@@ -481,12 +484,24 @@ body {
         font-size: 1rem;
     }
 
+    /* تصغير بطاقات الإحصائيات أكثر للشاشات الصغيرة جداً */
     .stat-card {
-        padding: 0.4rem;
+        padding: 0.2rem;
+        border-radius: 6px;
+    }
+
+    .stat-icon {
+        width: 18px;
+        height: 18px;
+        font-size: 0.5rem;
+    }
+
+    .stat-content h4 {
+        font-size: 0.55rem;
     }
 
     .stat-number {
-        font-size: 1rem;
+        font-size: 0.7rem;
     }
 
     .container {
