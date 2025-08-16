@@ -271,7 +271,7 @@ function calculateStatistics(students, totalGrade) {
     if (percentage >= 90) stats.excellent++;
     else if (percentage >= 80) stats.veryGood++;
     else if (percentage >= 70) stats.good++;
-    else if (percentage >= 60) stats.acceptable++;
+    else if (percentage >= 50) stats.acceptable++;
     else stats.weak++;
   });
 
@@ -317,7 +317,7 @@ function displayStudentsResults(students, totalGrade) {
     } else if (percentage >= 70) {
       gradeClass = "grade-good";
       gradeText = "جيد";
-    } else if (percentage >= 60) {
+    } else if (percentage >= 50) {
       gradeClass = "grade-acceptable";
       gradeText = "مقبول";
     } else {
@@ -485,7 +485,7 @@ function exportToPDF() {
   // ترتيب الطلاب حسب الدرجة
   const sortedStudents = [...dataToExport].sort((a, b) => b.grade - a.grade);
 
-  // إنشاء محتوى HTML للطباعة
+  // إنشاء قائمة الطلاب بتصميم مضغوط
   let studentsListHTML = "";
   sortedStudents.forEach((student, index) => {
     const percentage = (student.grade / Number.parseFloat(totalGrade)) * 100;
@@ -501,7 +501,7 @@ function exportToPDF() {
     } else if (percentage >= 70) {
       gradeText = "جيد";
       gradeColor = "#ffc107";
-    } else if (percentage >= 60) {
+    } else if (percentage >= 50) {
       gradeText = "مقبول";
       gradeColor = "#fd7e14";
     } else {
@@ -510,133 +510,282 @@ function exportToPDF() {
     }
 
     studentsListHTML += `
-      <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; margin-bottom: 8px; background: ${
-        index % 2 === 0 ? "#f8f9fa" : "white"
-      }; border: 1px solid #e9ecef; border-radius: 8px;">
-        <span style="font-weight: bold; color: #333; font-size: 16px;">${
+      <tr style="border-bottom: 1px solid #dee2e6;">
+        <td style="padding: 8px; text-align: center; font-weight: bold;">${
           index + 1
-        }. ${student.name}</span>
-        <div style="display: flex; align-items: center; gap: 15px;">
-          <span style="font-size: 18px; font-weight: bold; color: #0062CC;">${
-            student.grade
-          }</span>
-          <span style="color: white; background: ${gradeColor}; padding: 6px 12px; border-radius: 20px; font-weight: bold; font-size: 14px;">${gradeText}</span>
-        </div>
-      </div>
+        }</td>
+        <td style="padding: 8px; text-align: right;">${student.name}</td>
+        <td style="padding: 8px; text-align: center; font-weight: bold; color: #0062CC;">${
+          student.grade
+        }</td>
+        <td style="padding: 8px; text-align: center;">
+          <span style="color: white !important; background: ${gradeColor} !important; padding: 4px 8px; border-radius: 12px; font-size: 12px; font-weight: bold;">${gradeText}</span>
+        </td>
+      </tr>
     `;
   });
+
+  // إنشاء الرسم البياني كـ SVG
+  const maxValue = Math.max(
+    stats.excellent,
+    stats.veryGood,
+    stats.good,
+    stats.acceptable,
+    stats.weak,
+    1
+  );
+  const chartHTML = `
+    <svg width="100%" height="200" viewBox="0 0 500 200" style="background: #f8f9fa !important; border-radius: 8px; margin: 20px 0;">
+      <text x="250" y="20" text-anchor="middle" style="font-size: 14px; font-weight: bold; fill: #333 !important;">توزيع الطلاب حسب الفئات</text>
+      
+      <!-- ممتاز -->
+      <rect x="50" y="${
+        180 - (stats.excellent / maxValue) * 140
+      }" width="60" height="${
+    (stats.excellent / maxValue) * 140
+  }" fill="#28a745" rx="4"/>
+      <text x="80" y="195" text-anchor="middle" style="font-size: 12px; fill: #333 !important;">ممتاز</text>
+      <text x="80" y="${
+        175 - (stats.excellent / maxValue) * 140
+      }" text-anchor="middle" style="font-size: 12px; font-weight: bold; fill: #333 !important;">${
+    stats.excellent
+  }</text>
+      
+      <!-- جيد جداً -->
+      <rect x="130" y="${
+        180 - (stats.veryGood / maxValue) * 140
+      }" width="60" height="${
+    (stats.veryGood / maxValue) * 140
+  }" fill="#17a2b8" rx="4"/>
+      <text x="160" y="195" text-anchor="middle" style="font-size: 12px; fill: #333 !important;">جيد جداً</text>
+      <text x="160" y="${
+        175 - (stats.veryGood / maxValue) * 140
+      }" text-anchor="middle" style="font-size: 12px; font-weight: bold; fill: #333 !important;">${
+    stats.veryGood
+  }</text>
+      
+      <!-- جيد -->
+      <rect x="210" y="${
+        180 - (stats.good / maxValue) * 140
+      }" width="60" height="${
+    (stats.good / maxValue) * 140
+  }" fill="#ffc107" rx="4"/>
+      <text x="240" y="195" text-anchor="middle" style="font-size: 12px; fill: #333 !important;">جيد</text>
+      <text x="240" y="${
+        175 - (stats.good / maxValue) * 140
+      }" text-anchor="middle" style="font-size: 12px; font-weight: bold; fill: #333 !important;">${
+    stats.good
+  }</text>
+      
+      <!-- مقبول -->
+      <rect x="290" y="${
+        180 - (stats.acceptable / maxValue) * 140
+      }" width="60" height="${
+    (stats.acceptable / maxValue) * 140
+  }" fill="#fd7e14" rx="4"/>
+      <text x="320" y="195" text-anchor="middle" style="font-size: 12px; fill: #333 !important;">مقبول</text>
+      <text x="320" y="${
+        175 - (stats.acceptable / maxValue) * 140
+      }" text-anchor="middle" style="font-size: 12px; font-weight: bold; fill: #333 !important;">${
+    stats.acceptable
+  }</text>
+      
+      <!-- ضعيف -->
+      <rect x="370" y="${
+        180 - (stats.weak / maxValue) * 140
+      }" width="60" height="${
+    (stats.weak / maxValue) * 140
+  }" fill="#dc3545" rx="4"/>
+      <text x="400" y="195" text-anchor="middle" style="font-size: 12px; fill: #333 !important;">ضعيف</text>
+      <text x="400" y="${
+        175 - (stats.weak / maxValue) * 140
+      }" text-anchor="middle" style="font-size: 12px; font-weight: bold; fill: #333 !important;">${
+    stats.weak
+  }</text>
+    </svg>
+  `;
 
   const htmlContent = `
     <!DOCTYPE html>
     <html dir="rtl" lang="ar">
     <head>
       <meta charset="UTF-8">
-      <title>تقرير تحليل النتائج</title>
+      <title>تقرير ${examType}</title>
       <style>
+        /* إضافة CSS خاص للطباعة لضمان ظهور الألوان والخلفيات */
+        * {
+          print-color-adjust: exact !important;
+          color-adjust: exact !important;
+          -webkit-print-color-adjust: exact !important;
+        }
         body { 
           font-family: 'Segoe UI', Tahoma, Arial, sans-serif; 
-          margin: 20px; 
+          margin: 15px; 
           direction: rtl; 
-          line-height: 1.6;
-          color: #333;
+          line-height: 1.4;
+          color: #333 !important;
+          font-size: 14px;
+          print-color-adjust: exact !important;
+          color-adjust: exact !important;
         }
         .header { 
           text-align: center; 
-          margin-bottom: 40px; 
-          padding: 20px;
-          background: linear-gradient(135deg, #0062CC, #004499);
-          color: white;
-          border-radius: 15px;
-        }
-        .header h1 { margin: 0; font-size: 28px; }
-        .header h2 { margin: 10px 0; font-size: 20px; font-weight: normal; }
-        .header h3 { margin: 15px 0 0 0; font-size: 24px; }
-        .info-section { 
-          background: #f8f9fa;
-          padding: 20px;
+          margin-bottom: 25px; 
+          padding: 15px;
+          background: linear-gradient(135deg, #0062CC, #004499) !important;
+          color: white !important;
           border-radius: 10px;
-          margin-bottom: 30px;
-          border: 2px solid #0062CC;
+          print-color-adjust: exact !important;
         }
-        .info-row {
-          display: flex;
-          justify-content: space-between;
-          margin-bottom: 10px;
-          padding: 8px 0;
-          border-bottom: 1px solid #dee2e6;
-        }
-        .info-row:last-child { border-bottom: none; }
-        .stats-section {
-          background: white;
-          padding: 20px;
-          border-radius: 10px;
-          margin-bottom: 30px;
-          border: 2px solid #0062CC;
-        }
-        .stats-grid { 
-          display: grid; 
-          grid-template-columns: repeat(3, 1fr); 
-          gap: 15px; 
-          margin: 20px 0; 
-        }
-        .stat-box { 
-          padding: 20px; 
-          border-radius: 10px; 
-          text-align: center;
-          color: white;
+        .header h1 { margin: 0; font-size: 22px; color: white !important; }
+        .header h2 { margin: 8px 0; font-size: 16px; font-weight: normal; color: white !important; }
+        .header h3 { margin: 10px 0 0 0; font-size: 20px; color: white !important; }
+        .report-title { 
+          background: rgba(255,255,255,0.2) !important; 
+          padding: 10px; 
+          border-radius: 8px; 
+          margin-top: 15px;
+          font-size: 18px;
           font-weight: bold;
+          color: white !important;
+          print-color-adjust: exact !important;
         }
-        .stat-excellent { background: #28a745; }
-        .stat-very-good { background: #17a2b8; }
-        .stat-good { background: #ffc107; color: #333; }
-        .stat-acceptable { background: #fd7e14; }
-        .stat-weak { background: #dc3545; }
-        .stat-total { background: #0062CC; }
-        .stat-box h4 { margin: 0 0 10px 0; font-size: 16px; }
-        .stat-box .number { font-size: 32px; margin: 0; }
-        .students-section {
-          background: white;
-          padding: 20px;
-          border-radius: 10px;
-          border: 2px solid #0062CC;
+        .info-table { 
+          width: 100%;
+          border-collapse: collapse;
+          margin-bottom: 20px;
+          background: #f8f9fa !important;
+          border: 2px solid #0062CC !important;
+          border-radius: 8px;
+          overflow: hidden;
+          print-color-adjust: exact !important;
+        }
+        .info-table td { 
+          padding: 8px 12px; 
+          border-bottom: 1px solid #dee2e6 !important;
+        }
+        .info-table td:first-child { 
+          font-weight: bold; 
+          background: #e3f2fd !important;
+          width: 30%;
+          print-color-adjust: exact !important;
+        }
+        .stats-table { 
+          width: 100%;
+          border-collapse: collapse;
+          margin: 15px 0;
+          background: white !important;
+          border: 2px solid #0062CC !important;
+          border-radius: 8px;
+          overflow: hidden;
+          print-color-adjust: exact !important;
+        }
+        .stats-table th { 
+          background: #0062CC !important; 
+          color: white !important; 
+          padding: 10px 8px; 
+          text-align: center;
+          font-size: 14px;
+          print-color-adjust: exact !important;
+        }
+        .stats-table td { 
+          padding: 8px; 
+          text-align: center; 
+          font-weight: bold;
+          font-size: 16px;
+        }
+        .stat-excellent { background: #d4edda !important; color: #155724 !important; print-color-adjust: exact !important; }
+        .stat-very-good { background: #d1ecf1 !important; color: #0c5460 !important; print-color-adjust: exact !important; }
+        .stat-good { background: #fff3cd !important; color: #856404 !important; print-color-adjust: exact !important; }
+        .stat-acceptable { background: #ffeaa7 !important; color: #856404 !important; print-color-adjust: exact !important; }
+        .stat-weak { background: #f8d7da !important; color: #721c24 !important; print-color-adjust: exact !important; }
+        .students-table { 
+          width: 100%;
+          border-collapse: collapse;
+          margin: 15px 0;
+          background: white !important;
+          border: 2px solid #0062CC !important;
+          border-radius: 8px;
+          overflow: hidden;
+          print-color-adjust: exact !important;
+        }
+        .students-table th { 
+          background: #0062CC !important; 
+          color: white !important; 
+          padding: 10px 8px; 
+          text-align: center;
+          font-size: 14px;
+          print-color-adjust: exact !important;
+        }
+        .students-table td { 
+          padding: 8px; 
+          border-bottom: 1px solid #dee2e6 !important;
         }
         .section-title {
-          color: #0062CC;
-          font-size: 22px;
+          color: #0062CC !important;
+          font-size: 16px;
           font-weight: bold;
-          margin-bottom: 20px;
+          margin: 20px 0 10px 0;
           text-align: center;
-          padding-bottom: 10px;
-          border-bottom: 3px solid #0062CC;
+          padding: 8px;
+          background: #e3f2fd !important;
+          border-radius: 6px;
+          print-color-adjust: exact !important;
         }
         .average-info {
-          background: #e3f2fd;
-          padding: 15px;
-          border-radius: 8px;
-          margin: 20px 0;
+          background: #e3f2fd !important;
+          padding: 10px;
+          border-radius: 6px;
+          margin: 15px 0;
           text-align: center;
-          font-size: 18px;
+          font-size: 16px;
           font-weight: bold;
-          color: #0062CC;
+          color: #0062CC !important;
+          print-color-adjust: exact !important;
         }
         .footer { 
-          margin-top: 40px; 
+          margin-top: 30px; 
           text-align: center;
-          padding: 20px;
-          background: #f8f9fa;
-          border-radius: 10px;
-          border: 2px solid #0062CC;
+          padding: 15px;
+          background: #f8f9fa !important;
+          border-radius: 8px;
+          border: 2px solid #0062CC !important;
+          print-color-adjust: exact !important;
         }
-        .footer p { margin: 5px 0; }
         .director-name {
-          font-size: 18px;
+          font-size: 16px;
           font-weight: bold;
-          color: #0062CC;
+          color: #0062CC !important;
+          margin-bottom: 5px;
         }
         @media print {
-          body { margin: 0; }
-          .header { break-inside: avoid; }
-          .stats-section { break-inside: avoid; }
+          * {
+            print-color-adjust: exact !important;
+            color-adjust: exact !important;
+            -webkit-print-color-adjust: exact !important;
+          }
+          body { 
+            margin: 0; 
+            font-size: 12px; 
+            print-color-adjust: exact !important;
+          }
+          .header { 
+            break-inside: avoid; 
+            background: linear-gradient(135deg, #0062CC, #004499) !important;
+            color: white !important;
+            print-color-adjust: exact !important;
+          }
+          .header * { color: white !important; }
+          .stats-table th { 
+            background: #0062CC !important; 
+            color: white !important; 
+            print-color-adjust: exact !important;
+          }
+          .students-table th { 
+            background: #0062CC !important; 
+            color: white !important; 
+            print-color-adjust: exact !important;
+          }
         }
       </style>
     </head>
@@ -645,81 +794,63 @@ function exportToPDF() {
         <h1>وزارة التعليم</h1>
         <h2>الإدارة العامة للتعليم بمحافظة الطائف</h2>
         <h3>${schoolName}</h3>
-        <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; margin-top: 20px;">
-          <h2 style="margin: 0;">📊 تقرير تحليل النتائج</h2>
-        </div>
+        <div class="report-title">تقرير ${examType}</div>
       </div>
       
-      <div class="info-section">
-        <h3 class="section-title">معلومات الاختبار</h3>
-        <div class="info-row">
-          <strong>👨‍🏫 اسم المعلم:</strong>
-          <span>${teacherName}</span>
-        </div>
-        <div class="info-row">
-          <strong>📚 المادة:</strong>
-          <span>${subjectName}</span>
-        </div>
-        <div class="info-row">
-          <strong>🎯 الدرجة النهائية:</strong>
-          <span>${totalGrade}</span>
-        </div>
-        <div class="info-row">
-          <strong>📅 الفصل الدراسي:</strong>
-          <span>${semester}</span>
-        </div>
-        <div class="info-row">
-          <strong>📝 نوع الاختبار:</strong>
-          <span>${examType}</span>
-        </div>
+      <div class="section-title">معلومات الاختبار</div>
+      <table class="info-table">
+        <tr><td>اسم المعلم</td><td>${teacherName}</td></tr>
+        <tr><td>المادة</td><td>${subjectName}</td></tr>
+        <tr><td>الدرجة النهائية</td><td>${totalGrade}</td></tr>
+        <tr><td>الفصل الدراسي</td><td>${semester}</td></tr>
+        <tr><td>نوع الاختبار</td><td>${examType}</td></tr>
+      </table>
+      
+      <div class="section-title">الإحصائيات التفصيلية</div>
+      <table class="stats-table">
+        <tr>
+          <th>ممتاز</th>
+          <th>جيد جداً</th>
+          <th>جيد</th>
+          <th>مقبول</th>
+          <th>ضعيف</th>
+          <th>المجموع</th>
+        </tr>
+        <tr>
+          <td class="stat-excellent">${stats.excellent}</td>
+          <td class="stat-very-good">${stats.veryGood}</td>
+          <td class="stat-good">${stats.good}</td>
+          <td class="stat-acceptable">${stats.acceptable}</td>
+          <td class="stat-weak">${stats.weak}</td>
+          <td style="background: #0062CC !important; color: white !important; print-color-adjust: exact !important;">${
+            stats.total
+          }</td>
+        </tr>
+      </table>
+      
+      <div class="average-info">
+        متوسط الدرجات: ${stats.average.toFixed(
+          2
+        )} من ${totalGrade} (${stats.averagePercentage.toFixed(1)}%)
       </div>
       
-      <div class="stats-section">
-        <h3 class="section-title">📈 الإحصائيات التفصيلية</h3>
-        <div class="stats-grid">
-          <div class="stat-box stat-excellent">
-            <h4>⭐ ممتاز</h4>
-            <p class="number">${stats.excellent}</p>
-          </div>
-          <div class="stat-box stat-very-good">
-            <h4>🌟 جيد جداً</h4>
-            <p class="number">${stats.veryGood}</p>
-          </div>
-          <div class="stat-box stat-good">
-            <h4>👍 جيد</h4>
-            <p class="number">${stats.good}</p>
-          </div>
-          <div class="stat-box stat-acceptable">
-            <h4>✅ مقبول</h4>
-            <p class="number">${stats.acceptable}</p>
-          </div>
-          <div class="stat-box stat-weak">
-            <h4>⚠️ ضعيف</h4>
-            <p class="number">${stats.weak}</p>
-          </div>
-          <div class="stat-box stat-total">
-            <h4>👥 المجموع</h4>
-            <p class="number">${stats.total}</p>
-          </div>
-        </div>
-        <div class="average-info">
-          📊 متوسط الدرجات: ${stats.average.toFixed(
-            2
-          )} من ${totalGrade} (${stats.averagePercentage.toFixed(1)}%)
-        </div>
-      </div>
+      <div class="section-title">الرسم البياني</div>
+      ${chartHTML}
       
-      <div class="students-section">
-        <h3 class="section-title">👥 قائمة الطلاب مرتبة حسب الدرجات</h3>
-        <div style="margin-top: 20px;">
-          ${studentsListHTML}
-        </div>
-      </div>
+      <div class="section-title">قائمة الطلاب مرتبة حسب الدرجات</div>
+      <table class="students-table">
+        <tr>
+          <th style="width: 10%;">الترتيب</th>
+          <th style="width: 40%;">اسم الطالب</th>
+          <th style="width: 20%;">الدرجة</th>
+          <th style="width: 30%;">التقدير</th>
+        </tr>
+        ${studentsListHTML}
+      </table>
       
       <div class="footer">
-        <p class="director-name">👨‍💼 مدير المدرسة: فهد بن حسن القحطاني</p>
-        <p>📅 تاريخ التقرير: ${new Date().toLocaleDateString("ar-SA")}</p>
-        <p style="color: #666; font-size: 14px;">تم إنشاء هذا التقرير بواسطة نظام تحليل النتائج</p>
+        <div class="director-name">مدير المدرسة: فهد بن حسن القحطاني</div>
+        <div>تاريخ التقرير: ${new Date().toLocaleDateString("ar-SA")}</div>
       </div>
     </body>
     </html>
