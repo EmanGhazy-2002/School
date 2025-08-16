@@ -1,3 +1,4 @@
+
 /* Global Styles */
 * {
     margin: 0;
@@ -7,7 +8,8 @@
 
 body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* تغيير لون الثيم إلى #0062CC */
+    background: linear-gradient(135deg, #0062cc 0%, #004499 100%);
     min-height: 100vh;
     color: #333;
 }
@@ -40,98 +42,102 @@ body {
     opacity: 0.8;
 }
 
-/* Statistics Cards */
+/* تصغير حجم بطاقات الإحصائيات */
 .stat-card {
     background: white;
     border-radius: 15px;
-    padding: 2rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .stat-icon {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    /* تحديث لون الأيقونة للثيم الجديد */
+    background: linear-gradient(135deg, #0062cc, #004499);
     color: white;
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5rem;
-    margin-left: 1.5rem;
+    font-size: 1.2rem;
+    margin-left: 1rem;
 }
 
 .stat-content h4 {
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: #333;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
 }
 
 .stat-number {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     font-weight: bold;
-    color: #667eea;
+    /* تحديث لون الأرقام للثيم الجديد */
+    color: #0062cc;
 }
 
-/* Action Buttons */
+/* تكبير أزرار العمل الرئيسية */
 .action-buttons {
     display: flex;
-    gap: 2rem;
+    gap: 3rem;
     justify-content: center;
     flex-wrap: wrap;
+    margin-top: 3rem;
 }
 
 .action-btn {
     background: white;
     border: none;
-    border-radius: 20px;
-    padding: 2rem 3rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+    padding: 3rem 4rem;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
-    min-width: 200px;
+    gap: 1.5rem;
+    min-width: 250px;
 }
 
 .action-btn:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
 }
 
 .action-btn i {
-    font-size: 3rem;
+    font-size: 4rem;
 }
 
 .action-btn span {
-    font-size: 1.3rem;
-    font-weight: 600;
+    font-size: 1.5rem;
+    font-weight: 700;
 }
 
 .primary-btn i {
-    color: #667eea;
+    /* تحديث لون الأزرار للثيم الجديد */
+    color: #0062cc;
 }
 
 .primary-btn span {
-    color: #667eea;
+    color: #0062cc;
 }
 
 .secondary-btn i {
-    color: #764ba2;
+    color: #004499;
 }
 
 .secondary-btn span {
-    color: #764ba2;
+    color: #004499;
 }
 
 /* Cards */
@@ -143,7 +149,8 @@ body {
 }
 
 .card-header {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    /* تحديث لون الهيدر للثيم الجديد */
+    background: linear-gradient(135deg, #0062cc, #004499);
     color: white;
     border: none;
     padding: 1.5rem;
@@ -167,8 +174,9 @@ body {
 }
 
 .form-control:focus {
-    border-color: #667eea;
-    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    /* تحديث لون التركيز للثيم الجديد */
+    border-color: #0062cc;
+    box-shadow: 0 0 0 0.2rem rgba(0, 98, 204, 0.25);
 }
 
 .form-label {
@@ -266,11 +274,12 @@ body {
 }
 
 .percentage {
-    border-right: 5px solid #667eea;
+    /* تحديث لون النسبة للثيم الجديد */
+    border-right: 5px solid #0062cc;
 }
 
 .percentage .count {
-    color: #667eea;
+    color: #0062cc;
 }
 
 /* Students List */
@@ -334,11 +343,13 @@ body {
     .action-buttons {
         flex-direction: column;
         align-items: center;
+        gap: 2rem;
     }
 
     .action-btn {
         width: 100%;
         max-width: 300px;
+        padding: 2rem 3rem;
     }
 
     .stat-card {
@@ -371,7 +382,8 @@ body {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #667eea, #764ba2);
+    /* تحديث لون الأزرار الأساسية للثيم الجديد */
+    background: linear-gradient(135deg, #0062cc, #004499);
     border: none;
 }
 

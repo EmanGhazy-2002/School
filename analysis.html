@@ -39,16 +39,19 @@
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label class="form-label">اسم المدرسة</label>
+                <!-- جعل اسم المدرسة ثابت وغير قابل للتعديل -->
                 <input
                   type="text"
                   class="form-control"
                   id="schoolName"
                   value="ثانوية دار التوحيد"
-                  required
+                  readonly
+                  style="background-color: #f8f9fa"
                 />
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">اسم المعلم</label>
+                <!-- إزالة كلمة "مثال" من placeholder -->
                 <input
                   type="text"
                   class="form-control"
@@ -79,22 +82,23 @@
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">الفصل الدراسي</label>
+                <!-- تحديد خيارات الفصل الدراسي للأول والثاني فقط -->
                 <select class="form-control" id="semester" required>
                   <option value="">اختر الفصل</option>
-                  <option value="الأول">الفصل الأول</option>
-                  <option value="الثاني">الفصل الثاني</option>
-                  <option value="الثالث">الفصل الثالث</option>
+                  <option value="الأول">الفصل الدراسي الأول</option>
+                  <option value="الثاني">الفصل الدراسي الثاني</option>
                 </select>
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">نوع الاختبار</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="examType"
-                  placeholder="الاختبار التشخيصي القبلي"
-                  required
-                />
+                <!-- تحويل نوع الاختبار إلى قائمة منسدلة -->
+                <select class="form-control" id="examType" required>
+                  <option value="">اختر نوع الاختبار</option>
+                  <option value="الاختبار التشخيصي">الاختبار التشخيصي</option>
+                  <option value="الاختبار البعدي">الاختبار البعدي</option>
+                  <option value="اختبار الفترة">اختبار الفترة</option>
+                  <option value="الاختبار النهائي">الاختبار النهائي</option>
+                </select>
               </div>
             </div>
           </form>
@@ -139,11 +143,12 @@
         <div class="card-body">
           <div class="row mb-3">
             <div class="col-md-5">
+              <!-- إضافة كلمة "اختياري" لاسم الطالب -->
               <input
                 type="text"
                 class="form-control"
                 id="studentName"
-                placeholder="اسم الطالب"
+                placeholder="اسم الطالب (اختياري)"
               />
             </div>
             <div class="col-md-5">
@@ -520,6 +525,11 @@
         >
           <p>تم إنشاء هذا التقرير بواسطة نظام تحليل النتائج</p>
           <p>تاريخ الإنشاء: <span id="pdfDate"></span></p>
+          <div style="margin-top: 20px; text-align: left">
+            <p style="font-weight: bold; color: #007bff">
+              مدير المدرسة: فهد بن حسن القحطاني
+            </p>
+          </div>
         </div>
       </div>
     </main>

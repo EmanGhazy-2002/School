@@ -28,8 +28,28 @@
 
     <!-- Main Content -->
     <main class="container my-5">
+      <!-- Action Buttons -->
+      <div class="row justify-content-center mb-5">
+        <div class="col-md-10">
+          <div class="action-buttons">
+            <button
+              class="action-btn primary-btn"
+              onclick="goToAnalysis(); return false;"
+              onmousedown="console.log('[v0] Button clicked')"
+            >
+              <i class="fas fa-chart-line"></i>
+              <span>تحليل النتائج</span>
+            </button>
+            <button class="action-btn secondary-btn" onclick="showReports()">
+              <i class="fas fa-award"></i>
+              <span>شواهد الأداء</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
       <!-- Statistics Cards -->
-      <div class="row mb-5">
+      <div class="row">
         <div class="col-md-6 mb-3">
           <div class="stat-card">
             <div class="stat-icon">
@@ -50,26 +70,6 @@
               <h4>عدد التقارير</h4>
               <span class="stat-number" id="reportCount">0</span>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Action Buttons -->
-      <div class="row justify-content-center">
-        <div class="col-md-8">
-          <div class="action-buttons">
-            <button
-              class="action-btn primary-btn"
-              onclick="goToAnalysis(); return false;"
-              onmousedown="console.log('[v0] Button clicked')"
-            >
-              <i class="fas fa-chart-line"></i>
-              <span>تحليل النتائج</span>
-            </button>
-            <button class="action-btn secondary-btn" onclick="showReports()">
-              <i class="fas fa-award"></i>
-              <span>شواهد الأداء</span>
-            </button>
           </div>
         </div>
       </div>
