@@ -81,10 +81,7 @@ body {
 .stat-content h4 {
     font-size: 1rem;
     color: #333;
-    margin-bottom: 0;
-    display: inline-flex;
-    align-items: center;
-    white-space: nowrap;
+    margin-bottom: 0.3rem;
 }
 
 .stat-number {
@@ -92,7 +89,6 @@ body {
     font-weight: bold;
     /* تحديث لون الأرقام للثيم الجديد */
     color: #3c7db8;
-    margin-right: 0.5rem;
 }
 
 /* تكبير أزرار العمل الرئيسية */
@@ -352,8 +348,7 @@ body {
     }
 
     .header-section {
-        padding: 0.5rem 0;
-        margin-bottom: 0.3rem;
+        padding: 1rem 0;
     }
 
     .main-title {
@@ -374,57 +369,47 @@ body {
         max-height: 50px;
     }
 
-    /* تصغير بطاقات الإحصائيات */
-    .row {
+    /* جعل بطاقات الإحصائيات جنباً إلى جنب وتصغيرها */
+    .row.mb-4 {
         display: flex;
-        flex-direction: row;
         gap: 0.5rem;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        max-width: 350px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 0.5rem;
     }
 
-    .row .col-md-6 {
-        display: flex;
-        justify-content: center;
+    .row.mb-4 .col-md-6 {
         flex: 1;
-        max-width: 150px;
+        max-width: 50%;
     }
 
     .stat-card {
-        padding: 0.5rem;
-        width: 100%;
-        max-width: 150px;
+        padding: 0.4rem;
+        margin-bottom: 0.5rem;
+        flex-direction: column;
+        text-align: center;
+        min-height: auto;
     }
 
     .stat-icon {
-        width: 35px;
-        height: 35px;
-        font-size: 0.9rem;
-        margin-left: 0.5rem;
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+        margin-left: 0;
+        margin-bottom: 0.3rem;
     }
 
     .stat-content h4 {
-        font-size: 0.8rem;
-        margin-bottom: 0;
-        display: inline-flex;
-        align-items: center;
-        white-space: nowrap;
+        font-size: 0.7rem;
+        margin-bottom: 0.1rem;
+        line-height: 1.2;
     }
 
     .stat-number {
-        font-size: 1.2rem;
-        margin-right: 0.3rem;
+        font-size: 1rem;
     }
 
     /* تصغير الأزرار الرئيسية */
     .action-buttons {
         gap: 1rem;
-        margin-top: 0.5rem;
+        margin-top: 1.5rem;
     }
 
     .action-btn {
@@ -448,16 +433,16 @@ body {
     }
 
     .py-4 {
-        padding-top: 0.5rem !important;
-        padding-bottom: 0.5rem !important;
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
     }
 
     .mb-4 {
-        margin-bottom: 0.5rem !important;
+        margin-bottom: 1rem !important;
     }
 
     .mb-5 {
-        margin-bottom: 1rem !important;
+        margin-bottom: 1.5rem !important;
     }
 
     /* تصغير الفوتر */
@@ -496,43 +481,12 @@ body {
         font-size: 1rem;
     }
 
-    .row {
-        display: flex;
-        flex-direction: row;
-        gap: 0.3rem;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        max-width: 300px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 0.3rem;
-    }
-
-    .row .col-md-6 {
-        display: flex;
-        justify-content: center;
-        flex: 1;
-        max-width: 120px;
-    }
-
     .stat-card {
         padding: 0.4rem;
-        width: 100%;
-        max-width: 120px;
-    }
-
-    .stat-content h4 {
-        font-size: 0.7rem;
-        margin-bottom: 0;
-        display: inline-flex;
-        align-items: center;
-        white-space: nowrap;
     }
 
     .stat-number {
         font-size: 1rem;
-        margin-right: 0.2rem;
     }
 
     .container {
