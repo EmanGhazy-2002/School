@@ -69,7 +69,22 @@ function goHome() {
 }
 
 function showReports() {
-  alert("ميزة شواهد الأداء قيد التطوير");
+  console.log("[v0] showReports function called");
+  try {
+    if (typeof window !== "undefined" && window.location) {
+      window.location.href = "performance-evidence.html";
+    } else {
+      document.location = "performance-evidence.html";
+    }
+  } catch (error) {
+    console.error("[v0] Error navigating to performance evidence page:", error);
+    try {
+      window.open("performance-evidence.html", "_self");
+    } catch (error2) {
+      console.error("[v0] Fallback navigation also failed:", error2);
+      alert("خطأ في الانتقال إلى صفحة شواهد الأداء. يرجى المحاولة مرة أخرى.");
+    }
+  }
 }
 
 // Show manual input section
