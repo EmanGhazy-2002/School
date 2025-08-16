@@ -338,34 +338,144 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    body {
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    .container {
+        padding: 0.5rem;
+    }
+
+    .header-section {
+        padding: 1rem 0;
+    }
+
     .main-title {
-        font-size: 2rem;
+        font-size: 1.5rem;
+        margin-bottom: 0.3rem;
     }
 
     .sub-title {
-        font-size: 1.2rem;
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
     }
 
-    .action-buttons {
-        flex-direction: column;
-        align-items: center;
-        gap: 2rem;
+    .school-title {
+        font-size: 0.9rem;
     }
 
-    .action-btn {
-        width: 100%;
-        max-width: 300px;
-        padding: 2rem 3rem;
+    .ministry-logo {
+        max-height: 50px;
     }
 
+    /* تصغير بطاقات الإحصائيات */
     .stat-card {
-        flex-direction: column;
-        text-align: center;
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
     }
 
     .stat-icon {
-        margin-left: 0;
-        margin-bottom: 1rem;
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+        margin-left: 0.5rem;
+    }
+
+    .stat-content h4 {
+        font-size: 0.8rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .stat-number {
+        font-size: 1.2rem;
+    }
+
+    /* تصغير الأزرار الرئيسية */
+    .action-buttons {
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .action-btn {
+        padding: 1.5rem 2rem;
+        min-width: 200px;
+        max-width: 250px;
+    }
+
+    .action-btn i {
+        font-size: 2.5rem;
+    }
+
+    .action-btn span {
+        font-size: 1.1rem;
+    }
+
+    /* تصغير المسافات العامة */
+    .py-5 {
+        padding-top: 1.5rem !important;
+        padding-bottom: 1.5rem !important;
+    }
+
+    .py-4 {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
+
+    .mb-4 {
+        margin-bottom: 1rem !important;
+    }
+
+    .mb-5 {
+        margin-bottom: 1.5rem !important;
+    }
+
+    /* تصغير الفوتر */
+    .footer-section {
+        padding: 1rem 0;
+    }
+
+    .footer-section p {
+        font-size: 0.8rem;
+        margin: 0;
+    }
+
+    /* ضمان عدم التمرير */
+    .main-content {
+        max-height: calc(100vh - 120px);
+        overflow-y: auto;
+    }
+}
+
+/* تحسينات إضافية للشاشات الصغيرة جداً */
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 1.3rem;
+    }
+
+    .action-btn {
+        padding: 1rem 1.5rem;
+        min-width: 180px;
+    }
+
+    .action-btn i {
+        font-size: 2rem;
+    }
+
+    .action-btn span {
+        font-size: 1rem;
+    }
+
+    .stat-card {
+        padding: 0.4rem;
+    }
+
+    .stat-number {
+        font-size: 1rem;
+    }
+
+    .container {
+        padding: 0.3rem;
     }
 }
 
