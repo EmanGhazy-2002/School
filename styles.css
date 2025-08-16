@@ -369,26 +369,41 @@ body {
         max-height: 50px;
     }
 
-    /* تصغير بطاقات الإحصائيات */
+    /* جعل بطاقات الإحصائيات جنباً إلى جنب وتصغيرها */
+    .row.mb-4 {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .row.mb-4 .col-md-6 {
+        flex: 1;
+        max-width: 50%;
+    }
+
     .stat-card {
-        padding: 0.5rem;
+        padding: 0.4rem;
         margin-bottom: 0.5rem;
+        flex-direction: column;
+        text-align: center;
+        min-height: auto;
     }
 
     .stat-icon {
-        width: 35px;
-        height: 35px;
-        font-size: 0.9rem;
-        margin-left: 0.5rem;
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+        margin-left: 0;
+        margin-bottom: 0.3rem;
     }
 
     .stat-content h4 {
-        font-size: 0.8rem;
-        margin-bottom: 0.2rem;
+        font-size: 0.7rem;
+        margin-bottom: 0.1rem;
+        line-height: 1.2;
     }
 
     .stat-number {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 
     /* تصغير الأزرار الرئيسية */
