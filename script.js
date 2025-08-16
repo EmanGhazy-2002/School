@@ -175,13 +175,30 @@ function handleFileUpload(event) {
         }
       }
 
+      console.log("[v0] Excel loaded, students count:", studentsData.length); // إضافة تسجيل للتحقق من تحميل البيانات
+
       if (studentsData.length > 0) {
+        displayStudentsList();
+
+        const totalGrade = document.getElementById("totalGrade").value;
+        console.log("[v0] Total grade value:", totalGrade);
+
         checkAnalyzeButton();
-        alert(`تم تحميل ${studentsData.length} طالب بنجاح`);
+
+        alert(
+          `تم تحميل ${studentsData.length} طالب بنجاح من ملف Excel!\n${
+            totalGrade
+              ? "يمكنك الآن تحليل النتائج."
+              : "يرجى إدخال الدرجة النهائية لتفعيل زر التحليل."
+          }`
+        );
+
+        showManualInput();
       } else {
         alert("لم يتم العثور على بيانات صحيحة في الملف");
       }
     } catch (error) {
+      console.error("[v0] Error reading Excel file:", error); // إضافة تسجيل للأخطاء
       alert("خطأ في قراءة الملف. يرجى التأكد من صحة تنسيق الملف");
     }
   };
@@ -731,15 +748,27 @@ function checkAnalyzeButton() {
   const analyzeBtn = document.getElementById("analyzeBtn");
   const totalGrade = document.getElementById("totalGrade").value;
 
+  console.log(
+    "[v0] checkAnalyzeButton called - students:",
+    studentsData.length,
+    "totalGrade:",
+    totalGrade
+  ); // إضافة تسجيل للتحقق من حالة الزر
+
   if (analyzeBtn) {
     if (studentsData.length > 0 && totalGrade) {
       analyzeBtn.disabled = false;
       analyzeBtn.classList.remove("btn-secondary");
       analyzeBtn.classList.add("btn-primary");
+      console.log("[v0] Analyze button enabled"); // تسجيل تفعيل الزر
     } else {
       analyzeBtn.disabled = true;
       analyzeBtn.classList.remove("btn-primary");
       analyzeBtn.classList.add("btn-secondary");
+      console.log(
+        "[v0] Analyze button disabled - missing:",
+        !studentsData.length ? "students data" : "total grade"
+      ); // تسجيل سبب تعطيل الزر
     }
   }
 }
