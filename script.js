@@ -515,7 +515,7 @@ function exportToPDF() {
           index + 1
         }</td>
         <td style="padding: 8px; text-align: right;">${student.name}</td>
-        <td style="padding: 8px; text-align: center; font-weight: bold; color: #0062CC;">${
+        <td style="padding: 8px; text-align: center; font-weight: bold; color: #3c7db8;">${
           student.grade
         }</td>
         <td style="padding: 8px; text-align: center;">
@@ -628,11 +628,18 @@ function exportToPDF() {
           print-color-adjust: exact !important;
           color-adjust: exact !important;
         }
+        .header-image {
+          width: 100%;
+          height: auto;
+          margin-bottom: 20px;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
         .header { 
           text-align: center; 
           margin-bottom: 25px; 
           padding: 15px;
-          background: linear-gradient(135deg, #0062CC, #004499) !important;
+          background: linear-gradient(135deg, #3c7db8, #06a869) !important;
           color: white !important;
           border-radius: 10px;
           print-color-adjust: exact !important;
@@ -655,18 +662,20 @@ function exportToPDF() {
           border-collapse: collapse;
           margin-bottom: 20px;
           background: #f8f9fa !important;
-          border: 2px solid #0062CC !important;
+          border: 2px solid #3c7db8 !important;
           border-radius: 8px;
           overflow: hidden;
           print-color-adjust: exact !important;
         }
         .info-table td { 
-          padding: 8px 12px; 
+          padding: 6px 10px; 
           border-bottom: 1px solid #dee2e6 !important;
+          font-size: 13px;
         }
         .info-table td:first-child { 
           font-weight: bold; 
-          background: #e3f2fd !important;
+          background: linear-gradient(135deg, #3c7db8, #06a869) !important;
+          color: white !important;
           width: 30%;
           print-color-adjust: exact !important;
         }
@@ -675,24 +684,24 @@ function exportToPDF() {
           border-collapse: collapse;
           margin: 15px 0;
           background: white !important;
-          border: 2px solid #0062CC !important;
+          border: 2px solid #3c7db8 !important;
           border-radius: 8px;
           overflow: hidden;
           print-color-adjust: exact !important;
         }
         .stats-table th { 
-          background: #0062CC !important; 
+          background: linear-gradient(135deg, #3c7db8, #06a869) !important; 
           color: white !important; 
-          padding: 10px 8px; 
+          padding: 8px 6px; 
           text-align: center;
-          font-size: 14px;
+          font-size: 12px;
           print-color-adjust: exact !important;
         }
         .stats-table td { 
-          padding: 8px; 
+          padding: 6px; 
           text-align: center; 
           font-weight: bold;
-          font-size: 16px;
+          font-size: 14px;
         }
         .stat-excellent { background: #d4edda !important; color: #155724 !important; print-color-adjust: exact !important; }
         .stat-very-good { background: #d1ecf1 !important; color: #0c5460 !important; print-color-adjust: exact !important; }
@@ -704,58 +713,59 @@ function exportToPDF() {
           border-collapse: collapse;
           margin: 15px 0;
           background: white !important;
-          border: 2px solid #0062CC !important;
+          border: 2px solid #3c7db8 !important;
           border-radius: 8px;
           overflow: hidden;
           print-color-adjust: exact !important;
         }
         .students-table th { 
-          background: #0062CC !important; 
+          background: linear-gradient(135deg, #3c7db8, #06a869) !important; 
           color: white !important; 
-          padding: 10px 8px; 
+          padding: 8px 6px; 
           text-align: center;
-          font-size: 14px;
+          font-size: 12px;
           print-color-adjust: exact !important;
         }
         .students-table td { 
-          padding: 8px; 
+          padding: 6px; 
           border-bottom: 1px solid #dee2e6 !important;
+          font-size: 12px;
         }
         .section-title {
-          color: #0062CC !important;
-          font-size: 16px;
+          color: #3c7db8 !important;
+          font-size: 14px;
           font-weight: bold;
-          margin: 20px 0 10px 0;
+          margin: 15px 0 8px 0;
           text-align: center;
-          padding: 8px;
-          background: #e3f2fd !important;
+          padding: 6px;
+          background: linear-gradient(135deg, rgba(60,125,184,0.1), rgba(6,168,105,0.1)) !important;
           border-radius: 6px;
           print-color-adjust: exact !important;
         }
         .average-info {
-          background: #e3f2fd !important;
-          padding: 10px;
+          background: linear-gradient(135deg, rgba(60,125,184,0.1), rgba(6,168,105,0.1)) !important;
+          padding: 8px;
           border-radius: 6px;
-          margin: 15px 0;
+          margin: 10px 0;
           text-align: center;
-          font-size: 16px;
+          font-size: 14px;
           font-weight: bold;
-          color: #0062CC !important;
+          color: #3c7db8 !important;
           print-color-adjust: exact !important;
         }
         .footer { 
-          margin-top: 30px; 
+          margin-top: 20px; 
           text-align: center;
-          padding: 15px;
+          padding: 10px;
           background: #f8f9fa !important;
           border-radius: 8px;
-          border: 2px solid #0062CC !important;
+          border: 2px solid #3c7db8 !important;
           print-color-adjust: exact !important;
         }
         .director-name {
-          font-size: 16px;
+          font-size: 14px;
           font-weight: bold;
-          color: #0062CC !important;
+          color: #3c7db8 !important;
           margin-bottom: 5px;
         }
         @media print {
@@ -766,32 +776,39 @@ function exportToPDF() {
           }
           body { 
             margin: 0; 
-            font-size: 12px; 
+            font-size: 11px; 
             print-color-adjust: exact !important;
           }
           .header { 
             break-inside: avoid; 
-            background: linear-gradient(135deg, #0062CC, #004499) !important;
+            background: linear-gradient(135deg, #3c7db8, #06a869) !important;
             color: white !important;
             print-color-adjust: exact !important;
           }
           .header * { color: white !important; }
           .stats-table th { 
-            background: #0062CC !important; 
+            background: linear-gradient(135deg, #3c7db8, #06a869) !important; 
             color: white !important; 
             print-color-adjust: exact !important;
           }
           .students-table th { 
-            background: #0062CC !important; 
+            background: linear-gradient(135deg, #3c7db8, #06a869) !important; 
             color: white !important; 
+            print-color-adjust: exact !important;
+          }
+          .info-table td:first-child { 
+            background: linear-gradient(135deg, #3c7db8, #06a869) !important;
+            color: white !important;
             print-color-adjust: exact !important;
           }
         }
       </style>
     </head>
     <body>
+      <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/%D9%87%D9%8A%D8%AF.jpg-6PEqVrebgA5QvaapQ4CeEVs8hahdRF.jpeg" alt="هيدر وزارة التعليم" class="header-image">
+      
       <div class="header">
-        <h1>وزارة التعليم</h1>
+        <!-- حذف وزارة التعليم من PDF -->
         <h2>الإدارة العامة للتعليم بمحافظة الطائف</h2>
         <h3>${schoolName}</h3>
         <div class="report-title">تقرير ${examType}</div>
@@ -822,7 +839,7 @@ function exportToPDF() {
           <td class="stat-good">${stats.good}</td>
           <td class="stat-acceptable">${stats.acceptable}</td>
           <td class="stat-weak">${stats.weak}</td>
-          <td style="background: #0062CC !important; color: white !important; print-color-adjust: exact !important;">${
+          <td style="background: linear-gradient(135deg, #3c7db8, #06a869) !important; color: white !important; print-color-adjust: exact !important;">${
             stats.total
           }</td>
         </tr>
@@ -850,7 +867,6 @@ function exportToPDF() {
       
       <div class="footer">
         <div class="director-name">مدير المدرسة: فهد بن حسن القحطاني</div>
-        <div>تاريخ التقرير: ${new Date().toLocaleDateString("ar-SA")}</div>
       </div>
     </body>
     </html>
