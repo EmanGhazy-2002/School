@@ -297,7 +297,7 @@ function printExchangeVisit() {
               }
               .evidence-item img {
                   max-width: 100%;
-                  max-height: 250px;
+                  max-height: 180px; /* زيادة الحجم من 120px إلى 180px */
                   border-radius: 6px;
                   border: 1px solid #0da9a6;
               }
@@ -306,6 +306,16 @@ function printExchangeVisit() {
                   font-weight: bold;
                   color: #333;
                   font-size: 0.9rem;
+              }
+              .footer {
+                  background: #14445A !important;
+                  color: white !important;
+                  padding: 0.5rem;
+                  text-align: center;
+                  font-size: 0.7rem;
+                  border-radius: 0 0 10px 10px;
+                  margin-top: 1rem;
+                  print-color-adjust: exact !important;
               }
               @media print {
                   * { print-color-adjust: exact !important; }
@@ -319,7 +329,7 @@ function printExchangeVisit() {
                   <img src="/images/ministry-logo-white.png" alt="وزارة التعليم">
               </div>
               <div class="header-text">
-                  <h1>الإدارة العامة للتعليم بمحافظة الطائف</h1>
+                  <h1>الإدارة العامة للتعليم بمحافظة الطائفة</h1>
                   <h2>دار التوحيد الثانوية</h2>
                   <h3>تقرير الزيارات التبادلية</h3>
               </div>
@@ -392,6 +402,7 @@ function printExchangeVisit() {
                   : ""
               }
           </div>
+          <div class="footer"></div>
       </body>
       </html>
   `;
@@ -613,7 +624,7 @@ function printStrategiesReport() {
               }
               .evidence-item img {
                   max-width: 100%;
-                  max-height: 200px;
+                  max-height: 180px; /* زيادة الحجم من 120px إلى 180px */
                   border-radius: 4px;
                   border: 1px solid #0da9a6;
               }
@@ -653,6 +664,16 @@ function printStrategiesReport() {
                   font-weight: bold; 
                   color: #333; 
               }
+              .footer {
+                  background: #14445A !important;
+                  color: white !important;
+                  padding: 0.5rem;
+                  text-align: center;
+                  font-size: 0.7rem;
+                  border-radius: 0 0 8px 8px;
+                  margin-top: 1rem;
+                  print-color-adjust: exact !important;
+              }
               @media print {
                   * { print-color-adjust: exact !important; }
                   body { margin: 0; font-size: 10px; background: white !important; }
@@ -665,7 +686,7 @@ function printStrategiesReport() {
                   <img src="/images/ministry-logo-white.png" alt="وزارة التعليم">
               </div>
               <div class="header-text">
-                  <h3>الإدارة العامة للتعليم بمحافظة الطائف</h3>
+                  <h3>الإدارة العامة للتعليم بمحافظة الطائفة</h3>
                   <h4>دار التوحيد الثانوية</h4>
                   <h5>تقرير تطبيق استراتيجية تدريسية</h5>
               </div>
@@ -701,21 +722,7 @@ function printStrategiesReport() {
               <div class="section-title">الأهداف والأدوات والوسائل التعليمية</div>
               <div class="objectives-grid">
                   <div class="objectives-list">
-                      <div class="objective-item">1. ${
-                        getObjectiveFromTextarea(formData.objectives, 0) || ""
-                      }</div>
-                      <div class="objective-item">2. ${
-                        getObjectiveFromTextarea(formData.objectives, 1) || ""
-                      }</div>
-                      <div class="objective-item">3. ${
-                        getObjectiveFromTextarea(formData.objectives, 2) || ""
-                      }</div>
-                      <div class="objective-item">4. ${
-                        getObjectiveFromTextarea(formData.objectives, 3) || ""
-                      }</div>
-                      <div class="objective-item">5. ${
-                        getObjectiveFromTextarea(formData.objectives, 4) || ""
-                      }</div>
+                      ${generateObjectivesList(formData.objectives)}
                   </div>
                   <div class="tools-section">
                       <div class="tools-title">الأدوات والوسائل التعليمية</div>
@@ -770,9 +777,7 @@ function printStrategiesReport() {
           <div class="signature-section">
               <div class="signature-item">
                   <div class="signature-title">مدير المدرسة</div>
-                  <div class="signature-name">${
-                    formData.principalName || "غير محدد"
-                  }</div>
+                  <div class="signature-name">فهد بن حسن القحطاني</div>
               </div>
               <div class="signature-item">
                   <div class="signature-title">اسم المعلم</div>
@@ -781,6 +786,7 @@ function printStrategiesReport() {
                   }</div>
               </div>
           </div>
+          <div class="footer"></div>
       </body>
       </html>
   `;
@@ -993,8 +999,8 @@ function getSelectedTools() {
   return Array.from(checkboxes).map((cb) => cb.value);
 }
 
-function getObjectiveFromTextarea(objectives, index) {
-  console.log("[v0] Processing objectives:", objectives, "index:", index);
+function generateObjectivesList(objectives) {
+  console.log("[v0] Processing objectives:", objectives);
 
   if (!objectives || objectives.trim() === "") {
     console.log("[v0] No objectives found - returning empty string");
@@ -1008,15 +1014,17 @@ function getObjectiveFromTextarea(objectives, index) {
 
   console.log("[v0] Objectives lines after processing:", lines);
 
-  if (index >= lines.length) {
-    console.log("[v0] Index out of range - returning empty string");
-    return "";
-  }
+  let objectivesHtml = "";
+  lines.forEach((line, index) => {
+    // إزالة الأرقام والنقاط من بداية السطر إذا كانت موجودة
+    const cleanObjective = line.replace(/^\d+[.\-)\s]*/, "").trim();
+    if (cleanObjective) {
+      objectivesHtml += `<div class="objective-item">${
+        index + 1
+      }. ${cleanObjective}</div>`;
+    }
+  });
 
-  const objective = lines[index] || "";
-  // إزالة الأرقام والنقاط من بداية السطر
-  const cleanObjective = objective.replace(/^\d+[.\-)\s]*/, "").trim();
-  console.log("[v0] Objective at index", index, ":", cleanObjective);
-
-  return cleanObjective;
+  console.log("[v0] Generated objectives HTML:", objectivesHtml);
+  return objectivesHtml || '<div class="objective-item">لا توجد أهداف</div>';
 }
