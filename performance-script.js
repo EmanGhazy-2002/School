@@ -186,8 +186,8 @@ function printExchangeVisit() {
                   gap: 2rem;
               }
               .ministry-logo { 
-                  width: 120px;
-                  height: 90px;
+                  width: 140px;
+                  height: 105px;
                   display: flex; 
                   align-items: center; 
                   justify-content: center; 
@@ -195,8 +195,8 @@ function printExchangeVisit() {
                   flex-shrink: 0;
               }
               .ministry-logo img {
-                  width: 120px;
-                  height: 90px;
+                  width: 140px;
+                  height: 105px;
                   object-fit: contain;
               }
               .header-text { 
@@ -280,7 +280,7 @@ function printExchangeVisit() {
                   background: linear-gradient(135deg, #0da9a6, #03d7eb) !important;
                   color: white !important;
                   font-weight: bold;
-                  font-size: 1rem;
+                  font-size: 0.9rem;
                   margin-bottom: 0.75rem;
                   text-align: center;
                   padding: 0.3rem;
@@ -297,7 +297,7 @@ function printExchangeVisit() {
               }
               .evidence-item img {
                   max-width: 100%;
-                  max-height: 200px;
+                  max-height: 250px;
                   border-radius: 6px;
                   border: 1px solid #0da9a6;
               }
@@ -414,7 +414,8 @@ function printStrategiesReport() {
     .getElementById("strategyEvidence2-preview")
     .querySelector("img");
 
-  console.log("[v0] Objectives data:", formData.objectives);
+  console.log("[v0] Form data:", formData);
+  console.log("[v0] Objectives from form:", formData.objectives);
 
   const printWindow = window.open("", "_blank");
   const htmlContent = `
@@ -422,7 +423,7 @@ function printStrategiesReport() {
       <html dir="rtl" lang="ar">
       <head>
           <meta charset="UTF-8">
-          <title>تقرير الاستراتيجيات</title>
+          <title>تقرير تطبيق استراتيجية تدريسية</title>
           <style>
               * { 
                   print-color-adjust: exact !important; 
@@ -454,8 +455,8 @@ function printStrategiesReport() {
                   gap: 2rem;
               }
               .ministry-logo { 
-                  width: 120px;
-                  height: 90px;
+                  width: 140px;
+                  height: 105px;
                   display: flex; 
                   align-items: center; 
                   justify-content: center; 
@@ -463,8 +464,8 @@ function printStrategiesReport() {
                   flex-shrink: 0;
               }
               .ministry-logo img {
-                  width: 120px;
-                  height: 90px;
+                  width: 140px;
+                  height: 105px;
                   object-fit: contain;
               }
               .header-text { 
@@ -612,7 +613,7 @@ function printStrategiesReport() {
               }
               .evidence-item img {
                   max-width: 100%;
-                  max-height: 120px;
+                  max-height: 200px;
                   border-radius: 4px;
                   border: 1px solid #0da9a6;
               }
@@ -666,7 +667,7 @@ function printStrategiesReport() {
               <div class="header-text">
                   <h3>الإدارة العامة للتعليم بمحافظة الطائف</h3>
                   <h4>دار التوحيد الثانوية</h4>
-                  <h5>تقرير الاستراتيجيات</h5>
+                  <h5>تقرير تطبيق استراتيجية تدريسية</h5>
               </div>
           </div>
           
@@ -701,24 +702,19 @@ function printStrategiesReport() {
               <div class="objectives-grid">
                   <div class="objectives-list">
                       <div class="objective-item">1. ${
-                        getObjectiveFromTextarea(formData.objectives, 0) ||
-                        "الهدف الأول غير محدد"
+                        getObjectiveFromTextarea(formData.objectives, 0) || ""
                       }</div>
                       <div class="objective-item">2. ${
-                        getObjectiveFromTextarea(formData.objectives, 1) ||
-                        "الهدف الثاني غير محدد"
+                        getObjectiveFromTextarea(formData.objectives, 1) || ""
                       }</div>
                       <div class="objective-item">3. ${
-                        getObjectiveFromTextarea(formData.objectives, 2) ||
-                        "الهدف الثالث غير محدد"
+                        getObjectiveFromTextarea(formData.objectives, 2) || ""
                       }</div>
                       <div class="objective-item">4. ${
-                        getObjectiveFromTextarea(formData.objectives, 3) ||
-                        "الهدف الرابع غير محدد"
+                        getObjectiveFromTextarea(formData.objectives, 3) || ""
                       }</div>
                       <div class="objective-item">5. ${
-                        getObjectiveFromTextarea(formData.objectives, 4) ||
-                        "الهدف الخامس غير محدد"
+                        getObjectiveFromTextarea(formData.objectives, 4) || ""
                       }</div>
                   </div>
                   <div class="tools-section">
@@ -968,11 +964,10 @@ function getFormData(formId) {
 
   const objectivesTextarea = form.querySelector('textarea[name="objectives"]');
   if (objectivesTextarea) {
-    data.objectives = objectivesTextarea.value;
-    console.log(
-      "[v0] Reading objectives from textarea:",
-      objectivesTextarea.value
-    );
+    data.objectives = objectivesTextarea.value.trim();
+    console.log("[v0] Reading objectives from textarea:", data.objectives);
+  } else {
+    console.log("[v0] Objectives textarea not found");
   }
 
   return data;
@@ -1002,20 +997,25 @@ function getObjectiveFromTextarea(objectives, index) {
   console.log("[v0] Processing objectives:", objectives, "index:", index);
 
   if (!objectives || objectives.trim() === "") {
-    console.log("[v0] No objectives found");
+    console.log("[v0] No objectives found - returning empty string");
     return "";
   }
 
-  const lines = objectives.split(/\r?\n/).filter((line) => line.trim());
-  console.log("[v0] Objectives lines:", lines);
+  const lines = objectives
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0);
+
+  console.log("[v0] Objectives lines after processing:", lines);
 
   if (index >= lines.length) {
-    console.log("[v0] Index out of range");
+    console.log("[v0] Index out of range - returning empty string");
     return "";
   }
 
   const objective = lines[index] || "";
-  const cleanObjective = objective.replace(/^\d+\.\s*/, "").trim();
+  // إزالة الأرقام والنقاط من بداية السطر
+  const cleanObjective = objective.replace(/^\d+[.\-)\s]*/, "").trim();
   console.log("[v0] Objective at index", index, ":", cleanObjective);
 
   return cleanObjective;

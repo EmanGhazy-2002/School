@@ -239,15 +239,27 @@ body {
 
 /* تصميم نموذج الاستراتيجيات */
 .strategies-form {
-    background: white;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
     margin: 1rem 0;
 }
 
-.form-sections {
+.strategies-form .section-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
     padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    margin-bottom: 1rem;
+}
+
+.form-sections {
+    background: white;
+    border-radius: 15px;
+    padding: 1rem;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--border-color);
 }
 
 .objectives-tools-grid {
@@ -462,7 +474,7 @@ body {
     border: 1px solid rgba(245, 158, 11, 0.2);
 }
 
-.evidence-title {
+.evidence-upload-section .evidence-title {
     color: var(--accent-color);
     font-size: 1.3rem;
     font-weight: 700;
@@ -657,8 +669,8 @@ body {
     }
 
     .pdf-logo {
-        width: 120px !important;
-        height: 90px !important;
+        width: 140px !important;
+        height: 105px !important;
         object-fit: contain;
         background: none !important;
         border: none !important;
@@ -671,20 +683,20 @@ body {
     }
 
     .pdf-header-title {
-        font-size: 1.3rem !important;
+        font-size: 1.2rem !important;
         font-weight: 700;
         margin-bottom: 0.3rem;
         color: white;
     }
 
     .pdf-header-subtitle {
-        font-size: 1rem !important;
+        font-size: 0.9rem !important;
         margin-bottom: 0.3rem;
         color: rgba(255, 255, 255, 0.9);
     }
 
     .pdf-report-title {
-        font-size: 0.9rem !important;
+        font-size: 0.8rem !important;
         color: rgba(255, 255, 255, 0.8);
         margin: 0;
     }
@@ -791,6 +803,14 @@ body {
         color: white !important;
         font-size: 0.8rem !important;
         padding: 0.2rem !important;
+    }
+
+    .evidence-placeholder img,
+    .image-preview img {
+        width: 200px !important;
+        height: 200px !important;
+        object-fit: cover;
+        border-radius: 8px;
     }
 
     .signatures-section {

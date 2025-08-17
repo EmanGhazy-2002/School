@@ -142,13 +142,14 @@
               </select>
             </div>
             <div class="form-group">
+              <!-- تغيير التاريخ الهجري في نموذج الزيارة -->
               <label class="form-label">التاريخ الهجري</label>
               <input
                 type="text"
                 class="form-control"
                 id="hijriDate"
                 name="hijriDate"
-                placeholder="مثال: 1446/03/15"
+                placeholder="1446/12/12"
                 required
               />
             </div>
@@ -256,7 +257,7 @@
                   class="form-control"
                   id="strategy"
                   name="strategy"
-                  placeholder="التعلم المبني على حل المشكلات"
+                  placeholder="اكتب اسم الاستراتيجية"
                   required
                 />
               </div>
@@ -267,18 +268,18 @@
                   class="form-control"
                   id="subject"
                   name="subject"
-                  placeholder="مادة الرياضيات"
+                  placeholder="اسم المادة"
                   required
                 />
               </div>
               <div class="form-group">
-                <label class="form-label">تاريخ التنفيذ</label>
+                <label class="form-label">تاريخ التنفيذ الهجري</label>
                 <input
                   type="text"
                   class="form-control"
                   id="implementationDate"
                   name="implementationDate"
-                  placeholder="1446/12/12"
+                  placeholder="مثلا 1446/12/12"
                   required
                 />
               </div>
@@ -292,7 +293,7 @@
                   class="form-control"
                   id="studentsCount"
                   name="studentsCount"
-                  placeholder="30 طالب"
+                  placeholder="عدد الطلاب"
                   required
                 />
               </div>
@@ -305,11 +306,11 @@
                   required
                 >
                   <option value="">اختر الفصل</option>
-                  <option value="1">الفصل الأول</option>
-                  <option value="2">الفصل الثاني</option>
-                  <option value="3">الفصل الثالث</option>
-                  <option value="4">الفصل الرابع</option>
-                  <option value="5">الفصل الخامس</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
                   <option value="جميع الفصول">جميع الفصول</option>
                 </select>
               </div>
@@ -329,171 +330,125 @@
               </div>
             </div>
 
-            <div class="form-group full-width">
-              <label class="form-label">الدرس</label>
-              <input
-                type="text"
-                class="form-control"
-                id="lesson"
-                name="lesson"
-                placeholder="المعادلات الخطية"
-                required
-              />
-            </div>
-
-            <div class="objectives-section">
-              <div class="objectives-title">الأهداف</div>
-              <div class="objectives-list">
-                <div class="objective-item">
-                  1. الهدف الأول:
-                  <input
-                    type="text"
-                    class="form-control d-inline-block"
-                    style="width: 70%; margin-right: 10px"
-                    id="objective1"
-                    name="objective1"
-                    placeholder="اكتب الهدف الأول"
-                  />
-                </div>
-                <div class="objective-item">
-                  2. الهدف الثاني:
-                  <input
-                    type="text"
-                    class="form-control d-inline-block"
-                    style="width: 70%; margin-right: 10px"
-                    id="objective2"
-                    name="objective2"
-                    placeholder="اكتب الهدف الثاني"
-                  />
-                </div>
-                <div class="objective-item">
-                  3. الهدف الثالث:
-                  <input
-                    type="text"
-                    class="form-control d-inline-block"
-                    style="width: 70%; margin-right: 10px"
-                    id="objective3"
-                    name="objective3"
-                    placeholder="اكتب الهدف الثالث"
-                  />
-                </div>
-                <div class="objective-item">
-                  4. الهدف الرابع:
-                  <input
-                    type="text"
-                    class="form-control d-inline-block"
-                    style="width: 70%; margin-right: 10px"
-                    id="objective4"
-                    name="objective4"
-                    placeholder="اكتب الهدف الرابع"
-                  />
-                </div>
-                <div class="objective-item">
-                  5. الهدف الخامس:
-                  <input
-                    type="text"
-                    class="form-control d-inline-block"
-                    style="width: 70%; margin-right: 10px"
-                    id="objective5"
-                    name="objective5"
-                    placeholder="اكتب الهدف الخامس"
-                  />
-                </div>
+            <div class="form-row">
+              <div class="form-group full-width">
+                <label class="form-label">الدرس</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lesson"
+                  name="lesson"
+                  placeholder="اكتب اسم الدرس"
+                  required
+                />
               </div>
             </div>
 
-            <div class="tools-section">
-              <div class="tools-title">الأدوات والوسائل التعليمية</div>
-              <div class="tools-grid">
-                <div class="tool-item">
-                  <input
-                    type="checkbox"
-                    class="tool-checkbox"
-                    id="projector"
-                    name="tools"
-                    value="جهاز عرض"
-                  />
-                  <label for="projector">جهاز عرض</label>
-                </div>
-                <div class="tool-item">
-                  <input
-                    type="checkbox"
-                    class="tool-checkbox"
-                    id="smartBoard"
-                    name="tools"
-                    value="سبورة تفاعلية"
-                  />
-                  <label for="smartBoard">سبورة تفاعلية</label>
-                </div>
-                <div class="tool-item">
-                  <input
-                    type="checkbox"
-                    class="tool-checkbox"
-                    id="computer"
-                    name="tools"
-                    value="جهاز الحاسب"
-                  />
-                  <label for="computer">جهاز الحاسب</label>
-                </div>
-                <div class="tool-item">
-                  <input
-                    type="checkbox"
-                    class="tool-checkbox"
-                    id="smartBoard2"
-                    name="tools"
-                    value="سبورة ذكية"
-                  />
-                  <label for="smartBoard2">سبورة ذكية</label>
-                </div>
-                <div class="tool-item">
-                  <input
-                    type="checkbox"
-                    class="tool-checkbox"
-                    id="explanatoryCards"
-                    name="tools"
-                    value="بطاقات تعليمية"
-                  />
-                  <label for="explanatoryCards">بطاقات تعليمية</label>
-                </div>
-                <div class="tool-item">
-                  <input
-                    type="checkbox"
-                    class="tool-checkbox"
-                    id="mathTools"
-                    name="tools"
-                    value="أدوات رياضية"
-                  />
-                  <label for="mathTools">أدوات رياضية</label>
-                </div>
-                <div class="tool-item">
-                  <input
-                    type="checkbox"
-                    class="tool-checkbox"
-                    id="worksheets"
-                    name="tools"
-                    value="أوراق عمل"
-                  />
-                  <label for="worksheets">أوراق عمل</label>
-                </div>
-                <div class="tool-item">
-                  <input
-                    type="checkbox"
-                    class="tool-checkbox"
-                    id="presentation"
-                    name="tools"
-                    value="عرض تقديمي"
-                  />
-                  <label for="presentation">عرض تقديمي</label>
-                </div>
-                <div class="tool-item">
-                  <input
-                    type="checkbox"
-                    class="tool-checkbox"
-                    id="books"
-                    name="tools"
-                    value="كتب"
-                  />
-                  <label for="books">كتب</label>
+            <div class="objectives-tools-grid">
+              <div class="objectives-section">
+                <div class="objectives-title">الأهداف</div>
+                <textarea
+                  class="objectives-textarea"
+                  id="objectives"
+                  name="objectives"
+                  placeholder="اكتب الأهداف من واحد لخمسة تحت بعض:&#10;1. الهدف الأول&#10;2. الهدف الثاني&#10;3. الهدف الثالث&#10;4. الهدف الرابع&#10;5. الهدف الخامس"
+                  required
+                ></textarea>
+              </div>
+
+              <div class="tools-section">
+                <div class="tools-title">الأدوات والوسائل التعليمية</div>
+                <div class="tools-grid">
+                  <div class="tool-item">
+                    <input
+                      type="checkbox"
+                      class="tool-checkbox"
+                      id="projector"
+                      name="tools"
+                      value="جهاز عرض"
+                    />
+                    <label for="projector">جهاز عرض</label>
+                  </div>
+                  <div class="tool-item">
+                    <input
+                      type="checkbox"
+                      class="tool-checkbox"
+                      id="smartBoard"
+                      name="tools"
+                      value="سبورة تفاعلية"
+                    />
+                    <label for="smartBoard">سبورة تفاعلية</label>
+                  </div>
+                  <div class="tool-item">
+                    <input
+                      type="checkbox"
+                      class="tool-checkbox"
+                      id="computer"
+                      name="tools"
+                      value="جهاز الحاسب"
+                    />
+                    <label for="computer">جهاز الحاسب</label>
+                  </div>
+                  <div class="tool-item">
+                    <input
+                      type="checkbox"
+                      class="tool-checkbox"
+                      id="smartBoard2"
+                      name="tools"
+                      value="سبورة ذكية"
+                    />
+                    <label for="smartBoard2">سبورة ذكية</label>
+                  </div>
+                  <div class="tool-item">
+                    <input
+                      type="checkbox"
+                      class="tool-checkbox"
+                      id="explanatoryCards"
+                      name="tools"
+                      value="بطاقات تعليمية"
+                    />
+                    <label for="explanatoryCards">بطاقات تعليمية</label>
+                  </div>
+                  <div class="tool-item">
+                    <input
+                      type="checkbox"
+                      class="tool-checkbox"
+                      id="mathTools"
+                      name="tools"
+                      value="أدوات رياضية"
+                    />
+                    <label for="mathTools">أدوات رياضية</label>
+                  </div>
+                  <div class="tool-item">
+                    <input
+                      type="checkbox"
+                      class="tool-checkbox"
+                      id="worksheets"
+                      name="tools"
+                      value="أوراق عمل"
+                    />
+                    <label for="worksheets">أوراق عمل</label>
+                  </div>
+                  <div class="tool-item">
+                    <input
+                      type="checkbox"
+                      class="tool-checkbox"
+                      id="presentation"
+                      name="tools"
+                      value="عرض تقديمي"
+                    />
+                    <label for="presentation">عرض تقديمي</label>
+                  </div>
+                  <div class="tool-item">
+                    <input
+                      type="checkbox"
+                      class="tool-checkbox"
+                      id="books"
+                      name="tools"
+                      value="كتب"
+                    />
+                    <label for="books">كتب</label>
+                  </div>
                 </div>
               </div>
             </div>
@@ -586,7 +541,7 @@
     <footer class="footer-section">
       <div class="container">
         <div class="text-center py-3">
-          <p>&copy; 2025 وزارة التعليم - جميع الحقوق محفوظة</p>
+          <p>&copy; 2025 الحقوق محفوظة</p>
         </div>
       </div>
     </footer>
