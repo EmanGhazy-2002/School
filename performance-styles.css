@@ -2,7 +2,7 @@
 :root {
     --primary-color: #3c7db8;
     --secondary-color: #06a869;
-    --accent-color: #f59e0b;
+    --accent-color: #0b84f5;
     --text-dark: #1f2937;
     --text-light: #6b7280;
     --bg-light: #f8fafc;
@@ -269,6 +269,13 @@ body {
     margin: 1rem 0;
 }
 
+@media (max-width: 768px) {
+    .objectives-tools-grid {
+        grid-template-columns: 1fr;
+        /* جعل الأهداف ووسائل التعلم تحت بعض في الموبايل */
+    }
+}
+
 .objectives-section {
     background: linear-gradient(135deg, rgba(6, 168, 105, 0.05), rgba(6, 168, 105, 0.08));
     padding: 1rem;
@@ -361,7 +368,7 @@ body {
 }
 
 .evidence-title {
-    color: var(--accent-color);
+    color: var(--text-dark) !important;
     font-size: 1.3rem;
     font-weight: 700;
     margin-bottom: 1rem;
