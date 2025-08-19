@@ -297,7 +297,7 @@ function printExchangeVisit() {
               }
               .evidence-item img {
                   max-width: 100%;
-                  max-height: 180px; /* زيادة الحجم من 120px إلى 180px */
+                  max-height: 350px; /* زيادة الحجم من 180px إلى 250px */
                   border-radius: 6px;
                   border: 1px solid #0da9a6;
               }
@@ -329,7 +329,7 @@ function printExchangeVisit() {
                   <img src="/images/ministry-logo-white.png" alt="وزارة التعليم">
               </div>
               <div class="header-text">
-                  <h1>الإدارة العامة للتعليم بمحافظة الطائفة</h1>
+                  <h1>الإدارة العامة للتعليم بمحافظة الطائف</h1>
                   <h2>دار التوحيد الثانوية</h2>
                   <h3>تقرير الزيارات التبادلية</h3>
               </div>
@@ -624,7 +624,7 @@ function printStrategiesReport() {
               }
               .evidence-item img {
                   max-width: 100%;
-                  max-height: 180px; /* زيادة الحجم من 120px إلى 180px */
+                  max-height: 350px; /* زيادة الحجم من 180px إلى 250px */
                   border-radius: 4px;
                   border: 1px solid #0da9a6;
               }
@@ -686,7 +686,7 @@ function printStrategiesReport() {
                   <img src="/images/ministry-logo-white.png" alt="وزارة التعليم">
               </div>
               <div class="header-text">
-                  <h3>الإدارة العامة للتعليم بمحافظة الطائفة</h3>
+                  <h3>الإدارة العامة للتعليم بمحافظة الطائف</h3>
                   <h4>دار التوحيد الثانوية</h4>
                   <h5>تقرير تطبيق استراتيجية تدريسية</h5>
               </div>
@@ -776,14 +776,14 @@ function printStrategiesReport() {
           
           <div class="signature-section">
               <div class="signature-item">
-                  <div class="signature-title">مدير المدرسة</div>
-                  <div class="signature-name">فهد بن حسن القحطاني</div>
-              </div>
-              <div class="signature-item">
                   <div class="signature-title">اسم المعلم</div>
                   <div class="signature-name">${
                     formData.teacherNameStrategy || "غير محدد"
                   }</div>
+              </div>
+                   <div class="signature-item">
+                  <div class="signature-title">مدير المدرسة</div>
+                  <div class="signature-name">فهد بن حسن القحطاني</div>
               </div>
           </div>
           <div class="footer"></div>
