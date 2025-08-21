@@ -1130,7 +1130,7 @@ function printProgramExecution() {
           </div>
           
           <div class="form-section">
-              <div class="section-title">نموذج  ${
+              <div class="section-title"> ${
                 formData.programNameReport || "غير محدد"
               }</div>
               
