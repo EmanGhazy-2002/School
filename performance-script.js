@@ -1,22 +1,30 @@
-// ملف JavaScript خاص بشواهد الأداء
-
 // التنقل بين الصفحات والأقسام
 function showSelectionPage() {
   document.getElementById("selectionPage").style.display = "block";
   document.getElementById("exchangeVisitSection").style.display = "none";
   document.getElementById("strategiesSection").style.display = "none";
+  document.getElementById("programExecutionSection").style.display = "none";
 }
 
 function showExchangeVisitForm() {
   document.getElementById("selectionPage").style.display = "none";
   document.getElementById("exchangeVisitSection").style.display = "block";
   document.getElementById("strategiesSection").style.display = "none";
+  document.getElementById("programExecutionSection").style.display = "none";
 }
 
 function showStrategiesForm() {
   document.getElementById("selectionPage").style.display = "none";
   document.getElementById("exchangeVisitSection").style.display = "none";
   document.getElementById("strategiesSection").style.display = "block";
+  document.getElementById("programExecutionSection").style.display = "none";
+}
+
+function showProgramExecutionForm() {
+  document.getElementById("selectionPage").style.display = "none";
+  document.getElementById("exchangeVisitSection").style.display = "none";
+  document.getElementById("strategiesSection").style.display = "none";
+  document.getElementById("programExecutionSection").style.display = "block";
 }
 
 function goToExchangeVisit() {
@@ -125,6 +133,7 @@ function clearFormData(formId) {
 function clearAllData() {
   localStorage.removeItem("exchangeVisitForm_data");
   localStorage.removeItem("strategiesForm_data");
+  localStorage.removeItem("programExecutionForm_data");
 
   // إعادة تعيين جميع النماذج
   const forms = document.querySelectorAll("form[id]");
@@ -166,28 +175,29 @@ function printExchangeVisit() {
               }
               body { 
                   font-family: 'Segoe UI', Tahoma, Arial, sans-serif; 
-                  margin: 15px; 
+                  margin: 10px; 
                   direction: rtl; 
-                  line-height: 1.4;
+                  line-height: 1.3;
                   color: #333;
+                  font-size: 12px;
                   background: white !important;
               }
               .header { 
                   background: #14445A !important;
                   color: white !important;
-                  padding: 1.5rem;
+                  padding: 1rem;
                   text-align: center;
-                  border-radius: 10px;
-                  margin-bottom: 1.5rem;
+                  border-radius: 8px;
+                  margin-bottom: 0.8rem;
                   print-color-adjust: exact !important;
                   display: flex;
                   align-items: center;
                   justify-content: center;
-                  gap: 2rem;
+                  gap: 1.5rem;
               }
               .ministry-logo { 
-                  width: 140px;
-                  height: 105px;
+                  width: 120px;
+                  height: 90px;
                   display: flex; 
                   align-items: center; 
                   justify-content: center; 
@@ -195,82 +205,102 @@ function printExchangeVisit() {
                   flex-shrink: 0;
               }
               .ministry-logo img {
-                  width: 140px;
-                  height: 105px;
+                  width: 120px;
+                  height: 90px;
                   object-fit: contain;
               }
               .header-text { 
                   text-align: center;
                   flex: 1;
               }
-              .header-text h1 { margin: 0 0 0.3rem 0; font-size: 1.3rem; }
-              .header-text h2 { margin: 0 0 0.3rem 0; font-size: 1rem; }
-              .header-text h3 { margin: 0; font-size: 0.9rem; }
+              .header-text h1 { margin: 0 0 0.2rem 0; font-size: 1.1rem; }
+              .header-text h2 { margin: 0 0 0.2rem 0; font-size: 0.9rem; }
+              .header-text h3 { margin: 0; font-size: 0.8rem; }
               .form-section {
                   background: white !important;
-                  border-radius: 10px;
-                  padding: 1rem;
-                  margin-bottom: 1rem;
+                  border-radius: 8px;
+                  padding: 0.8rem;
+                  margin-bottom: 0.8rem;
               }
               .section-title {
                   background: linear-gradient(135deg, #0da9a6, #03d7eb) !important;
                   color: white !important;
-                  padding: 0.5rem;
+                  padding: 0.4rem;
                   border-radius: 6px;
                   text-align: center;
                   font-weight: bold;
-                  font-size: 1rem;
-                  margin-bottom: 1rem;
-                  print-color-adjust: exact !important;
-              }
-              .info-table {
-                  width: 100%;
-                  border-collapse: collapse;
-                  margin-bottom: 1rem;
-                  background: white !important;
-              }
-              .info-table td {
-                  padding: 0.4rem;
-                  border: 1px solid #0da9a6;
                   font-size: 0.9rem;
-                  background: white !important;
+                  margin-bottom: 0.6rem;
                   print-color-adjust: exact !important;
               }
-              .info-table td:first-child {
-                  background: linear-gradient(135deg, #0da9a6, #03d7eb) !important;
-                  color: white !important;
-                  font-weight: bold;
-                  width: 25%;
-                  text-align: center;
+              .info-grid { 
+                  display: grid; 
+                  grid-template-columns: repeat(3, 1fr); 
+                  gap: 0.2rem;
+                  margin-bottom: 0.8rem;
+                  border: 1px solid #0da9a6;
+                  border-radius: 6px;
+                  overflow: hidden;
+                  background: white !important;
+              }
+              .info-item { 
+                  background: white !important; 
+                  border-right: 1px solid #0da9a6;
+                  border-bottom: 1px solid #0da9a6;
+                  padding: 0.3rem;
+                  display: flex; 
+                  align-items: center;
                   print-color-adjust: exact !important;
+              }
+              .info-item:nth-child(3n) {
+                  border-right: none;
+              }
+              .info-item:nth-last-child(-n+3) {
+                  border-bottom: none;
+              }
+              .info-label { 
+                  background: linear-gradient(135deg, #0da9a6, #03d7eb) !important;
+                  color: white !important; 
+                  padding: 0.2rem 0.4rem;
+                  border-radius: 3px;
+                  font-weight: bold; 
+                  margin-left: 0.3rem;
+                  min-width: 60px;
+                  text-align: center; 
+                  font-size: 0.65rem;
+                  print-color-adjust: exact !important;
+              }
+              .info-value { 
+                  flex: 1; 
+                  font-size: 0.7rem; 
               }
               .text-section {
                   background: white !important;
                   border: 1px solid #0da9a6;
                   border-radius: 6px;
-                  padding: 0.8rem;
-                  margin-bottom: 1rem;
+                  padding: 0.6rem;
+                  margin-bottom: 0.8rem;
                   print-color-adjust: exact !important;
               }
               .text-title {
                   background: linear-gradient(135deg, #0da9a6, #03d7eb) !important;
                   color: white !important;
                   font-weight: bold;
-                  font-size: 1rem;
-                  margin-bottom: 0.5rem;
-                  padding: 0.3rem;
+                  font-size: 0.8rem;
+                  margin-bottom: 0.4rem;
+                  padding: 0.2rem;
                   border-radius: 4px;
                   text-align: center;
                   print-color-adjust: exact !important;
               }
               .text-content {
-                  line-height: 1.6;
-                  font-size: 0.9rem;
+                  line-height: 1.4;
+                  font-size: 0.7rem;
                   background: white !important;
               }
               .evidence-section {
-                  margin-top: 1rem;
-                  padding: 1rem;
+                  margin-top: 0.8rem;
+                  padding: 0.6rem;
                   border: 1px solid #0da9a6;
                   border-radius: 6px;
                   background: white !important;
@@ -280,32 +310,62 @@ function printExchangeVisit() {
                   background: linear-gradient(135deg, #0da9a6, #03d7eb) !important;
                   color: white !important;
                   font-weight: bold;
-                  font-size: 0.9rem;
-                  margin-bottom: 0.75rem;
+                  font-size: 0.8rem;
+                  margin-bottom: 0.4rem;
                   text-align: center;
-                  padding: 0.3rem;
+                  padding: 0.2rem;
                   border-radius: 4px;
                   print-color-adjust: exact !important;
               }
               .evidence-grid {
                   display: grid;
                   grid-template-columns: 1fr 1fr;
-                  gap: 1rem;
+                  gap: 0.8rem;
               }
               .evidence-item {
                   text-align: center;
               }
               .evidence-item img {
                   max-width: 100%;
-                  max-height: 350px; /* زيادة الحجم من 180px إلى 250px */
-                  border-radius: 6px;
+                  max-height: 350px;
+                  border-radius: 4px;
                   border: 1px solid #0da9a6;
               }
               .evidence-label {
-                  margin-top: 0.5rem;
+                  margin-top: 0.2rem;
                   font-weight: bold;
                   color: #333;
-                  font-size: 0.9rem;
+                  font-size: 0.65rem;
+              }
+              .signature-section { 
+                  display: flex;
+                  justify-content: flex-end;
+                  margin-top: 0.8rem; 
+                  padding-top: 0.8rem; 
+                  border-top: 1px solid #0da9a6; 
+              }
+              .signature-item { 
+                  text-align: center; 
+                  padding: 0.4rem; 
+                  background: white !important;
+                  border: 1px solid #0da9a6;
+                  border-radius: 6px;
+                  print-color-adjust: exact !important;
+                  width: 50%;
+              }
+              .signature-title { 
+                  background: linear-gradient(135deg, #0da9a6, #03d7eb) !important;
+                  color: white !important; 
+                  margin-bottom: 0.2rem; 
+                  font-size: 0.7rem;
+                  padding: 0.2rem;
+                  border-radius: 3px;
+                  print-color-adjust: exact !important;
+              }
+              .signature-name { 
+                  font-size: 0.8rem; 
+                  font-weight: bold; 
+                  color: #333; 
               }
               .footer {
                   background: #14445A !important;
@@ -313,13 +373,14 @@ function printExchangeVisit() {
                   padding: 0.5rem;
                   text-align: center;
                   font-size: 0.7rem;
-                  border-radius: 0 0 10px 10px;
-                  margin-top: 1rem;
+                  border-radius: 0 0 8px 8px;
+                  margin-top: 0.8rem;
                   print-color-adjust: exact !important;
               }
               @media print {
                   * { print-color-adjust: exact !important; }
-                  body { margin: 0; font-size: 11px; background: white !important; }
+                  body { margin: 0; font-size: 10px; background: white !important; }
+                  @page { margin: 0.5cm; }
               }
           </style>
       </head>
@@ -338,23 +399,23 @@ function printExchangeVisit() {
           <div class="form-section">
               <div class="section-title">نموذج الزيارة التبادلية</div>
               
-              <table class="info-table">
-                  <tr><td>اسم البرنامج</td><td>${
+              <div class="info-grid">
+                  <div class="info-item"><div class="info-label">اسم البرنامج:</div><div class="info-value">${
                     formData.programName || "غير محدد"
-                  }</td></tr>
-                  <tr><td>اسم المعلم</td><td>${
+                  }</div></div>
+                  <div class="info-item"><div class="info-label">اسم المعلم:</div><div class="info-value">${
                     formData.teacherNameExchange || "غير محدد"
-                  }</td></tr>
-                  <tr><td>المستفيدون</td><td>${getBeneficiariesText(
-                    formData.beneficiaries
-                  )}</td></tr>
-                  <tr><td>الحصة</td><td>${getPeriodText(
+                  }</div></div>
+                  <div class="info-item"><div class="info-label">الزائرون:</div><div class="info-value">${
+                    formData.visitors || "غير محدد"
+                  }</div></div>
+                  <div class="info-item"><div class="info-label">الحصة:</div><div class="info-value">${getPeriodText(
                     formData.period
-                  )}</td></tr>
-                  <tr><td>التاريخ الهجري</td><td>${
+                  )}</div></div>
+                  <div class="info-item"><div class="info-label">التاريخ الهجري:</div><div class="info-value">${
                     formData.hijriDate || "غير محدد"
-                  }</td></tr>
-              </table>
+                  }</div></div>
+              </div>
               
               <div class="text-section">
                   <div class="text-title">أهداف البرنامج:</div>
@@ -401,6 +462,13 @@ function printExchangeVisit() {
               `
                   : ""
               }
+              
+              <div class="signature-section">
+                  <div class="signature-item">
+                      <div class="signature-title">مدير المدرسة</div>
+                      <div class="signature-name">فهد بن حسن القحطاني</div>
+                  </div>
+              </div>
           </div>
           <div class="footer"></div>
       </body>
@@ -424,9 +492,6 @@ function printStrategiesReport() {
   const evidence2 = document
     .getElementById("strategyEvidence2-preview")
     .querySelector("img");
-
-  console.log("[v0] Form data:", formData);
-  console.log("[v0] Objectives from form:", formData.objectives);
 
   const printWindow = window.open("", "_blank");
   const htmlContent = `
@@ -624,7 +689,7 @@ function printStrategiesReport() {
               }
               .evidence-item img {
                   max-width: 100%;
-                  max-height: 350px; /* زيادة الحجم من 180px إلى 250px */
+                  max-height: 350px;
                   border-radius: 4px;
                   border: 1px solid #0da9a6;
               }
@@ -677,6 +742,7 @@ function printStrategiesReport() {
               @media print {
                   * { print-color-adjust: exact !important; }
                   body { margin: 0; font-size: 10px; background: white !important; }
+                  @page { margin: 0.5cm; }
               }
           </style>
       </head>
@@ -781,7 +847,7 @@ function printStrategiesReport() {
                     formData.teacherNameStrategy || "غير محدد"
                   }</div>
               </div>
-                   <div class="signature-item">
+              <div class="signature-item">
                   <div class="signature-title">مدير المدرسة</div>
                   <div class="signature-name">فهد بن حسن القحطاني</div>
               </div>
@@ -796,6 +862,361 @@ function printStrategiesReport() {
   setTimeout(() => {
     printWindow.print();
     clearFormData("strategiesForm");
+  }, 1000);
+}
+
+function printProgramExecution() {
+  const formData = getFormData("programExecutionForm");
+  const evidence1 = document
+    .getElementById("evidence1Report-preview")
+    .querySelector("img");
+  const evidence2 = document
+    .getElementById("evidence2Report-preview")
+    .querySelector("img");
+
+  const printWindow = window.open("", "_blank");
+  const htmlContent = `
+      <!DOCTYPE html>
+      <html dir="rtl" lang="ar">
+      <head>
+          <meta charset="UTF-8">
+          <title>تقرير تنفيذ البرنامج</title>
+          <style>
+              * { 
+                  print-color-adjust: exact !important; 
+                  color-adjust: exact !important; 
+                  margin: 0; 
+                  padding: 0; 
+                  box-sizing: border-box;
+              }
+              body { 
+                  font-family: 'Segoe UI', Tahoma, Arial, sans-serif; 
+                  margin: 10px; 
+                  direction: rtl; 
+                  line-height: 1.3;
+                  color: #333;
+                  font-size: 12px;
+                  background: white !important;
+              }
+              .header { 
+                  background: #14445A !important;
+                  color: white !important;
+                  padding: 1rem;
+                  text-align: center;
+                  border-radius: 8px;
+                  margin-bottom: 0.8rem;
+                  print-color-adjust: exact !important;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  gap: 1.5rem;
+              }
+              .ministry-logo { 
+                  width: 120px;
+                  height: 90px;
+                  display: flex; 
+                  align-items: center; 
+                  justify-content: center; 
+                  print-color-adjust: exact !important;
+                  flex-shrink: 0;
+              }
+              .ministry-logo img {
+                  width: 120px;
+                  height: 90px;
+                  object-fit: contain;
+              }
+              .header-text { 
+                  text-align: center;
+                  flex: 1;
+              }
+              .header-text h1 { margin: 0 0 0.2rem 0; font-size: 1.1rem; }
+              .header-text h2 { margin: 0 0 0.2rem 0; font-size: 0.9rem; }
+              .header-text h3 { margin: 0; font-size: 0.8rem; }
+              .form-section {
+                  background: white !important;
+                  border-radius: 8px;
+                  padding: 0.8rem;
+                  margin-bottom: 0.8rem;
+              }
+              .section-title {
+                  background: linear-gradient(135deg, #0da9a6, #03d7eb) !important;
+                  color: white !important;
+                  padding: 0.4rem;
+                  border-radius: 6px;
+                  text-align: center;
+                  font-weight: bold;
+                  font-size: 0.9rem;
+                  margin-bottom: 0.6rem;
+                  print-color-adjust: exact !important;
+              }
+              .info-grid { 
+                  display: grid; 
+                  grid-template-columns: repeat(3, 1fr); 
+                  gap: 0.2rem;
+                  margin-bottom: 0.8rem;
+                  border: 1px solid #0da9a6;
+                  border-radius: 6px;
+                  overflow: hidden;
+                  background: white !important;
+              }
+              .info-item { 
+                  background: white !important; 
+                  border-right: 1px solid #0da9a6;
+                  border-bottom: 1px solid #0da9a6;
+                  padding: 0.3rem;
+                  display: flex; 
+                  align-items: center;
+                  print-color-adjust: exact !important;
+              }
+              .info-item:nth-child(3n) {
+                  border-right: none;
+              }
+              .info-item:nth-last-child(-n+3) {
+                  border-bottom: none;
+              }
+              .info-label { 
+                  background: linear-gradient(135deg, #0da9a6, #03d7eb) !important;
+                  color: white !important; 
+                  padding: 0.2rem 0.4rem;
+                  border-radius: 3px;
+                  font-weight: bold; 
+                  margin-left: 0.3rem;
+                  min-width: 60px;
+                  text-align: center; 
+                  font-size: 0.65rem;
+                  print-color-adjust: exact !important;
+              }
+              .info-value { 
+                  flex: 1; 
+                  font-size: 0.7rem; 
+              }
+              .text-section {
+                  background: white !important;
+                  border: 1px solid #0da9a6;
+                  border-radius: 6px;
+                  padding: 0.6rem;
+                  margin-bottom: 0.8rem;
+                  print-color-adjust: exact !important;
+              }
+              .text-title {
+                  background: linear-gradient(135deg, #0da9a6, #03d7eb) !important;
+                  color: white !important;
+                  font-weight: bold;
+                  font-size: 0.8rem;
+                  margin-bottom: 0.4rem;
+                  padding: 0.2rem;
+                  border-radius: 4px;
+                  text-align: center;
+                  print-color-adjust: exact !important;
+              }
+              .text-content {
+                  line-height: 1.4;
+                  font-size: 0.7rem;
+                  background: white !important;
+              }
+              .objectives-list { 
+                  background: white !important; 
+                  border-radius: 6px; 
+                  padding: 0.6rem; 
+                  border: 1px solid #0da9a6; 
+                  print-color-adjust: exact !important;
+              }
+              .objective-item { 
+                  margin-bottom: 0.3rem; 
+                  font-size: 0.65rem; 
+                  line-height: 1.3; 
+                  padding: 0.15rem 0;
+                  border-bottom: 1px solid #0da9a6;
+              }
+              .objective-item:last-child {
+                  border-bottom: none;
+              }
+              .evidence-section {
+                  margin-top: 0.8rem;
+                  padding: 0.6rem;
+                  border: 1px solid #0da9a6;
+                  border-radius: 6px;
+                  background: white !important;
+                  print-color-adjust: exact !important;
+              }
+              .evidence-title {
+                  background: linear-gradient(135deg, #0da9a6, #03d7eb) !important;
+                  color: white !important;
+                  font-weight: bold;
+                  font-size: 0.8rem;
+                  margin-bottom: 0.4rem;
+                  text-align: center;
+                  padding: 0.2rem;
+                  border-radius: 4px;
+                  print-color-adjust: exact !important;
+              }
+              .evidence-grid {
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 0.8rem;
+              }
+              .evidence-item {
+                  text-align: center;
+              }
+              .evidence-item img {
+                  max-width: 100%;
+                  max-height: 350px;
+                  border-radius: 4px;
+                  border: 1px solid #0da9a6;
+              }
+              .evidence-label {
+                  margin-top: 0.2rem;
+                  font-weight: bold;
+                  color: #333;
+                  font-size: 0.65rem;
+              }
+              .signature-section { 
+                  display: grid; 
+                  grid-template-columns: 1fr 1fr; 
+                  gap: 0.8rem; 
+                  margin-top: 0.8rem; 
+                  padding-top: 0.8rem; 
+                  border-top: 1px solid #0da9a6; 
+              }
+              .signature-item { 
+                  text-align: center; 
+                  padding: 0.4rem; 
+                  background: white !important;
+                  border: 1px solid #0da9a6;
+                  border-radius: 6px;
+                  print-color-adjust: exact !important;
+              }
+              .signature-title { 
+                  background: linear-gradient(135deg, #0da9a6, #03d7eb) !important;
+                  color: white !important; 
+                  margin-bottom: 0.2rem; 
+                  font-size: 0.7rem;
+                  padding: 0.2rem;
+                  border-radius: 3px;
+                  print-color-adjust: exact !important;
+              }
+              .signature-name { 
+                  font-size: 0.8rem; 
+                  font-weight: bold; 
+                  color: #333; 
+              }
+              .footer {
+                  background: #14445A !important;
+                  color: white !important;
+                  padding: 0.5rem;
+                  text-align: center;
+                  font-size: 0.7rem;
+                  border-radius: 0 0 8px 8px;
+                  margin-top: 0.8rem;
+                  print-color-adjust: exact !important;
+              }
+              @media print {
+                  * { print-color-adjust: exact !important; }
+                  body { margin: 0; font-size: 10px; background: white !important; }
+                  @page { margin: 0.5cm; }
+              }
+          </style>
+      </head>
+      <body>
+          <div class="header">
+              <div class="ministry-logo">
+                  <img src="/images/ministry-logo-white.png" alt="وزارة التعليم">
+              </div>
+              <div class="header-text">
+                  <h1>الإدارة العامة للتعليم بمحافظة الطائف</h1>
+                  <h2>دار التوحيد الثانوية</h2>
+                  <h3>تقرير تنفيذ البرنامج</h3>
+              </div>
+          </div>
+          
+          <div class="form-section">
+              <div class="section-title">نموذج تنفيذ البرنامج</div>
+              
+              <div class="info-grid">
+                  <div class="info-item"><div class="info-label">اسم البرنامج:</div><div class="info-value">${
+                    formData.programNameReport || "غير محدد"
+                  }</div></div>
+                  <div class="info-item"><div class="info-label">المنفذ:</div><div class="info-value">${
+                    formData.implementer || "غير محدد"
+                  }</div></div>
+                  <div class="info-item"><div class="info-label">مكان التنفيذ:</div><div class="info-value">${
+                    formData.location || "غير محدد"
+                  }</div></div>
+                  <div class="info-item"><div class="info-label">المستهدفون:</div><div class="info-value">${getBeneficiariesText(
+                    formData.beneficiaries
+                  )}</div></div>
+                  <div class="info-item"><div class="info-label">عدد المستهدفين:</div><div class="info-value">${
+                    formData.beneficiariesCount || "غير محدد"
+                  }</div></div>
+                  <div class="info-item"><div class="info-label">تاريخ التنفيذ الهجري:</div><div class="info-value">${
+                    formData.implementationDateReport || "غير محدد"
+                  }</div></div>
+              </div>
+              
+              <div class="text-section">
+                  <div class="text-title">الأهداف:</div>
+                  <div class="objectives-list">
+                      ${generateObjectivesList(
+                        formData.programObjectivesReport
+                      )}
+                  </div>
+              </div>
+              
+              ${
+                evidence1 || evidence2
+                  ? `
+              <div class="evidence-section">
+                  <div class="evidence-title">الشواهد والصور</div>
+                  <div class="evidence-grid">
+                      ${
+                        evidence1
+                          ? `
+                      <div class="evidence-item">
+                          <img src="${evidence1.src}" alt="الشاهد الأول">
+                          <div class="evidence-label">الشاهد الأول</div>
+                      </div>
+                      `
+                          : ""
+                      }
+                      ${
+                        evidence2
+                          ? `
+                      <div class="evidence-item">
+                          <img src="${evidence2.src}" alt="الشاهد الثاني">
+                          <div class="evidence-label">الشاهد الثاني</div>
+                      </div>
+                      `
+                          : ""
+                      }
+                  </div>
+              </div>
+              `
+                  : ""
+              }
+              
+              <div class="signature-section">
+                  <div class="signature-item">
+                      <div class="signature-title">المنفذ</div>
+                      <div class="signature-name">${
+                        formData.implementer || "غير محدد"
+                      }</div>
+                  </div>
+                  <div class="signature-item">
+                      <div class="signature-title">مدير المدرسة</div>
+                      <div class="signature-name">فهد بن حسن القحطاني</div>
+                  </div>
+              </div>
+          </div>
+          <div class="footer"></div>
+      </body>
+      </html>
+  `;
+
+  printWindow.document.write(htmlContent);
+  printWindow.document.close();
+  setTimeout(() => {
+    printWindow.print();
+    clearFormData("programExecutionForm");
   }, 1000);
 }
 
@@ -887,24 +1308,30 @@ document.addEventListener("DOMContentLoaded", () => {
   setupImageUpload("evidence2", "evidence2-preview");
   setupImageUpload("strategyEvidence1", "strategyEvidence1-preview");
   setupImageUpload("strategyEvidence2", "strategyEvidence2-preview");
+  setupImageUpload("evidence1Report", "evidence1Report-preview");
+  setupImageUpload("evidence2Report", "evidence2Report-preview");
 
   // تحميل البيانات المحفوظة
-  const forms = document.querySelectorAll("form[id]");
+  loadFormData("exchangeVisitForm");
+  loadFormData("strategiesForm");
+  loadFormData("programExecutionForm");
 
   // إضافة مستمعي الأحداث للنماذج
-  const forms2 = document.querySelectorAll("form[id]");
-  forms2.forEach((form) => {
+  const forms = document.querySelectorAll("form[id]");
+  forms.forEach((form) => {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       if (validateForm(form.id)) {
         saveFormData(form.id);
-        printForm(form.id);
+        if (form.id === "programExecutionForm") {
+          printProgramExecution();
+        } else if (form.id === "strategiesForm") {
+          printStrategiesReport();
+        } else if (form.id === "exchangeVisitForm") {
+          printExchangeVisit();
+        }
       }
     });
-
-    // form.addEventListener("input", () => {
-    //   saveFormData(form.id)
-    // })
   });
 });
 
@@ -918,15 +1345,21 @@ function toggleSection(sectionId) {
 
 // تحديث التاريخ الهجري تلقائياً
 function updateHijriDate() {
-  const hijriDateInput = document.getElementById("hijri-date");
-  if (hijriDateInput && !hijriDateInput.value) {
-    // يمكن إضافة مكتبة للتاريخ الهجري هنا
-    const today = new Date();
-    const hijriDate = `${today.getFullYear() - 579}/${
-      today.getMonth() + 1
-    }/${today.getDate()}`;
-    hijriDateInput.value = hijriDate;
-  }
+  const hijriDateInputs = [
+    document.getElementById("hijriDate"),
+    document.getElementById("implementationDate"),
+    document.getElementById("implementationDateReport"),
+  ];
+  hijriDateInputs.forEach((input) => {
+    if (input && !input.value) {
+      // يمكن إضافة مكتبة للتاريخ الهجري هنا
+      const today = new Date();
+      const hijriDate = `${today.getFullYear() - 579}/${
+        today.getMonth() + 1
+      }/${today.getDate()}`;
+      input.value = hijriDate;
+    }
+  });
 }
 
 // تصدير البيانات كـ JSON
@@ -968,14 +1401,6 @@ function getFormData(formId) {
     data[key] = value;
   }
 
-  const objectivesTextarea = form.querySelector('textarea[name="objectives"]');
-  if (objectivesTextarea) {
-    data.objectives = objectivesTextarea.value.trim();
-    console.log("[v0] Reading objectives from textarea:", data.objectives);
-  } else {
-    console.log("[v0] Objectives textarea not found");
-  }
-
   return data;
 }
 
@@ -1000,11 +1425,8 @@ function getSelectedTools() {
 }
 
 function generateObjectivesList(objectives) {
-  console.log("[v0] Processing objectives:", objectives);
-
   if (!objectives || objectives.trim() === "") {
-    console.log("[v0] No objectives found - returning empty string");
-    return "";
+    return '<div class="objective-item">لا توجد أهداف</div>';
   }
 
   const lines = objectives
@@ -1012,11 +1434,8 @@ function generateObjectivesList(objectives) {
     .map((line) => line.trim())
     .filter((line) => line.length > 0);
 
-  console.log("[v0] Objectives lines after processing:", lines);
-
   let objectivesHtml = "";
   lines.forEach((line, index) => {
-    // إزالة الأرقام والنقاط من بداية السطر إذا كانت موجودة
     const cleanObjective = line.replace(/^\d+[.\-)\s]*/, "").trim();
     if (cleanObjective) {
       objectivesHtml += `<div class="objective-item">${
@@ -1025,6 +1444,5 @@ function generateObjectivesList(objectives) {
     }
   });
 
-  console.log("[v0] Generated objectives HTML:", objectivesHtml);
   return objectivesHtml || '<div class="objective-item">لا توجد أهداف</div>';
 }

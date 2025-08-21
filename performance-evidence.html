@@ -41,6 +41,19 @@
         </div>
 
         <div class="selection-cards">
+          <div class="selection-card" onclick="showStrategiesForm()">
+            <div class="card-icon">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+            <h3 class="card-title">الاستراتيجيات</h3>
+            <p class="card-description">
+              نموذج توثيق الاستراتيجيات التعليمية والأدوات المستخدمة
+            </p>
+            <div class="card-arrow">
+              <i class="fas fa-arrow-left"></i>
+            </div>
+          </div>
+
           <div class="selection-card" onclick="showExchangeVisitForm()">
             <div class="card-icon">
               <i class="fas fa-exchange-alt"></i>
@@ -54,183 +67,17 @@
             </div>
           </div>
 
-          <div class="selection-card" onclick="showStrategiesForm()">
+          <div class="selection-card" onclick="showProgramExecutionForm()">
             <div class="card-icon">
-              <i class="fas fa-lightbulb"></i>
+              <i class="fas fa-check-circle"></i>
             </div>
-            <h3 class="card-title">الاستراتيجيات</h3>
-            <p class="card-description">
-              نموذج توثيق الاستراتيجيات التعليمية والأدوات المستخدمة
-            </p>
+            <h3 class="card-title">تنفيذ البرامج</h3>
+            <p class="card-description">وثّق تنفيذ البرامج التعليمية.</p>
             <div class="card-arrow">
               <i class="fas fa-arrow-left"></i>
             </div>
           </div>
         </div>
-      </div>
-
-      <!-- نموذج الزيارة التبادلية -->
-      <div class="form-section" id="exchangeVisitSection" style="display: none">
-        <div class="form-header">
-          <button class="back-btn" onclick="showSelectionPage()">
-            <i class="fas fa-arrow-right me-2"></i>
-            العودة للاختيار
-          </button>
-          <div class="section-header">
-            <i class="fas fa-exchange-alt me-2"></i>
-            نموذج الزيارة التبادلية
-          </div>
-        </div>
-
-        <form id="exchangeVisitForm" class="form-container">
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">اسم البرنامج</label>
-              <input
-                type="text"
-                class="form-control"
-                id="programName"
-                name="programName"
-                placeholder="أدخل اسم البرنامج"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label class="form-label">اسم المعلم</label>
-              <input
-                type="text"
-                class="form-control"
-                id="teacherNameExchange"
-                name="teacherNameExchange"
-                placeholder="أدخل اسم المعلم"
-                required
-              />
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label">المستفيدون</label>
-              <select
-                class="form-control form-select"
-                id="beneficiaries"
-                name="beneficiaries"
-                required
-              >
-                <option value="">اختر نوع المستفيدين</option>
-                <option value="students">طلاب</option>
-                <option value="teachers">معلمين</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label">الحصة</label>
-              <select
-                class="form-control form-select"
-                id="period"
-                name="period"
-                required
-              >
-                <option value="">اختر الحصة</option>
-                <option value="1">الحصة الأولى</option>
-                <option value="2">الحصة الثانية</option>
-                <option value="3">الحصة الثالثة</option>
-                <option value="4">الحصة الرابعة</option>
-                <option value="5">الحصة الخامسة</option>
-                <option value="6">الحصة السادسة</option>
-                <option value="7">الحصة السابعة</option>
-                <option value="8">الحصة الثامنة</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <!-- تغيير التاريخ الهجري في نموذج الزيارة -->
-              <label class="form-label">التاريخ الهجري</label>
-              <input
-                type="text"
-                class="form-control"
-                id="hijriDate"
-                name="hijriDate"
-                placeholder="1446/12/12"
-                required
-              />
-            </div>
-          </div>
-
-          <div class="form-group full-width">
-            <label class="form-label">أهداف البرنامج</label>
-            <textarea
-              class="form-control textarea-control"
-              id="programObjectives"
-              name="programObjectives"
-              placeholder="اكتب أهداف البرنامج هنا..."
-              required
-            ></textarea>
-          </div>
-
-          <div class="form-group full-width">
-            <label class="form-label">التوصيات</label>
-            <textarea
-              class="form-control textarea-control"
-              id="recommendations"
-              name="recommendations"
-              placeholder="اكتب التوصيات هنا..."
-              required
-            ></textarea>
-          </div>
-
-          <!-- رفع الصور -->
-          <div class="evidence-upload-section">
-            <h4 class="evidence-title">الشواهد والصور</h4>
-            <div class="row">
-              <div class="col-md-6">
-                <label class="form-label">الشاهد الأول</label>
-                <div
-                  class="file-upload-area"
-                  onclick="document.getElementById('evidence1').click()"
-                >
-                  <i class="fas fa-cloud-upload-alt"></i>
-                  <p>اضغط لرفع الصورة الأولى</p>
-                  <input
-                    type="file"
-                    id="evidence1"
-                    name="evidence1"
-                    accept="image/*"
-                    style="display: none"
-                  />
-                </div>
-                <div id="evidence1-preview" class="image-preview"></div>
-              </div>
-              <div class="col-md-6">
-                <label class="form-label">الشاهد الثاني</label>
-                <div
-                  class="file-upload-area"
-                  onclick="document.getElementById('evidence2').click()"
-                >
-                  <i class="fas fa-cloud-upload-alt"></i>
-                  <p>اضغط لرفع الصورة الثانية</p>
-                  <input
-                    type="file"
-                    id="evidence2"
-                    name="evidence2"
-                    accept="image/*"
-                    style="display: none"
-                  />
-                </div>
-                <div id="evidence2-preview" class="image-preview"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="btn-group">
-            <button
-              type="button"
-              class="btn-success"
-              onclick="printExchangeVisit()"
-            >
-              <i class="fas fa-print me-2"></i>
-              طباعة نموذج الزيارة التبادلية
-            </button>
-          </div>
-        </form>
       </div>
 
       <!-- نموذج الاستراتيجيات -->
@@ -351,7 +198,7 @@
                   class="objectives-textarea"
                   id="objectives"
                   name="objectives"
-                  placeholder="اكتب الأهداف من واحد لخمسة تحت بعض:&#10;1. الهدف الأول&#10;2. الهدف الثاني&#10;3. الهدف الثالث&#10;4. الهدف الرابع&#10;5. الهدف الخامس"
+                  placeholder="اكتب الأهداف هنا ويفضل خمس أهداف تحت بعض:&#10;1. الهدف الأول&#10;2. الهدف الثاني&#10;3. الهدف الثالث&#10;4. الهدف الرابع&#10;5. الهدف الخامس"
                   required
                 ></textarea>
               </div>
@@ -445,7 +292,7 @@
                       class="tool-checkbox"
                       id="sampleMachines"
                       name="tools"
-                      value=" نماذج"
+                      value="نماذج"
                     />
                     <label for="sampleMachines">نماذج</label>
                   </div>
@@ -535,6 +382,329 @@
             </div>
           </form>
         </div>
+      </div>
+
+      <!-- نموذج الزيارة التبادلية -->
+      <div class="form-section" id="exchangeVisitSection" style="display: none">
+        <div class="form-header">
+          <button class="back-btn" onclick="showSelectionPage()">
+            <i class="fas fa-arrow-right me-2"></i>
+            العودة للاختيار
+          </button>
+          <div class="section-header">
+            <i class="fas fa-exchange-alt me-2"></i>
+            نموذج الزيارة التبادلية
+          </div>
+        </div>
+
+        <form id="exchangeVisitForm" class="form-container">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">اسم البرنامج</label>
+              <input
+                type="text"
+                class="form-control"
+                id="programName"
+                name="programName"
+                value="الزيارات التبادلية"
+                placeholder="الزيارات التبادلية"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label">اسم المعلم المزار</label>
+              <input
+                type="text"
+                class="form-control"
+                id="teacherNameExchange"
+                name="teacherNameExchange"
+                placeholder="أدخل اسم المعلم"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">الزائرون</label>
+              <textarea
+                class="form-control visitors-textarea"
+                id="visitors"
+                name="visitors"
+                placeholder="أسماء الزائرين"
+                required
+                style="height: 40px; resize: vertical"
+              ></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">الحصة</label>
+              <select
+                class="form-control form-select"
+                id="period"
+                name="period"
+                required
+              >
+                <option value="">اختر الحصة</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">التاريخ الهجري</label>
+              <input
+                type="text"
+                class="form-control"
+                id="hijriDate"
+                name="hijriDate"
+                placeholder="مثلا: 1446/12/12"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group full-width">
+            <label class="form-label">أهداف البرنامج</label>
+            <textarea
+              class="form-control textarea-control"
+              id="programObjectives"
+              name="programObjectives"
+              placeholder="اكتب أهداف البرنامج هنا..."
+              required
+            ></textarea>
+          </div>
+
+          <div class="form-group full-width">
+            <label class="form-label">التوصيات</label>
+            <textarea
+              class="form-control textarea-control"
+              id="recommendations"
+              name="recommendations"
+              placeholder="اكتب التوصيات هنا..."
+              required
+            ></textarea>
+          </div>
+
+          <div class="evidence-upload-section">
+            <h4 class="evidence-title">الشواهد والصور</h4>
+            <div class="row">
+              <div class="col-md-6">
+                <label class="form-label">الشاهد الأول</label>
+                <div
+                  class="file-upload-area"
+                  onclick="document.getElementById('evidence1').click()"
+                >
+                  <i class="fas fa-cloud-upload-alt"></i>
+                  <p>اضغط لرفع الصورة الأولى</p>
+                  <input
+                    type="file"
+                    id="evidence1"
+                    name="evidence1"
+                    accept="image/*"
+                    style="display: none"
+                  />
+                </div>
+                <div id="evidence1-preview" class="image-preview"></div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">الشاهد الثاني</label>
+                <div
+                  class="file-upload-area"
+                  onclick="document.getElementById('evidence2').click()"
+                >
+                  <i class="fas fa-cloud-upload-alt"></i>
+                  <p>اضغط لرفع الصورة الثانية</p>
+                  <input
+                    type="file"
+                    id="evidence2"
+                    name="evidence2"
+                    accept="image/*"
+                    style="display: none"
+                  />
+                </div>
+                <div id="evidence2-preview" class="image-preview"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="btn-group">
+            <button
+              type="button"
+              class="btn-success"
+              onclick="printExchangeVisit()"
+            >
+              <i class="fas fa-file-pdf me-2"></i>
+              طباعة نموذج الزيارة التبادلية
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- قسم نموذج تنفيذ البرامج -->
+      <div
+        id="programExecutionSection"
+        class="form-section"
+        style="display: none"
+      >
+        <div class="form-header">
+          <button class="back-btn" onclick="showSelectionPage()">
+            <i class="fas fa-arrow-right me-2"></i>
+            العودة للاختيار
+          </button>
+          <div class="section-header">
+            <i class="fas fa-check-circle me-2"></i>
+            نموذج تنفيذ البرامج
+          </div>
+        </div>
+
+        <form id="programExecutionForm" class="form-container">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">اسم البرنامج *</label>
+              <input
+                type="text"
+                class="form-control"
+                id="programNameReport"
+                name="programNameReport"
+                placeholder="أدخل اسم البرنامج"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label">المنفذ *</label>
+              <input
+                type="text"
+                class="form-control"
+                id="implementer"
+                name="implementer"
+                placeholder="أدخل اسم المنفذ"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">مكان التنفيذ *</label>
+              <input
+                type="text"
+                class="form-control"
+                id="location"
+                name="location"
+                placeholder="أدخل مكان التنفيذ"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label">المستهدفون *</label>
+              <select
+                class="form-control form-select"
+                id="beneficiaries"
+                name="beneficiaries"
+                required
+              >
+                <option value="">اختر المستهدفين</option>
+                <option value="students">طلاب</option>
+                <option value="teachers">معلمين</option>
+                <option value="other">آخرون</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">عدد المستهدفين *</label>
+              <input
+                type="number"
+                class="form-control"
+                id="beneficiariesCount"
+                name="beneficiariesCount"
+                min="1"
+                placeholder="أدخل عدد المستهدفين"
+                required
+              />
+            </div>
+          </div>
+          <div class="form-group full-width">
+            <label class="form-label">تاريخ التنفيذ الهجري *</label>
+            <input
+              type="text"
+              class="form-control"
+              id="implementationDateReport"
+              name="implementationDateReport"
+              placeholder="مثلا: 1446/12/12"
+              required
+            />
+          </div>
+          <div class="form-group full-width">
+            <label class="form-label">الأهداف *</label>
+            <textarea
+              class="form-control textarea-control"
+              id="programObjectivesReport"
+              name="programObjectivesReport"
+              placeholder="اكتب الأهداف هنا ويفضل خمس أهداف تحت بعض:&#10;1. الهدف الأول&#10;2. الهدف الثاني&#10;3. الهدف الثالث&#10;4. الهدف الرابع&#10;5. الهدف الخامس"
+              required
+            ></textarea>
+          </div>
+          <div class="evidence-upload-section">
+            <h4 class="evidence-title">الشواهد والصور</h4>
+            <div class="row">
+              <div class="col-md-6">
+                <label class="form-label">الشاهد الأول</label>
+                <div
+                  class="file-upload-area"
+                  onclick="document.getElementById('evidence1Report').click()"
+                >
+                  <i class="fas fa-cloud-upload-alt"></i>
+                  <p>اضغط لرفع الصورة الأولى</p>
+                  <input
+                    type="file"
+                    id="evidence1Report"
+                    name="evidence1Report"
+                    accept="image/*"
+                    style="display: none"
+                  />
+                </div>
+                <div
+                  id="evidence1Report-preview"
+                  class="image-preview mt-2"
+                ></div>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">الشاهد الثاني</label>
+                <div
+                  class="file-upload-area"
+                  onclick="document.getElementById('evidence2Report').click()"
+                >
+                  <i class="fas fa-cloud-upload-alt"></i>
+                  <p>اضغط لرفع الصورة الثانية</p>
+                  <input
+                    type="file"
+                    id="evidence2Report"
+                    name="evidence2Report"
+                    accept="image/*"
+                    style="display: none"
+                  />
+                </div>
+                <div
+                  id="evidence2Report-preview"
+                  class="image-preview mt-2"
+                ></div>
+              </div>
+            </div>
+          </div>
+          <div class="btn-group">
+            <button
+              type="button"
+              class="btn-success"
+              onclick="printProgramExecution()"
+            >
+              <i class="fas fa-file-pdf me-2"></i>
+              طباعة تقرير تنفيذ البرنامج PDF
+            </button>
+          </div>
+        </form>
       </div>
     </main>
 
