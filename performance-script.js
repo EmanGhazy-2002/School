@@ -1125,17 +1125,17 @@ function printProgramExecution() {
               <div class="header-text">
                   <h1>الإدارة العامة للتعليم بمحافظة الطائف</h1>
                   <h2>دار التوحيد الثانوية</h2>
-                  <h3>تقرير تنفيذ البرنامج</h3>
+                  <h3>تقرير تنفيذ برنامج</h3>
               </div>
           </div>
           
           <div class="form-section">
-              <div class="section-title">نموذج تنفيذ البرنامج</div>
+              <div class="section-title">نموذج  ${
+                formData.programNameReport || "غير محدد"
+              }</div>
               
               <div class="info-grid">
-                  <div class="info-item"><div class="info-label">اسم البرنامج:</div><div class="info-value">${
-                    formData.programNameReport || "غير محدد"
-                  }</div></div>
+              
                   <div class="info-item"><div class="info-label">المنفذ:</div><div class="info-value">${
                     formData.implementer || "غير محدد"
                   }</div></div>
