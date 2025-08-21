@@ -1436,11 +1436,9 @@ function generateObjectivesList(objectives) {
 
   let objectivesHtml = "";
   lines.forEach((line, index) => {
-    const cleanObjective = line.replace(/^\d+[.\-)\s]*/, "").trim();
+    const cleanObjective = line.trim();
     if (cleanObjective) {
-      objectivesHtml += `<div class="objective-item">${
-        index + 1
-      }. ${cleanObjective}</div>`;
+      objectivesHtml += `<div class="objective-item">${cleanObjective}</div>`;
     }
   });
 
