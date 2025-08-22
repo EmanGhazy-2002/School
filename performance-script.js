@@ -952,9 +952,8 @@ function printProgramExecution() {
               .info-grid { 
                   display: grid; 
                   grid-template-columns: repeat(3, 1fr); 
-                  gap: 0.2rem;
+                  gap: 0rem;
                   margin-bottom: 0.8rem;
-                  border: 1px solid #0da9a6;
                   border-radius: 6px;
                   overflow: hidden;
                   background: white !important;
@@ -972,6 +971,10 @@ function printProgramExecution() {
                   border-right: none;
               }
               .info-item:nth-last-child(-n+3) {
+                  border-bottom: none;
+              }
+              .info-item.empty {
+                  border-right: none;
                   border-bottom: none;
               }
               .info-label { 
@@ -1125,27 +1128,29 @@ function printProgramExecution() {
               <div class="header-text">
                   <h1>الإدارة العامة للتعليم بمحافظة الطائف</h1>
                   <h2>دار التوحيد الثانوية</h2>
-                  <h3>تقرير تنفيذ برنامج</h3>
+                  <h3>تقرير تنفيذ البرنامج</h3>
               </div>
           </div>
           
           <div class="form-section">
-              <div class="section-title"> ${
-                formData.programNameReport || "غير محدد"
+              <div class="section-title">${
+                formData.programNameReport || "نموذج تنفيذ البرنامج"
               }</div>
               
               <div class="info-grid">
-              
+                  <div class="info-item"><div class="info-label">اسم البرنامج:</div><div class="info-value">${
+                    formData.programNameReport || "غير محدد"
+                  }</div></div>
                   <div class="info-item"><div class="info-label">المنفذ:</div><div class="info-value">${
                     formData.implementer || "غير محدد"
                   }</div></div>
                   <div class="info-item"><div class="info-label">مكان التنفيذ:</div><div class="info-value">${
                     formData.location || "غير محدد"
                   }</div></div>
-                  <div class="info-item"><div class="info-label">المستهدفون:</div><div class="info-value">${getBeneficiariesText(
+                  <div class="info-item"><div class="info-label">المستفيدون:</div><div class="info-value">${getBeneficiariesText(
                     formData.beneficiaries
                   )}</div></div>
-                  <div class="info-item"><div class="info-label">عدد المستهدفين:</div><div class="info-value">${
+                  <div class="info-item"><div class="info-label">عدد المستفيدين:</div><div class="info-value">${
                     formData.beneficiariesCount || "غير محدد"
                   }</div></div>
                   <div class="info-item"><div class="info-label">تاريخ التنفيذ الهجري:</div><div class="info-value">${
@@ -1436,9 +1441,11 @@ function generateObjectivesList(objectives) {
 
   let objectivesHtml = "";
   lines.forEach((line, index) => {
-    const cleanObjective = line.trim();
+    const cleanObjective = line.replace(/^\d+[.\-)\s]*/, "").trim();
     if (cleanObjective) {
-      objectivesHtml += `<div class="objective-item">${cleanObjective}</div>`;
+      objectivesHtml += `<div class="objective-item">${
+        index + 1
+      }. ${cleanObjective}</div>`;
     }
   });
 
