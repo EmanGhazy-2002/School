@@ -1431,7 +1431,6 @@ function generateObjectivesList(objectives) {
   if (!objectives || objectives.trim() === "") {
     return '<div class="objective-item">لا توجد أهداف</div>';
   }
-
   const lines = objectives
     .split(/\r?\n/)
     .map((line) => line.trim())
