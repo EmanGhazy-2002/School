@@ -235,7 +235,7 @@ function printExchangeVisit() {
               }
               .info-grid { 
                   display: grid; 
-                  grid-template-columns: repeat(3, 1fr); 
+                  grid-template-columns: repeat(2, 1fr); 
                   gap: 0;
                   margin-bottom: 0.8rem;
                   border: 1px solid #0da9a6;
@@ -292,10 +292,34 @@ function printExchangeVisit() {
                   text-align: center;
                   print-color-adjust: exact !important;
               }
-              .text-content {
-                  line-height: 1.4;
-                  font-size: 0.7rem;
-                  background: white !important;
+              .objectives-grid {
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 0.8rem;
+                  margin-bottom: 0.8rem;
+                  align-items: stretch;
+              }
+              .objectives-list { 
+                  background: white !important; 
+                  border-radius: 6px; 
+                  padding: 0.6rem; 
+                  border: 1px solid #0da9a6; 
+                  print-color-adjust: exact !important;
+                  max-height: 150px; /* Prevent overflow */
+                  overflow-y: auto; /* Enable scrolling if needed */
+              }
+              .objective-item { 
+                  margin-bottom: 0.4rem; 
+                  font-size: 0.65rem; 
+                  line-height: 1.4; 
+                  padding: 0.3rem 0.2rem;
+                  border-bottom: 1px solid #0da9a6; 
+                  overflow: hidden; /* Prevent text overflow */
+                  text-overflow: ellipsis; /* Handle long text */
+              }
+              .objective-item:last-child {
+                  border-bottom: none;
+                  margin-bottom: 0;
               }
               .evidence-section {
                   margin-top: 0.8rem;
@@ -326,7 +350,7 @@ function printExchangeVisit() {
               }
               .evidence-item img {
                   max-width: 100%;
-                  max-height: 350px;
+                  max-height: 300px;
                   border-radius: 4px;
                   border: 1px solid #0da9a6;
               }
@@ -380,6 +404,7 @@ function printExchangeVisit() {
                   * { print-color-adjust: exact !important; }
                   body { margin: 0; font-size: 10px; background: white !important; }
                   @page { margin: 0.5cm; }
+                  .objectives-list::-webkit-scrollbar { display: none; } /* Hide scrollbar in print */
               }
           </style>
       </head>
@@ -402,11 +427,8 @@ function printExchangeVisit() {
                   <div class="info-item"><div class="info-label">اسم البرنامج:</div><div class="info-value">${
                     formData.programName || "غير محدد"
                   }</div></div>
-                  <div class="info-item"><div class="info-label">اسم المعلم:</div><div class="info-value">${
+                  <div class="info-item"><div class="info-label">اسم المعلم المزار:</div><div class="info-value">${
                     formData.teacherNameExchange || "غير محدد"
-                  }</div></div>
-                  <div class="info-item"><div class="info-label">الزائرون:</div><div class="info-value">${
-                    formData.visitors || "غير محدد"
                   }</div></div>
                   <div class="info-item"><div class="info-label">الحصة:</div><div class="info-value">${getPeriodText(
                     formData.period
@@ -415,16 +437,19 @@ function printExchangeVisit() {
                     formData.hijriDate || "غير محدد"
                   }</div></div>
               </div>
+                   <div class="objectives-grid">
+                      <div class="objectives-list">
+                          <div class="text-title">الزائرون</div>
+                          ${generateObjectivesList(formData.visitors)}
+                      </div>
+                      <div class="objectives-list">
+                          <div class="text-title">أهداف البرنامج</div>
+                          ${generateObjectivesList(formData.programObjectives)}
+                      </div>
+                  </div>
               
               <div class="text-section">
-                  <div class="text-title">أهداف البرنامج:</div>
-                  <div class="text-content">${
-                    formData.programObjectives || "غير محدد"
-                  }</div>
-              </div>
-              
-              <div class="text-section">
-                  <div class="text-title">التوصيات:</div>
+                  <div class="text-title">التوصيات</div>
                   <div class="text-content">${
                     formData.recommendations || "غير محدد"
                   }</div>
@@ -1136,6 +1161,9 @@ function printProgramExecution() {
               }</div>
               
               <div class="info-grid">
+                  <div class="info-item"><div class="info-label">اسم البرنامج:</div><div class="info-value">${
+                    formData.programNameReport || "غير محدد"
+                  }</div></div>
                   <div class="info-item"><div class="info-label">المنفذ:</div><div class="info-value">${
                     formData.implementer || "غير محدد"
                   }</div></div>
@@ -1428,6 +1456,7 @@ function generateObjectivesList(objectives) {
   if (!objectives || objectives.trim() === "") {
     return '<div class="objective-item">لا توجد أهداف</div>';
   }
+
   const lines = objectives
     .split(/\r?\n/)
     .map((line) => line.trim())
