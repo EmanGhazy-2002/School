@@ -236,17 +236,16 @@ function printExchangeVisit() {
               .info-grid { 
                   display: grid; 
                   grid-template-columns: repeat(3, 1fr); 
-                  gap: 0.2rem;
+                  gap: 0;
                   margin-bottom: 0.8rem;
                   border: 1px solid #0da9a6;
                   border-radius: 6px;
-                  overflow: hidden;
                   background: white !important;
+                  border-collapse: collapse;
               }
               .info-item { 
                   background: white !important; 
-                  border-right: 1px solid #0da9a6;
-                  border-bottom: 1px solid #0da9a6;
+                  border: 1px solid #0da9a6;
                   padding: 0.3rem;
                   display: flex; 
                   align-items: center;
@@ -554,17 +553,16 @@ function printStrategiesReport() {
               .info-grid { 
                   display: grid; 
                   grid-template-columns: repeat(3, 1fr); 
-                  gap: 0.2rem;
+                  gap: 0;
                   margin-bottom: 0.8rem;
                   border: 1px solid #0da9a6;
                   border-radius: 6px;
-                  overflow: hidden;
                   background: white !important;
+                  border-collapse: collapse;
               }
               .info-item { 
                   background: white !important; 
-                  border-right: 1px solid #0da9a6;
-                  border-bottom: 1px solid #0da9a6;
+                  border: 1px solid #0da9a6;
                   padding: 0.3rem;
                   display: flex; 
                   align-items: center;
@@ -952,16 +950,16 @@ function printProgramExecution() {
               .info-grid { 
                   display: grid; 
                   grid-template-columns: repeat(3, 1fr); 
-                  gap: 0rem;
+                  gap: 0;
                   margin-bottom: 0.8rem;
+                  border: 1px solid #0da9a6;
                   border-radius: 6px;
-                  overflow: hidden;
                   background: white !important;
+                  border-collapse: collapse;
               }
               .info-item { 
                   background: white !important; 
-                  border-right: 1px solid #0da9a6;
-                  border-bottom: 1px solid #0da9a6;
+                  border: 1px solid #0da9a6;
                   padding: 0.3rem;
                   display: flex; 
                   align-items: center;
