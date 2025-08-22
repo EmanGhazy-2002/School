@@ -1136,9 +1136,6 @@ function printProgramExecution() {
               }</div>
               
               <div class="info-grid">
-                  <div class="info-item"><div class="info-label">اسم البرنامج:</div><div class="info-value">${
-                    formData.programNameReport || "غير محدد"
-                  }</div></div>
                   <div class="info-item"><div class="info-label">المنفذ:</div><div class="info-value">${
                     formData.implementer || "غير محدد"
                   }</div></div>
