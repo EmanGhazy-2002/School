@@ -793,9 +793,9 @@ function printStrategiesReport() {
               <div class="info-item"><div class="info-label">عدد الطلاب:</div><div class="info-value">${
                 formData.studentsCount || "غير محدد"
               }</div></div>
-              <div class="info-item"><div class="info-label">الفصل:</div><div class="info-value">${
+              <div class="info-item"><div class="info-label">الفصل:</div><div class="info-value">${getPeriodText(
                 formData.classroom || "غير محدد"
-              }</div></div>
+              )}</div></div>
               <div class="info-item"><div class="info-label">المرحلة الدراسية:</div><div class="info-value">${
                 formData.grade || "غير محدد"
               }</div></div>
@@ -1442,8 +1442,15 @@ function getBeneficiariesText(value) {
   }
 }
 
+// دالة لتحويل الأرقام الإنجليزية إلى العربية
+function toArabicNumbers(str) {
+  return String(str).replace(/[0-9]/g, function (d) {
+    return "٠١٢٣٤٥٦٧٨٩"[d];
+  });
+}
+
 function getPeriodText(value) {
-  return value ? `الحصة ${value}` : "غير محدد";
+  return value ? ` ${toArabicNumbers(value)}` : "غير محدد";
 }
 
 function getSelectedTools() {
@@ -1463,11 +1470,11 @@ function generateObjectivesList(objectives) {
 
   let objectivesHtml = "";
   lines.forEach((line, index) => {
-    const cleanObjective = line.replace(/^\d+[.\-)\s]*/, "").trim();
+    const cleanObjective = line.replace(/^\d+[.\-\)\s]*/, "").trim();
     if (cleanObjective) {
-      objectivesHtml += `<div class="objective-item">${
+      objectivesHtml += `<div class="objective-item">${toArabicNumbers(
         index + 1
-      }. ${cleanObjective}</div>`;
+      )}. ${cleanObjective}</div>`;
     }
   });
 
