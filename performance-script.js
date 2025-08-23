@@ -421,12 +421,11 @@ function printExchangeVisit() {
           </div>
           
           <div class="form-section">
-              <div class="section-title">نموذج الزيارة التبادلية</div>
+              <div class="section-title"> ${
+                formData.programName || "غير محدد"
+              }</div>
               
               <div class="info-grid">
-                  <div class="info-item"><div class="info-label">اسم البرنامج:</div><div class="info-value">${
-                    formData.programName || "غير محدد"
-                  }</div></div>
                   <div class="info-item"><div class="info-label">اسم المعلم المزار:</div><div class="info-value">${
                     formData.teacherNameExchange || "غير محدد"
                   }</div></div>
@@ -1151,13 +1150,13 @@ function printProgramExecution() {
               <div class="header-text">
                   <h1>الإدارة العامة للتعليم بمحافظة الطائف</h1>
                   <h2>دار التوحيد الثانوية</h2>
-                  <h3>تقرير تنفيذ البرنامج</h3>
+                  <h3>تقرير تنفيذ برنامج</h3>
               </div>
           </div>
           
           <div class="form-section">
               <div class="section-title">${
-                formData.programNameReport || "نموذج تنفيذ البرنامج"
+                formData.programNameReport || "نموذج تنفيذ برنامج"
               }</div>
               
               <div class="info-grid">
