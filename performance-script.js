@@ -458,7 +458,6 @@ function printExchangeVisit() {
                           ? `
                       <div class="evidence-item">
                           <img src="${evidence1.src}" alt="الشاهد الأول">
-                          <div class="evidence-label">الشاهد الأول</div>
                       </div>
                       `
                           : ""
@@ -468,7 +467,6 @@ function printExchangeVisit() {
                           ? `
                       <div class="evidence-item">
                           <img src="${evidence2.src}" alt="الشاهد الثاني">
-                          <div class="evidence-label">الشاهد الثاني</div>
                       </div>
                       `
                           : ""
@@ -839,7 +837,6 @@ function printStrategiesReport() {
                       ? `
                   <div class="evidence-item">
                       <img src="${evidence1.src}" alt="الشاهد الأول">
-                      <div class="evidence-label">صورة الشاهد الأول</div>
                   </div>
                   `
                       : ""
@@ -849,7 +846,6 @@ function printStrategiesReport() {
                       ? `
                   <div class="evidence-item">
                       <img src="${evidence2.src}" alt="الشاهد الثاني">
-                      <div class="evidence-label">صورة الشاهد الثاني</div>
                   </div>
                   `
                       : ""
@@ -1203,7 +1199,6 @@ function printProgramExecution() {
                           ? `
                       <div class="evidence-item">
                           <img src="${evidence1.src}" alt="الشاهد الأول">
-                          <div class="evidence-label">الشاهد الأول</div>
                       </div>
                       `
                           : ""
@@ -1213,7 +1208,6 @@ function printProgramExecution() {
                           ? `
                       <div class="evidence-item">
                           <img src="${evidence2.src}" alt="الشاهد الثاني">
-                          <div class="evidence-label">الشاهد الثاني</div>
                       </div>
                       `
                           : ""
