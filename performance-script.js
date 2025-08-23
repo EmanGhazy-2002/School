@@ -1,4 +1,3 @@
-// التنقل بين الصفحات والأقسام
 function showSelectionPage() {
   document.getElementById("selectionPage").style.display = "block";
   document.getElementById("exchangeVisitSection").style.display = "none";
@@ -43,7 +42,6 @@ function goHome() {
   window.location.href = "index.html";
 }
 
-// وظائف رفع الصور
 function setupImageUpload(inputId, previewId) {
   const input = document.getElementById(inputId);
   const preview = document.getElementById(previewId);
@@ -76,15 +74,12 @@ function setupImageUpload(inputId, previewId) {
   });
 }
 
-// حذف الصور
 function removeImage(button, inputId, index) {
   const input = document.getElementById(inputId);
   const preview = button.closest(".image-preview");
 
-  // إزالة الصورة من المعاينة
   button.closest(".image-preview-item").remove();
 
-  // تحديث قائمة الملفات
   const dt = new DataTransfer();
   const files = Array.from(input.files);
 
@@ -97,21 +92,17 @@ function removeImage(button, inputId, index) {
   input.files = dt.files;
 }
 
-// وظائف الطباعة
 function printForm(formId) {
   const form = document.getElementById(formId);
   if (!form) return;
 
-  // إخفاء العناصر غير المرغوب فيها في الطباعة
   const elementsToHide = form.querySelectorAll(
     ".btn-group, .back-btn, .header-section, .footer-section"
   );
   elementsToHide.forEach((el) => (el.style.display = "none"));
 
-  // طباعة الصفحة
   window.print();
 
-  // إظهار العناصر مرة أخرى بعد الطباعة
   setTimeout(() => {
     elementsToHide.forEach((el) => (el.style.display = ""));
   }, 1000);
@@ -122,7 +113,6 @@ function clearFormData(formId) {
   const form = document.getElementById(formId);
   if (form) {
     form.reset();
-    // مسح معاينة الصور
     const previews = form.querySelectorAll(".image-preview");
     previews.forEach((preview) => {
       preview.innerHTML = "";
@@ -135,11 +125,9 @@ function clearAllData() {
   localStorage.removeItem("strategiesForm_data");
   localStorage.removeItem("programExecutionForm_data");
 
-  // إعادة تعيين جميع النماذج
   const forms = document.querySelectorAll("form[id]");
   forms.forEach((form) => {
     form.reset();
-    // مسح معاينة الصور
     const previews = form.querySelectorAll(".image-preview");
     previews.forEach((preview) => {
       preview.innerHTML = "";
@@ -183,7 +171,7 @@ function printExchangeVisit() {
                   background: white !important;
               }
               .header { 
-                  background: #14445A !important;
+                  background: #15445A !important;
                   color: white !important;
                   padding: 1rem;
                   text-align: center;
@@ -196,8 +184,8 @@ function printExchangeVisit() {
                   gap: 1.5rem;
               }
               .ministry-logo { 
-                  width: 120px;
-                  height: 90px;
+                  width: 150px;
+                  height: 112.5px;
                   display: flex; 
                   align-items: center; 
                   justify-content: center; 
@@ -205,8 +193,8 @@ function printExchangeVisit() {
                   flex-shrink: 0;
               }
               .ministry-logo img {
-                  width: 120px;
-                  height: 90px;
+                  width: 150px;
+                  height: 112.5px;
                   object-fit: contain;
               }
               .header-text { 
@@ -223,14 +211,15 @@ function printExchangeVisit() {
                   margin-bottom: 0.8rem;
               }
               .section-title {
-                  background: linear-gradient(135deg, #0da9a6, #03d7eb) !important;
-                  color: white !important;
+                  background: white !important;
+                  color: #3D7EB9 !important;
                   padding: 0.4rem;
                   border-radius: 6px;
                   text-align: center;
                   font-weight: bold;
                   font-size: 0.9rem;
                   margin-bottom: 0.6rem;
+                  border: 1px solid #3D7EB9 !important;
                   print-color-adjust: exact !important;
               }
               .info-grid { 
@@ -238,14 +227,14 @@ function printExchangeVisit() {
                   grid-template-columns: repeat(2, 1fr); 
                   gap: 0;
                   margin-bottom: 0.8rem;
-                  border: 1px solid #0da9a6;
+                  border: 1px solid #3D7EB9 !important;
                   border-radius: 6px;
                   background: white !important;
                   border-collapse: collapse;
               }
               .info-item { 
                   background: white !important; 
-                  border: 1px solid #0da9a6;
+                  border: 1px solid #3D7EB9 !important;
                   padding: 0.3rem;
                   display: flex; 
                   align-items: center;
@@ -258,8 +247,8 @@ function printExchangeVisit() {
                   border-bottom: none;
               }
               .info-label { 
-                  background: linear-gradient(135deg, #0da9a6, #03d7eb) !important;
-                  color: white !important; 
+                  background: white !important;
+                  color: #3D7EB9 !important; 
                   padding: 0.2rem 0.4rem;
                   border-radius: 3px;
                   font-weight: bold; 
@@ -267,6 +256,7 @@ function printExchangeVisit() {
                   min-width: 60px;
                   text-align: center; 
                   font-size: 0.65rem;
+                  border: 1px solid #3D7EB9 !important;
                   print-color-adjust: exact !important;
               }
               .info-value { 
@@ -275,21 +265,22 @@ function printExchangeVisit() {
               }
               .text-section {
                   background: white !important;
-                  border: 1px solid #0da9a6;
+                  border: 1px solid #3D7EB9 !important;
                   border-radius: 6px;
                   padding: 0.6rem;
                   margin-bottom: 0.8rem;
                   print-color-adjust: exact !important;
               }
               .text-title {
-                  background: linear-gradient(135deg, #0da9a6, #03d7eb) !important;
-                  color: white !important;
+                  background: white !important;
+                  color: #3D7EB9 !important;
                   font-weight: bold;
                   font-size: 0.8rem;
                   margin-bottom: 0.4rem;
                   padding: 0.2rem;
                   border-radius: 4px;
                   text-align: center;
+                  border: 1px solid #3D7EB9 !important;
                   print-color-adjust: exact !important;
               }
               .objectives-grid {
@@ -303,19 +294,19 @@ function printExchangeVisit() {
                   background: white !important; 
                   border-radius: 6px; 
                   padding: 0.6rem; 
-                  border: 1px solid #0da9a6; 
+                  border: 1px solid #3D7EB9 !important; 
                   print-color-adjust: exact !important;
-                  max-height: 150px; /* Prevent overflow */
-                  overflow-y: auto; /* Enable scrolling if needed */
+                  max-height: 150px;
+                  overflow-y: auto;
               }
               .objective-item { 
                   margin-bottom: 0.4rem; 
                   font-size: 0.65rem; 
                   line-height: 1.4; 
                   padding: 0.3rem 0.2rem;
-                  border-bottom: 1px solid #0da9a6; 
-                  overflow: hidden; /* Prevent text overflow */
-                  text-overflow: ellipsis; /* Handle long text */
+                  border-bottom: 1px solid #3D7EB9 !important; 
+                  overflow: hidden;
+                  text-overflow: ellipsis;
               }
               .objective-item:last-child {
                   border-bottom: none;
@@ -324,20 +315,21 @@ function printExchangeVisit() {
               .evidence-section {
                   margin-top: 0.8rem;
                   padding: 0.6rem;
-                  border: 1px solid #0da9a6;
+                  border: 1px solid #3D7EB9 !important;
                   border-radius: 6px;
                   background: white !important;
                   print-color-adjust: exact !important;
               }
               .evidence-title {
-                  background: linear-gradient(135deg, #0da9a6, #03d7eb) !important;
-                  color: white !important;
+                  background: white !important;
+                  color: #3D7EB9 !important;
                   font-weight: bold;
                   font-size: 0.8rem;
                   margin-bottom: 0.4rem;
                   text-align: center;
                   padding: 0.2rem;
                   border-radius: 4px;
+                  border: 1px solid #3D7EB9 !important;
                   print-color-adjust: exact !important;
               }
               .evidence-grid {
@@ -352,7 +344,7 @@ function printExchangeVisit() {
                   max-width: 100%;
                   max-height: 300px;
                   border-radius: 4px;
-                  border: 1px solid #0da9a6;
+                  border: 1px solid #3D7EB9 !important;
               }
               .evidence-label {
                   margin-top: 0.2rem;
@@ -365,24 +357,25 @@ function printExchangeVisit() {
                   justify-content: flex-end;
                   margin-top: 0.8rem; 
                   padding-top: 0.8rem; 
-                  border-top: 1px solid #0da9a6; 
+                  border-top: 1px solid #3D7EB9 !important; 
               }
               .signature-item { 
                   text-align: center; 
                   padding: 0.4rem; 
                   background: white !important;
-                  border: 1px solid #0da9a6;
+                  border: 1px solid #3D7EB9 !important;
                   border-radius: 6px;
                   print-color-adjust: exact !important;
                   width: 50%;
               }
               .signature-title { 
-                  background: linear-gradient(135deg, #0da9a6, #03d7eb) !important;
-                  color: white !important; 
+                  background: white !important;
+                  color: #3D7EB9 !important; 
                   margin-bottom: 0.2rem; 
                   font-size: 0.7rem;
                   padding: 0.2rem;
                   border-radius: 3px;
+                  border: 1px solid #3D7EB9 !important;
                   print-color-adjust: exact !important;
               }
               .signature-name { 
@@ -391,7 +384,7 @@ function printExchangeVisit() {
                   color: #333; 
               }
               .footer {
-                  background: #14445A !important;
+                  background: #15445A !important;
                   color: white !important;
                   padding: 0.5rem;
                   text-align: center;
@@ -404,7 +397,7 @@ function printExchangeVisit() {
                   * { print-color-adjust: exact !important; }
                   body { margin: 0; font-size: 10px; background: white !important; }
                   @page { margin: 0.5cm; }
-                  .objectives-list::-webkit-scrollbar { display: none; } /* Hide scrollbar in print */
+                  .objectives-list::-webkit-scrollbar { display: none; }
               }
           </style>
       </head>
@@ -541,7 +534,7 @@ function printStrategiesReport() {
                   background: white !important;
               }
               .header { 
-                  background: #14445A !important;
+                  background: #15445A !important;
                   color: white !important;
                   padding: 1.5rem;
                   text-align: center;
@@ -554,8 +547,8 @@ function printStrategiesReport() {
                   gap: 2rem;
               }
               .ministry-logo { 
-                  width: 140px;
-                  height: 105px;
+                  width: 160px;
+                  height: 120px;
                   display: flex; 
                   align-items: center; 
                   justify-content: center; 
@@ -563,8 +556,8 @@ function printStrategiesReport() {
                   flex-shrink: 0;
               }
               .ministry-logo img {
-                  width: 140px;
-                  height: 105px;
+                  width: 160px;
+                  height: 120px;
                   object-fit: contain;
               }
               .header-text { 
@@ -579,14 +572,14 @@ function printStrategiesReport() {
                   grid-template-columns: repeat(3, 1fr); 
                   gap: 0;
                   margin-bottom: 0.8rem;
-                  border: 1px solid #0da9a6;
+                  border: 1px solid #3D7EB9 !important;
                   border-radius: 6px;
                   background: white !important;
                   border-collapse: collapse;
               }
               .info-item { 
                   background: white !important; 
-                  border: 1px solid #0da9a6;
+                  border: 1px solid #3D7EB9 !important;
                   padding: 0.3rem;
                   display: flex; 
                   align-items: center;
@@ -599,8 +592,8 @@ function printStrategiesReport() {
                   border-bottom: none;
               }
               .info-label { 
-                  background: linear-gradient(135deg, #0da9a6, #03d7eb) !important;
-                  color: white !important; 
+                  background: white !important;
+                  color: #3D7EB9 !important; 
                   padding: 0.2rem 0.4rem;
                   border-radius: 3px;
                   font-weight: bold; 
@@ -608,12 +601,13 @@ function printStrategiesReport() {
                   min-width: 60px;
                   text-align: center; 
                   font-size: 0.65rem;
+                  border: 1px solid #3D7EB9 !important;
                   print-color-adjust: exact !important;
               }
               .info-value { flex: 1; font-size: 0.7rem; }
               .lesson-section {
                   background: white !important;
-                  border: 1px solid #0da9a6;
+                  border: 1px solid #3D7EB9 !important;
                   border-radius: 6px;
                   padding: 0.3rem;
                   margin-bottom: 0.8rem;
@@ -623,14 +617,15 @@ function printStrategiesReport() {
               }
               .objectives-section { margin: 0.8rem 0; }
               .section-title { 
-                  background: linear-gradient(135deg, #0da9a6, #03d7eb) !important;
-                  color: white !important; 
+                  background: white !important;
+                  color: #3D7EB9 !important; 
                   padding: 0.4rem;
                   border-radius: 6px;
                   text-align: center; 
                   font-weight: bold; 
                   margin-bottom: 0.6rem;
                   font-size: 0.8rem;
+                  border: 1px solid #3D7EB9 !important;
                   print-color-adjust: exact !important;
               }
               .objectives-grid { 
@@ -642,7 +637,7 @@ function printStrategiesReport() {
                   background: white !important; 
                   border-radius: 6px; 
                   padding: 0.6rem; 
-                  border: 1px solid #0da9a6; 
+                  border: 1px solid #3D7EB9 !important; 
                   print-color-adjust: exact !important;
               }
               .objective-item { 
@@ -650,7 +645,7 @@ function printStrategiesReport() {
                   font-size: 0.65rem; 
                   line-height: 1.3; 
                   padding: 0.15rem 0;
-                  border-bottom: 1px solid #0da9a6;
+                  border-bottom: 1px solid #3D7EB9 !important;
               }
               .objective-item:last-child {
                   border-bottom: none;
@@ -659,18 +654,19 @@ function printStrategiesReport() {
                   background: white !important; 
                   border-radius: 6px; 
                   padding: 0.6rem; 
-                  border: 1px solid #0da9a6; 
+                  border: 1px solid #3D7EB9 !important; 
                   print-color-adjust: exact !important;
               }
               .tools-title { 
-                  background: linear-gradient(135deg, #0da9a6, #03d7eb) !important;
-                  color: white !important; 
+                  background: white !important;
+                  color: #3D7EB9 !important; 
                   font-weight: bold; 
                   margin-bottom: 0.4rem; 
                   text-align: center; 
                   font-size: 0.7rem;
                   padding: 0.2rem;
                   border-radius: 3px;
+                  border: 1px solid #3D7EB9 !important;
                   print-color-adjust: exact !important;
               }
               .tools-list { 
@@ -685,20 +681,21 @@ function printStrategiesReport() {
               .evidence-section {
                   margin-top: 0.8rem;
                   padding: 0.6rem;
-                  border: 1px solid #0da9a6;
+                  border: 1px solid #3D7EB9 !important;
                   border-radius: 6px;
                   background: white !important;
                   print-color-adjust: exact !important;
               }
               .evidence-title {
-                  background: linear-gradient(135deg, #0da9a6, #03d7eb) !important;
-                  color: white !important;
+                  background: white !important;
+                  color: #3D7EB9 !important;
                   font-weight: bold;
                   font-size: 0.8rem;
                   margin-bottom: 0.4rem;
                   text-align: center;
                   padding: 0.2rem;
-                  border-radius: 3px;
+                  border-radius: 4px;
+                  border: 1px solid #3D7EB9 !important;
                   print-color-adjust: exact !important;
               }
               .evidence-grid {
@@ -713,7 +710,7 @@ function printStrategiesReport() {
                   max-width: 100%;
                   max-height: 350px;
                   border-radius: 4px;
-                  border: 1px solid #0da9a6;
+                  border: 1px solid #3D7EB9 !important;
               }
               .evidence-label {
                   margin-top: 0.2rem;
@@ -727,23 +724,24 @@ function printStrategiesReport() {
                   gap: 0.8rem; 
                   margin-top: 0.8rem; 
                   padding-top: 0.8rem; 
-                  border-top: 1px solid #0da9a6; 
+                  border-top: 1px solid #3D7EB9 !important; 
               }
               .signature-item { 
                   text-align: center; 
                   padding: 0.4rem; 
                   background: white !important;
-                  border: 1px solid #0da9a6;
+                  border: 1px solid #3D7EB9 !important;
                   border-radius: 6px;
                   print-color-adjust: exact !important;
               }
               .signature-title { 
-                  background: linear-gradient(135deg, #0da9a6, #03d7eb) !important;
-                  color: white !important; 
+                  background: white !important;
+                  color: #3D7EB9 !important; 
                   margin-bottom: 0.2rem; 
                   font-size: 0.7rem;
                   padding: 0.2rem;
                   border-radius: 3px;
+                  border: 1px solid #3D7EB9 !important;
                   print-color-adjust: exact !important;
               }
               .signature-name { 
@@ -752,7 +750,7 @@ function printStrategiesReport() {
                   color: #333; 
               }
               .footer {
-                  background: #14445A !important;
+                  background: #15445A !important;
                   color: white !important;
                   padding: 0.5rem;
                   text-align: center;
@@ -921,7 +919,7 @@ function printProgramExecution() {
                   background: white !important;
               }
               .header { 
-                  background: #14445A !important;
+                  background: #15445A !important;
                   color: white !important;
                   padding: 1rem;
                   text-align: center;
@@ -934,8 +932,8 @@ function printProgramExecution() {
                   gap: 1.5rem;
               }
               .ministry-logo { 
-                  width: 120px;
-                  height: 90px;
+                  width: 150px;
+                  height: 112.5px;
                   display: flex; 
                   align-items: center; 
                   justify-content: center; 
@@ -943,8 +941,8 @@ function printProgramExecution() {
                   flex-shrink: 0;
               }
               .ministry-logo img {
-                  width: 120px;
-                  height: 90px;
+                  width: 150px;
+                  height: 112.5px;
                   object-fit: contain;
               }
               .header-text { 
@@ -961,14 +959,15 @@ function printProgramExecution() {
                   margin-bottom: 0.8rem;
               }
               .section-title {
-                  background: linear-gradient(135deg, #0da9a6, #03d7eb) !important;
-                  color: white !important;
+                  background: white !important;
+                  color: #3D7EB9 !important;
                   padding: 0.4rem;
                   border-radius: 6px;
                   text-align: center;
                   font-weight: bold;
                   font-size: 0.9rem;
                   margin-bottom: 0.6rem;
+                  border: 1px solid #3D7EB9 !important;
                   print-color-adjust: exact !important;
               }
               .info-grid { 
@@ -976,14 +975,14 @@ function printProgramExecution() {
                   grid-template-columns: repeat(3, 1fr); 
                   gap: 0;
                   margin-bottom: 0.8rem;
-                  border: 1px solid #0da9a6;
+                  border: 1px solid #3D7EB9 !important;
                   border-radius: 6px;
                   background: white !important;
                   border-collapse: collapse;
               }
               .info-item { 
                   background: white !important; 
-                  border: 1px solid #0da9a6;
+                  border: 1px solid #3D7EB9 !important;
                   padding: 0.3rem;
                   display: flex; 
                   align-items: center;
@@ -1000,8 +999,8 @@ function printProgramExecution() {
                   border-bottom: none;
               }
               .info-label { 
-                  background: linear-gradient(135deg, #0da9a6, #03d7eb) !important;
-                  color: white !important; 
+                  background: white !important;
+                  color: #3D7EB9 !important; 
                   padding: 0.2rem 0.4rem;
                   border-radius: 3px;
                   font-weight: bold; 
@@ -1009,6 +1008,7 @@ function printProgramExecution() {
                   min-width: 60px;
                   text-align: center; 
                   font-size: 0.65rem;
+                  border: 1px solid #3D7EB9 !important;
                   print-color-adjust: exact !important;
               }
               .info-value { 
@@ -1017,21 +1017,22 @@ function printProgramExecution() {
               }
               .text-section {
                   background: white !important;
-                  border: 1px solid #0da9a6;
+                  border: 1px solid #3D7EB9 !important;
                   border-radius: 6px;
                   padding: 0.6rem;
                   margin-bottom: 0.8rem;
                   print-color-adjust: exact !important;
               }
               .text-title {
-                  background: linear-gradient(135deg, #0da9a6, #03d7eb) !important;
-                  color: white !important;
+                  background: white !important;
+                  color: #3D7EB9 !important;
                   font-weight: bold;
                   font-size: 0.8rem;
                   margin-bottom: 0.4rem;
                   padding: 0.2rem;
                   border-radius: 4px;
                   text-align: center;
+                  border: 1px solid #3D7EB9 !important;
                   print-color-adjust: exact !important;
               }
               .text-content {
@@ -1043,7 +1044,7 @@ function printProgramExecution() {
                   background: white !important; 
                   border-radius: 6px; 
                   padding: 0.6rem; 
-                  border: 1px solid #0da9a6; 
+                  border: 1px solid #3D7EB9 !important; 
                   print-color-adjust: exact !important;
               }
               .objective-item { 
@@ -1051,7 +1052,7 @@ function printProgramExecution() {
                   font-size: 0.65rem; 
                   line-height: 1.3; 
                   padding: 0.15rem 0;
-                  border-bottom: 1px solid #0da9a6;
+                  border-bottom: 1px solid #3D7EB9 !important;
               }
               .objective-item:last-child {
                   border-bottom: none;
@@ -1059,20 +1060,21 @@ function printProgramExecution() {
               .evidence-section {
                   margin-top: 0.8rem;
                   padding: 0.6rem;
-                  border: 1px solid #0da9a6;
+                  border: 1px solid #3D7EB9 !important;
                   border-radius: 6px;
                   background: white !important;
                   print-color-adjust: exact !important;
               }
               .evidence-title {
-                  background: linear-gradient(135deg, #0da9a6, #03d7eb) !important;
-                  color: white !important;
+                  background: white !important;
+                  color: #3D7EB9 !important;
                   font-weight: bold;
                   font-size: 0.8rem;
                   margin-bottom: 0.4rem;
                   text-align: center;
                   padding: 0.2rem;
                   border-radius: 4px;
+                  border: 1px solid #3D7EB9 !important;
                   print-color-adjust: exact !important;
               }
               .evidence-grid {
@@ -1087,7 +1089,7 @@ function printProgramExecution() {
                   max-width: 100%;
                   max-height: 350px;
                   border-radius: 4px;
-                  border: 1px solid #0da9a6;
+                  border: 1px solid #3D7EB9 !important;
               }
               .evidence-label {
                   margin-top: 0.2rem;
@@ -1101,23 +1103,24 @@ function printProgramExecution() {
                   gap: 0.8rem; 
                   margin-top: 0.8rem; 
                   padding-top: 0.8rem; 
-                  border-top: 1px solid #0da9a6; 
+                  border-top: 1px solid #3D7EB9 !important; 
               }
               .signature-item { 
                   text-align: center; 
                   padding: 0.4rem; 
                   background: white !important;
-                  border: 1px solid #0da9a6;
+                  border: 1px solid #3D7EB9 !important;
                   border-radius: 6px;
                   print-color-adjust: exact !important;
               }
               .signature-title { 
-                  background: linear-gradient(135deg, #0da9a6, #03d7eb) !important;
-                  color: white !important; 
+                  background: white !important;
+                  color: #3D7EB9 !important; 
                   margin-bottom: 0.2rem; 
                   font-size: 0.7rem;
                   padding: 0.2rem;
                   border-radius: 3px;
+                  border: 1px solid #3D7EB9 !important;
                   print-color-adjust: exact !important;
               }
               .signature-name { 
@@ -1126,7 +1129,7 @@ function printProgramExecution() {
                   color: #333; 
               }
               .footer {
-                  background: #14445A !important;
+                  background: #15445A !important;
                   color: white !important;
                   padding: 0.5rem;
                   text-align: center;
@@ -1247,7 +1250,6 @@ function printProgramExecution() {
   }, 1000);
 }
 
-// حفظ البيانات محلياً
 function saveFormData(formId) {
   const form = document.getElementById(formId);
   if (!form) return;
@@ -1260,12 +1262,9 @@ function saveFormData(formId) {
   }
 
   localStorage.setItem(formId + "_data", JSON.stringify(data));
-
-  // إظهار رسالة نجاح الحفظ
   showNotification("تم حفظ البيانات بنجاح", "success");
 }
 
-// استرجاع البيانات المحفوظة
 function loadFormData(formId) {
   const savedData = localStorage.getItem(formId + "_data");
   if (!savedData) return;
@@ -1282,7 +1281,6 @@ function loadFormData(formId) {
   });
 }
 
-// إظهار الإشعارات
 function showNotification(message, type = "info") {
   const notification = document.createElement("div");
   notification.className = `notification notification-${type}`;
@@ -1292,17 +1290,12 @@ function showNotification(message, type = "info") {
         }"></i>
         <span>${message}</span>
     `;
-
-  // إضافة الإشعار للصفحة
   document.body.appendChild(notification);
-
-  // إزالة الإشعار بعد 3 ثوان
   setTimeout(() => {
     notification.remove();
   }, 3000);
 }
 
-// التحقق من صحة النموذج
 function validateForm(formId) {
   const form = document.getElementById(formId);
   if (!form) return false;
@@ -1326,24 +1319,18 @@ function validateForm(formId) {
   return isValid;
 }
 
-// تهيئة الصفحة عند التحميل
 document.addEventListener("DOMContentLoaded", () => {
   clearAllData();
-
-  // تهيئة رفع الصور
   setupImageUpload("evidence1", "evidence1-preview");
   setupImageUpload("evidence2", "evidence2-preview");
   setupImageUpload("strategyEvidence1", "strategyEvidence1-preview");
   setupImageUpload("strategyEvidence2", "strategyEvidence2-preview");
   setupImageUpload("evidence1Report", "evidence1Report-preview");
   setupImageUpload("evidence2Report", "evidence2Report-preview");
-
-  // تحميل البيانات المحفوظة
   loadFormData("exchangeVisitForm");
   loadFormData("strategiesForm");
   loadFormData("programExecutionForm");
 
-  // إضافة مستمعي الأحداث للنماذج
   const forms = document.querySelectorAll("form[id]");
   forms.forEach((form) => {
     form.addEventListener("submit", (e) => {
@@ -1362,7 +1349,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// وظائف إضافية للتفاعل
 function toggleSection(sectionId) {
   const section = document.getElementById(sectionId);
   if (section) {
@@ -1370,7 +1356,6 @@ function toggleSection(sectionId) {
   }
 }
 
-// تحديث التاريخ الهجري تلقائياً
 function updateHijriDate() {
   const hijriDateInputs = [
     document.getElementById("hijriDate"),
@@ -1379,7 +1364,6 @@ function updateHijriDate() {
   ];
   hijriDateInputs.forEach((input) => {
     if (input && !input.value) {
-      // يمكن إضافة مكتبة للتاريخ الهجري هنا
       const today = new Date();
       const hijriDate = `${today.getFullYear() - 579}/${
         today.getMonth() + 1
@@ -1389,7 +1373,6 @@ function updateHijriDate() {
   });
 }
 
-// تصدير البيانات كـ JSON
 function exportData(formId) {
   const savedData = localStorage.getItem(formId + "_data");
   if (savedData) {
@@ -1403,7 +1386,6 @@ function exportData(formId) {
   }
 }
 
-// استيراد البيانات من JSON
 function importData(formId, file) {
   const reader = new FileReader();
   reader.onload = (e) => {
@@ -1442,7 +1424,6 @@ function getBeneficiariesText(value) {
   }
 }
 
-// دالة لتحويل الأرقام الإنجليزية إلى العربية
 function toArabicNumbers(str) {
   return String(str).replace(/[0-9]/g, function (d) {
     return "٠١٢٣٤٥٦٧٨٩"[d];
