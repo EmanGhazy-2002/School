@@ -556,8 +556,8 @@ function printStrategiesReport() {
                   flex-shrink: 0;
               }
               .ministry-logo img {
-                  width: 160px;
-                  height: 120px;
+                  width: 120px;
+                  height: 100px;
                   object-fit: contain;
               }
               .header-text { 
