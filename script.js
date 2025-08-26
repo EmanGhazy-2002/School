@@ -4,7 +4,7 @@ let analysisCount = Number.parseInt(
   localStorage.getItem("analysisCount") || "0"
 );
 let reportCount = Number.parseInt(localStorage.getItem("reportCount") || "0");
-const html2pdf = window.html2pdf; // Declare the html2pdf variable
+const html2pdf = window.html2pdf;
 
 // Initialize page
 document.addEventListener("DOMContentLoaded", () => {
@@ -105,7 +105,6 @@ function addStudent() {
     return;
   }
 
-  // إنشاء اسم افتراضي إذا لم يتم إدخال اسم
   const studentName =
     nameInput.value.trim() || `طالب ${studentsData.length + 1}`;
 
@@ -121,11 +120,9 @@ function addStudent() {
 
   studentsData.push(student);
 
-  // Clear inputs
   nameInput.value = "";
   gradeInput.value = "";
 
-  // Update display
   displayStudentsList();
 
   checkAnalyzeButton();
@@ -177,7 +174,6 @@ function handleFileUpload(event) {
 
       studentsData = [];
 
-      // Skip header row if exists
       const startRow = jsonData[0] && isNaN(jsonData[0][1]) ? 1 : 0;
 
       for (let i = startRow; i < jsonData.length; i++) {
@@ -190,7 +186,7 @@ function handleFileUpload(event) {
         }
       }
 
-      console.log("[v0] Excel loaded, students count:", studentsData.length); // إضافة تسجيل للتحقق من تحميل البيانات
+      console.log("[v0] Excel loaded, students count:", studentsData.length);
 
       if (studentsData.length > 0) {
         displayStudentsList();
@@ -213,7 +209,7 @@ function handleFileUpload(event) {
         alert("لم يتم العثور على بيانات صحيحة في الملف");
       }
     } catch (error) {
-      console.error("[v0] Error reading Excel file:", error); // إضافة تسجيل للأخطاء
+      console.error("[v0] Error reading Excel file:", error);
       alert("خطأ في قراءة الملف. يرجى التأكد من صحة تنسيق الملف");
     }
   };
@@ -243,25 +239,20 @@ function analyzeResults() {
 
   console.log("[v0] Starting analysis...");
 
-  // Calculate statistics
   const stats = calculateStatistics(studentsData, totalGrade);
   console.log("[v0] Statistics calculated:", stats);
 
-  // Update UI
   updateStatisticsDisplay(stats);
   displayStudentsResults(studentsData, totalGrade);
   createChart(stats);
 
-  // Show results section
   document.getElementById("resultsSection").style.display = "block";
 
-  // Update analysis count
   analysisCount++;
   localStorage.setItem("analysisCount", analysisCount.toString());
 
   console.log("[v0] Analysis completed successfully");
 
-  // Scroll to results
   document
     .getElementById("resultsSection")
     .scrollIntoView({ behavior: "smooth" });
@@ -315,7 +306,6 @@ function displayStudentsResults(students, totalGrade) {
   const container = document.getElementById("studentsResults");
   container.innerHTML = "";
 
-  // Sort students by grade (descending)
   const sortedStudents = [...students].sort((a, b) => b.grade - a.grade);
 
   sortedStudents.forEach((student) => {
@@ -357,7 +347,6 @@ function displayStudentsResults(students, totalGrade) {
 function createChart(stats) {
   const ctx = document.getElementById("resultsChart").getContext("2d");
 
-  // Destroy existing chart if it exists
   if (
     window.resultsChart &&
     typeof window.resultsChart.destroy === "function"
@@ -369,7 +358,6 @@ function createChart(stats) {
     }
   }
 
-  // Check if Chart.js library is loaded
   if (typeof window.Chart === "undefined") {
     console.error("[v0] Chart.js library not loaded");
     alert("خطأ: مكتبة الرسوم البيانية غير محملة");
@@ -448,7 +436,6 @@ function exportToPDF() {
 
   let dataToExport = studentsData;
 
-  // إذا كانت البيانات فارغة، حاول قراءتها من DOM
   if (dataToExport.length === 0) {
     console.log("[v0] studentsData is empty, trying to read from DOM...");
     const studentsResults = document.getElementById("studentsResults");
@@ -468,7 +455,6 @@ function exportToPDF() {
     }
   }
 
-  // التأكد من وجود البيانات
   if (dataToExport.length === 0) {
     console.log("[v0] No data found for export");
     alert("لا توجد بيانات للتصدير. يرجى تحليل النتائج أولاً.");
@@ -477,12 +463,12 @@ function exportToPDF() {
 
   console.log("[v0] Exporting", dataToExport.length, "students");
 
-  // استخدام طريقة بسيطة وموثوقة
   const printWindow = window.open("", "_blank");
 
-  // الحصول على بيانات النموذج
-  const schoolName =
-    document.getElementById("schoolName").value || "ثانوية دار التوحيد";
+  const eduAdminName =
+    document.getElementById("eduAdminName").value || "غير محدد";
+  const schoolName = document.getElementById("schoolName").value || "غير محدد";
+  const teacherType = document.getElementById("teacherType").value || "";
   const teacherName =
     document.getElementById("teacherName").value || "غير محدد";
   const subjectName =
@@ -490,17 +476,21 @@ function exportToPDF() {
   const totalGrade = document.getElementById("totalGrade").value || "0";
   const semester = document.getElementById("semester").value || "غير محدد";
   const examType = document.getElementById("examType").value || "غير محدد";
+  const directorType = document.getElementById("directorType").value || "";
+  const directorName =
+    document.getElementById("directorName").value || "غير محدد";
 
-  // حساب الإحصائيات
+  const teacherLabel = teacherType === "معلمة" ? "اسم المعلمة" : "اسم المعلم";
+  const directorLabel =
+    directorType === "مديرة" ? "مديرة المدرسة" : "مدير المدرسة";
+
   const stats = calculateStatistics(
     dataToExport,
     Number.parseFloat(totalGrade)
   );
 
-  // ترتيب الطلاب حسب الدرجة
   const sortedStudents = [...dataToExport].sort((a, b) => b.grade - a.grade);
 
-  // إنشاء قائمة الطلاب بتصميم مضغوط
   let studentsListHTML = "";
   sortedStudents.forEach((student, index) => {
     const percentage = (student.grade / Number.parseFloat(totalGrade)) * 100;
@@ -540,7 +530,6 @@ function exportToPDF() {
     `;
   });
 
-  // إنشاء الرسم البياني كـ SVG
   const maxValue = Math.max(
     stats.excellent,
     stats.veryGood,
@@ -553,7 +542,6 @@ function exportToPDF() {
     <svg width="100%" height="200" viewBox="0 0 500 200" style="background: linear-gradient(135deg, #3C7DB8, #06A869) !important; border-radius: 8px; margin: 20px 0;">
       <text x="250" y="20" text-anchor="middle" style="font-size: 14px; font-weight: bold; fill: white !important;">توزيع الطلاب حسب الفئات</text>
       
-      <!-- ممتاز -->
       <rect x="50" y="${
         180 - (stats.excellent / maxValue) * 140
       }" width="60" height="${
@@ -566,7 +554,6 @@ function exportToPDF() {
     stats.excellent
   }</text>
       
-      <!-- جيد جداً -->
       <rect x="130" y="${
         180 - (stats.veryGood / maxValue) * 140
       }" width="60" height="${
@@ -579,7 +566,6 @@ function exportToPDF() {
     stats.veryGood
   }</text>
       
-      <!-- جيد -->
       <rect x="210" y="${
         180 - (stats.good / maxValue) * 140
       }" width="60" height="${
@@ -592,7 +578,6 @@ function exportToPDF() {
     stats.good
   }</text>
       
-      <!-- مقبول -->
       <rect x="290" y="${
         180 - (stats.acceptable / maxValue) * 140
       }" width="60" height="${
@@ -605,7 +590,6 @@ function exportToPDF() {
     stats.acceptable
   }</text>
       
-      <!-- ضعيف -->
       <rect x="370" y="${
         180 - (stats.weak / maxValue) * 140
       }" width="60" height="${
@@ -627,7 +611,6 @@ function exportToPDF() {
       <meta charset="UTF-8">
       <title>تقرير ${examType}</title>
       <style>
-        /* إضافة CSS خاص للطباعة لضمان ظهور الألوان والخلفيات */
         * {
           print-color-adjust: exact !important;
           color-adjust: exact !important;
@@ -641,7 +624,6 @@ function exportToPDF() {
           color: #333 !important;
           font-size: 14px;
           print-color-adjust: exact !important;
-          color-adjust: exact !important;
         }
         .header { 
           display: flex;
@@ -832,11 +814,10 @@ function exportToPDF() {
       </style>
     </head>
     <body>
-      <!-- تكبير اللوجو وتصغير النص في الهيدر -->
       <div class="header">
         <img src="/images/ministry-logo-white.png" alt="لوجو وزارة التعليم" class="header-logo">
         <div class="header-text">
-          <h2>الإدارة العامة للتعليم بمحافظة الطائف</h2>
+          <h2>${eduAdminName}</h2>
           <h3>${schoolName}</h3>
           <div class="report-title">تقرير ${examType}</div>
         </div>
@@ -844,7 +825,7 @@ function exportToPDF() {
       
       <div class="section-title">معلومات الاختبار</div>
       <table class="info-table">
-        <tr><td>اسم المعلم</td><td>${teacherName}</td></tr>
+        <tr><td>${teacherLabel}</td><td>${teacherName}</td></tr>
         <tr><td>المادة</td><td>${subjectName}</td></tr>
         <tr><td>الدرجة النهائية</td><td>${totalGrade}</td></tr>
         <tr><td>الفصل الدراسي</td><td>${semester}</td></tr>
@@ -894,7 +875,7 @@ function exportToPDF() {
       </table>
       
       <div class="footer">
-        <div class="director-name">مدير المدرسة: فهد بن حسن القحطاني</div>
+        <div class="director-name">${directorLabel}: ${directorName}</div>
       </div>
     </body>
     </html>
@@ -903,11 +884,9 @@ function exportToPDF() {
   printWindow.document.write(htmlContent);
   printWindow.document.close();
 
-  // طباعة النافذة الجديدة
   setTimeout(() => {
     printWindow.print();
 
-    // تحديث عداد التقارير
     reportCount++;
     localStorage.setItem("reportCount", reportCount.toString());
 
@@ -928,14 +907,14 @@ function checkAnalyzeButton() {
     studentsData.length,
     "totalGrade:",
     totalGrade
-  ); // إضافة تسجيل للتحقق من حالة الزر
+  );
 
   if (analyzeBtn) {
     if (studentsData.length > 0 && totalGrade) {
       analyzeBtn.disabled = false;
       analyzeBtn.classList.remove("btn-secondary");
       analyzeBtn.classList.add("btn-primary");
-      console.log("[v0] Analyze button enabled"); // تسجيل تفعيل الزر
+      console.log("[v0] Analyze button enabled");
     } else {
       analyzeBtn.disabled = true;
       analyzeBtn.classList.remove("btn-primary");
@@ -943,7 +922,7 @@ function checkAnalyzeButton() {
       console.log(
         "[v0] Analyze button disabled - missing:",
         !studentsData.length ? "students data" : "total grade"
-      ); // تسجيل سبب تعطيل الزر
+      );
     }
   }
 }
