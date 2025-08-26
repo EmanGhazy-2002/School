@@ -822,9 +822,9 @@ function exportToPDF() {
       <div class="header">
         <img src="/images/ministry-logo-white.png" alt="لوجو وزارة التعليم" class="header-logo">
         <div class="header-text">
-          <h2>${eduAdminName}</h2>
+          <h3>${eduAdminName}</h3>
           <h3>${schoolName}</h3>
-          <div>تقرير ${examType}</div>
+          <h3>تقرير ${examType}</h3>
         </div>
       </div>
       
