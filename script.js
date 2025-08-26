@@ -676,7 +676,7 @@ function exportToPDF() {
           border-collapse: collapse;
           margin-bottom: 20px;
           background: #f8f9fa !important;
-          border: 2px solid #3C7DB8 !important;
+          border: 2px solid #14445A !important;
           border-radius: 8px;
           overflow: hidden;
           print-color-adjust: exact !important;
@@ -688,7 +688,7 @@ function exportToPDF() {
         }
         .info-table td:first-child { 
           font-weight: bold; 
-          background: linear-gradient(135deg, #3C7DB8, #06A869) !important;
+          background: #14445A !important;
           color: white !important;
           width: 30%;
           print-color-adjust: exact !important;
@@ -698,13 +698,13 @@ function exportToPDF() {
           border-collapse: collapse;
           margin: 15px 0;
           background: white !important;
-          border: 2px solid #3C7DB8 !important;
+          border: 2px solid #14445A !important;
           border-radius: 8px;
           overflow: hidden;
           print-color-adjust: exact !important;
         }
         .stats-table th { 
-          background: linear-gradient(135deg, #3C7DB8, #06A869) !important; 
+          background: #14445A !important; 
           color: white !important; 
           padding: 10px 8px; 
           text-align: center;
@@ -727,13 +727,13 @@ function exportToPDF() {
           border-collapse: collapse;
           margin: 15px 0;
           background: white !important;
-          border: 2px solid #3C7DB8 !important;
+          border: 2px solid #14445A !important;
           border-radius: 8px;
           overflow: hidden;
           print-color-adjust: exact !important;
         }
         .students-table th { 
-          background: linear-gradient(135deg, #3C7DB8, #06A869) !important; 
+          background: #14445A !important; 
           color: white !important; 
           padding: 10px 8px; 
           text-align: center;
@@ -746,41 +746,50 @@ function exportToPDF() {
           font-size: 13px;
         }
         .section-title {
-          color: #3C7DB8 !important;
+          color: #14445A !important;
           font-size: 16px;
           font-weight: bold;
           margin: 20px 0 10px 0;
           text-align: center;
           padding: 8px;
-          background: linear-gradient(135deg, rgba(60,125,184,0.1), rgba(6,168,105,0.1)) !important;
+          background: linear-gradient(135deg, rgba(20,68,90,0.1), rgba(6,168,105,0.1)) !important;
           border-radius: 8px;
           print-color-adjust: exact !important;
         }
         .average-info {
-          background: linear-gradient(135deg, rgba(60,125,184,0.1), rgba(6,168,105,0.1)) !important;
+          background: linear-gradient(135deg, rgba(20,68,90,0.1), rgba(6,168,105,0.1)) !important;
           padding: 10px;
           border-radius: 8px;
           margin: 15px 0;
           text-align: center;
           font-size: 15px;
           font-weight: bold;
-          color: #3C7DB8 !important;
+          color: #14445A !important;
           print-color-adjust: exact !important;
         }
-        .footer { 
+        .final-notes { 
           margin-top: 25px; 
           text-align: center;
           padding: 12px;
-          background: #f8f9fa !important;
+          background: #14445A !important;
           border-radius: 8px;
-          border: 2px solid #3C7DB8 !important;
+          border: 2px solid #14445A !important;
           print-color-adjust: exact !important;
         }
         .director-name {
           font-size: 15px;
           font-weight: bold;
-          color: #3C7DB8 !important;
+          color: 14445A !important;
           margin-bottom: 5px;
+        }
+         .footer { 
+          margin-top: 25px; 
+          text-align: center;
+          padding: 12px;
+          background: #14445A !important;
+          border-radius: 8px;
+          border: 2px solid #14445A !important;
+          print-color-adjust: exact !important;
         }
         @media print {
           * {
@@ -801,17 +810,22 @@ function exportToPDF() {
           }
           .header * { color: white !important; }
           .stats-table th { 
-            background: linear-gradient(135deg, #3C7DB8, #06A869) !important; 
+            background: #14445A !important; 
             color: white !important; 
             print-color-adjust: exact !important;
           }
           .students-table th { 
-            background: linear-gradient(135deg, #3C7DB8, #06A869) !important; 
+            background: #14445A !important; 
             color: white !important; 
             print-color-adjust: exact !important;
           }
           .info-table td:first-child { 
-            background: linear-gradient(135deg, #3C7DB8, #06A869) !important;
+            background: #14445A !important;
+            color: white !important;
+            print-color-adjust: exact !important;
+          }
+          .footer { 
+            background: #14445A !important;
             color: white !important;
             print-color-adjust: exact !important;
           }
@@ -836,6 +850,7 @@ function exportToPDF() {
         <tr><td>الفصل الدراسي</td><td>${semester}</td></tr>
         <tr><td>الصف</td><td>${classLevel}</td></tr>
         <tr><td>الفصل</td><td>${classSection}</td></tr>
+     
       </table>
       
       <div class="section-title">الإحصائيات التفصيلية</div>
@@ -854,7 +869,7 @@ function exportToPDF() {
           <td class="stat-good">${stats.good}</td>
           <td class="stat-acceptable">${stats.acceptable}</td>
           <td class="stat-weak">${stats.weak}</td>
-          <td style="background: linear-gradient(135deg, #3C7DB8, #06A869) !important; color: white !important; print-color-adjust: exact !important;">${
+          <td style="background: #14445A !important; color: white !important; print-color-adjust: exact !important;">${
             stats.total
           }</td>
         </tr>
@@ -879,9 +894,11 @@ function exportToPDF() {
         </tr>
         ${studentsListHTML}
       </table>
-      
+      <div class="section-title">
+      <div class="director-name">${directorLabel}: ${directorName}</div>
+      </div>
+
       <div class="footer">
-        <div class="director-name">${directorLabel}: ${directorName}</div>
       </div>
     </body>
     </html>
