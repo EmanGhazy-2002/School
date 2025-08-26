@@ -828,8 +828,6 @@ function exportToPDF() {
       
       <div class="section-title">معلومات الاختبار</div>
       <table class="info-table">
-        <tr><td>اسم الإدارة التعليمية</td><td>${eduAdminName}</td></tr>
-        <tr><td>اسم المدرسة</td><td>${schoolName}</td></tr>
         <tr><td>الصف</td><td>${classLevel}</td></tr>
         <tr><td>${teacherLabel}</td><td>${teacherName}</td></tr>
         <tr><td>المادة</td><td>${subjectName}</td></tr>
