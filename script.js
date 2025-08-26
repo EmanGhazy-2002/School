@@ -471,6 +471,8 @@ function exportToPDF() {
     document.getElementById("eduAdminName").value || "غير محدد";
   const schoolName = document.getElementById("schoolName").value || "غير محدد";
   const classLevel = document.getElementById("classLevel").value || "غير محدد";
+  const classSection =
+    document.getElementById("classSection").value || "غير محدد";
   const teacherType = document.getElementById("teacherType").value || "";
   const teacherName =
     document.getElementById("teacherName").value || "غير محدد";
@@ -828,11 +830,12 @@ function exportToPDF() {
       
       <div class="section-title">معلومات الاختبار</div>
       <table class="info-table">
-        <tr><td>الصف</td><td>${classLevel}</td></tr>
         <tr><td>${teacherLabel}</td><td>${teacherName}</td></tr>
         <tr><td>المادة</td><td>${subjectName}</td></tr>
         <tr><td>الدرجة النهائية</td><td>${totalGrade}</td></tr>
         <tr><td>الفصل الدراسي</td><td>${semester}</td></tr>
+        <tr><td>الصف</td><td>${classLevel}</td></tr>
+        <tr><td>الفصل</td><td>${classSection}</td></tr>
       </table>
       
       <div class="section-title">الإحصائيات التفصيلية</div>

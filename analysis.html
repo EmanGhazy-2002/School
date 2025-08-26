@@ -70,6 +70,16 @@
                 />
               </div>
               <div class="col-md-6 mb-3">
+                <label class="form-label">الفصل</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="classSection"
+                  placeholder="أدخل الفصل (مثال: أولى أ)"
+                  required
+                />
+              </div>
+              <div class="col-md-6 mb-3">
                 <label class="form-label">المعلم/المعلمة</label>
                 <select class="form-control" id="teacherType" required>
                   <option value="">اختر</option>
@@ -175,7 +185,7 @@
                 id="manualInputButton"
                 onclick="showManualInput()"
               >
-                <i class="fas fa-keyboard"></i> إدخال البيانات يدوياً
+                <i class="fas fa-keyboard"></i> أو إدخال البيانات يدوياً
               </button>
             </div>
           </div>
@@ -396,6 +406,9 @@
               <span id="pdfSchoolName"></span>
             </div>
             <div><strong>الصف:</strong> <span id="pdfClassLevel"></span></div>
+            <div>
+              <strong>الفصل:</strong> <span id="pdfClassSection"></span>
+            </div>
             <div>
               <strong>المعلم/المعلمة:</strong> <span id="pdfTeacherType"></span>
             </div>
