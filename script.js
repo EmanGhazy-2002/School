@@ -90,6 +90,7 @@ function showReports() {
 // Show manual input section
 function showManualInput() {
   document.getElementById("manualInputSection").style.display = "block";
+  document.getElementById("manualInputButtonContainer").style.display = "none";
 }
 
 // Add student manually
@@ -108,15 +109,16 @@ function addStudent() {
   const studentName =
     nameInput.value.trim() || `طالب ${studentsData.length + 1}`;
 
-  const student = {
-    name: studentName,
-    grade: Number.parseFloat(gradeInput.value),
-  };
-
-  if (student.grade > totalGrade) {
+  const studentGrade = Number.parseFloat(gradeInput.value);
+  if (studentGrade > totalGrade) {
     alert("درجة الطالب لا يمكن أن تكون أكبر من الدرجة النهائية");
     return;
   }
+
+  const student = {
+    name: studentName,
+    grade: studentGrade,
+  };
 
   studentsData.push(student);
 
@@ -468,6 +470,7 @@ function exportToPDF() {
   const eduAdminName =
     document.getElementById("eduAdminName").value || "غير محدد";
   const schoolName = document.getElementById("schoolName").value || "غير محدد";
+  const classLevel = document.getElementById("classLevel").value || "غير محدد";
   const teacherType = document.getElementById("teacherType").value || "";
   const teacherName =
     document.getElementById("teacherName").value || "غير محدد";
@@ -825,6 +828,9 @@ function exportToPDF() {
       
       <div class="section-title">معلومات الاختبار</div>
       <table class="info-table">
+        <tr><td>اسم الإدارة التعليمية</td><td>${eduAdminName}</td></tr>
+        <tr><td>اسم المدرسة</td><td>${schoolName}</td></tr>
+        <tr><td>الصف</td><td>${classLevel}</td></tr>
         <tr><td>${teacherLabel}</td><td>${teacherName}</td></tr>
         <tr><td>المادة</td><td>${subjectName}</td></tr>
         <tr><td>الدرجة النهائية</td><td>${totalGrade}</td></tr>

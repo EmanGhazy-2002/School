@@ -60,6 +60,16 @@
                 />
               </div>
               <div class="col-md-6 mb-3">
+                <label class="form-label">الصف</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="classLevel"
+                  placeholder="أدخل الصف (مثال: الثالث الثانوي)"
+                  required
+                />
+              </div>
+              <div class="col-md-6 mb-3">
                 <label class="form-label">المعلم/المعلمة</label>
                 <select class="form-control" id="teacherType" required>
                   <option value="">اختر</option>
@@ -158,9 +168,13 @@
                 >يجب أن يحتوي الملف على عمودين: اسم الطالب والدرجة</small
               >
             </div>
-            <div class="col-md-6 mb-3">
+            <div class="col-md-6 mb-3" id="manualInputButtonContainer">
               <h5>إدخال يدوي</h5>
-              <button class="btn btn-primary" onclick="showManualInput()">
+              <button
+                class="btn btn-primary"
+                id="manualInputButton"
+                onclick="showManualInput()"
+              >
                 <i class="fas fa-keyboard"></i> إدخال البيانات يدوياً
               </button>
             </div>
@@ -381,6 +395,7 @@
               <strong>اسم المدرسة:</strong>
               <span id="pdfSchoolName"></span>
             </div>
+            <div><strong>الصف:</strong> <span id="pdfClassLevel"></span></div>
             <div>
               <strong>المعلم/المعلمة:</strong> <span id="pdfTeacherType"></span>
             </div>
