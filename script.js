@@ -822,7 +822,7 @@ function exportToPDF() {
         <div class="header-text">
           <h2>${eduAdminName}</h2>
           <h3>${schoolName}</h3>
-          <div class="report-title">تقرير ${examType}</div>
+          <div>تقرير ${examType}</div>
         </div>
       </div>
       
@@ -835,7 +835,6 @@ function exportToPDF() {
         <tr><td>المادة</td><td>${subjectName}</td></tr>
         <tr><td>الدرجة النهائية</td><td>${totalGrade}</td></tr>
         <tr><td>الفصل الدراسي</td><td>${semester}</td></tr>
-        <tr><td>نوع الاختبار</td><td>${examType}</td></tr>
       </table>
       
       <div class="section-title">الإحصائيات التفصيلية</div>
