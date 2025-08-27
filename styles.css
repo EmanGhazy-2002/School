@@ -7,18 +7,16 @@
 
 body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    /* تغيير لون الثيم إلى التدرج الجديد */
-    background: whitesmoke;
+    background: white;
     min-height: 100vh;
     color: #333;
 }
 
 /* Header Styles */
 .header-section {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    color: rgb(255, 255, 255);
+    background: #14445A;
+    color: white;
+    border-bottom: none;
 }
 
 .main-title {
@@ -65,7 +63,6 @@ body {
 }
 
 .stat-icon {
-    /* تحديث لون الأيقونة للثيم الجديد */
     background: linear-gradient(135deg, #3c7db8, #06a869);
     color: white;
     width: 50px;
@@ -87,7 +84,6 @@ body {
 .stat-number {
     font-size: 1.8rem;
     font-weight: bold;
-    /* تحديث لون الأرقام للثيم الجديد */
     color: #3c7db8;
 }
 
@@ -101,7 +97,7 @@ body {
 }
 
 .action-btn {
-    background: white;
+    background: #14445A;
     border: none;
     border-radius: 25px;
     padding: 3rem 4rem;
@@ -130,12 +126,11 @@ body {
 }
 
 .primary-btn i {
-    /* تحديث لون الأزرار للثيم الجديد */
-    color: #3c7db8;
+    color: white;
 }
 
 .primary-btn span {
-    color: #3c7db8;
+    color: white;
 }
 
 .secondary-btn i {
@@ -155,8 +150,7 @@ body {
 }
 
 .card-header {
-    /* تحديث لون الهيدر للثيم الجديد */
-    background: linear-gradient(135deg, #3c7db8, #06a869);
+    background: #14445A;
     color: white;
     border: none;
     padding: 1.5rem;
@@ -180,7 +174,6 @@ body {
 }
 
 .form-control:focus {
-    /* تحديث لون التركيز للثيم الجديد */
     border-color: #3c7db8;
     box-shadow: 0 0 0 0.2rem rgba(60, 125, 184, 0.25);
 }
@@ -280,7 +273,6 @@ body {
 }
 
 .percentage {
-    /* تحديث لون النسبة للثيم الجديد */
     border-right: 5px solid #3c7db8;
 }
 
@@ -369,7 +361,6 @@ body {
         max-height: 50px;
     }
 
-    /* جعل بطاقات الإحصائيات جنباً إلى جنب وتصغيرها */
     .row.mb-4 {
         display: flex;
         gap: 0.5rem;
@@ -406,7 +397,6 @@ body {
         font-size: 1rem;
     }
 
-    /* تصغير الأزرار الرئيسية */
     .action-buttons {
         gap: 1rem;
         margin-top: 1.5rem;
@@ -426,7 +416,6 @@ body {
         font-size: 1.1rem;
     }
 
-    /* تصغير المسافات العامة */
     .py-5 {
         padding-top: 1.5rem !important;
         padding-bottom: 1.5rem !important;
@@ -445,7 +434,6 @@ body {
         margin-bottom: 1.5rem !important;
     }
 
-    /* تصغير الفوتر */
     .footer-section {
         padding: 1rem 0;
     }
@@ -455,7 +443,6 @@ body {
         margin: 0;
     }
 
-    /* ضمان عدم التمرير */
     .main-content {
         max-height: calc(100vh - 120px);
         overflow-y: auto;
@@ -513,7 +500,6 @@ body {
 }
 
 .btn-primary {
-    /* تحديث لون الأزرار الأساسية للثيم الجديد */
     background: linear-gradient(135deg, #3c7db8, #06a869);
     border: none;
 }
