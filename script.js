@@ -6,6 +6,12 @@ let analysisCount = Number.parseInt(
 let reportCount = Number.parseInt(localStorage.getItem("reportCount") || "0");
 const html2pdf = window.html2pdf;
 
+// Function to convert English numbers to Arabic
+function toArabicNumbers(number) {
+  const arabicNumbers = ["٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩"];
+  return number.toString().replace(/\d/g, (digit) => arabicNumbers[digit]);
+}
+
 // Initialize page
 document.addEventListener("DOMContentLoaded", () => {
   updateCounters();
@@ -22,10 +28,10 @@ function updateCounters() {
   const reportElement = document.getElementById("reportCount");
 
   if (analysisElement) {
-    analysisElement.textContent = analysisCount;
+    analysisElement.textContent = toArabicNumbers(analysisCount);
   }
   if (reportElement) {
-    reportElement.textContent = reportCount;
+    reportElement.textContent = toArabicNumbers(reportCount);
   }
 }
 
@@ -141,7 +147,7 @@ function displayStudentsList() {
     div.innerHTML = `
             <span>${student.name}</span>
             <div>
-                <span class="me-2">${student.grade}</span>
+                <span class="me-2">${toArabicNumbers(student.grade)}</span>
                 <button class="btn btn-sm btn-danger" onclick="removeStudent(${index})">
                     <i class="fas fa-trash"></i>
                 </button>
@@ -199,7 +205,9 @@ function handleFileUpload(event) {
         checkAnalyzeButton();
 
         alert(
-          `تم تحميل ${studentsData.length} طالب بنجاح من ملف Excel!\n${
+          `تم تحميل ${toArabicNumbers(
+            studentsData.length
+          )} طالب بنجاح من ملف Excel!\n${
             totalGrade
               ? "يمكنك الآن تحليل النتائج."
               : "يرجى إدخال الدرجة النهائية لتفعيل زر التحليل."
@@ -291,16 +299,29 @@ function calculateStatistics(students, totalGrade) {
 
 // Update statistics display
 function updateStatisticsDisplay(stats) {
-  document.getElementById("excellentCount").textContent = stats.excellent;
-  document.getElementById("veryGoodCount").textContent = stats.veryGood;
-  document.getElementById("goodCount").textContent = stats.good;
-  document.getElementById("acceptableCount").textContent = stats.acceptable;
-  document.getElementById("weakCount").textContent = stats.weak;
-  document.getElementById("totalStudents").textContent = stats.total;
-  document.getElementById("averageGrade").textContent =
-    stats.average.toFixed(2);
+  document.getElementById("excellentCount").textContent = toArabicNumbers(
+    stats.excellent
+  );
+  document.getElementById("veryGoodCount").textContent = toArabicNumbers(
+    stats.veryGood
+  );
+  document.getElementById("goodCount").textContent = toArabicNumbers(
+    stats.good
+  );
+  document.getElementById("acceptableCount").textContent = toArabicNumbers(
+    stats.acceptable
+  );
+  document.getElementById("weakCount").textContent = toArabicNumbers(
+    stats.weak
+  );
+  document.getElementById("totalStudents").textContent = toArabicNumbers(
+    stats.total
+  );
+  document.getElementById("averageGrade").textContent = toArabicNumbers(
+    stats.average.toFixed(2)
+  );
   document.getElementById("averagePercentage").textContent =
-    stats.averagePercentage.toFixed(1) + "%";
+    toArabicNumbers(stats.averagePercentage.toFixed(1)) + "%";
 }
 
 // Display students results
@@ -310,7 +331,7 @@ function displayStudentsResults(students, totalGrade) {
 
   const sortedStudents = [...students].sort((a, b) => b.grade - a.grade);
 
-  sortedStudents.forEach((student) => {
+  sortedStudents.forEach((student, index) => {
     const percentage = (student.grade / totalGrade) * 100;
     let gradeClass = "";
     let gradeText = "";
@@ -335,10 +356,14 @@ function displayStudentsResults(students, totalGrade) {
     const div = document.createElement("div");
     div.className = "student-item";
     div.innerHTML = `
-            <span>${student.name}</span>
-            <div>
-                <span class="me-2">${student.grade}</span>
-                <span class="student-grade ${gradeClass}">${gradeText}</span>
+            <span style="width: 40%; display: inline-block; text-align: right;">${
+              student.name
+            }</span>
+            <div style="width: 60%; display: flex; justify-content: space-between; align-items: center;">
+                <span class="me-2" style="width: 20%; text-align: center;">${toArabicNumbers(
+                  student.grade
+                )}</span>
+                <span class="student-grade ${gradeClass}" style="width: 20%; text-align: center;">${gradeText}</span>
             </div>
         `;
     container.appendChild(div);
@@ -419,6 +444,9 @@ function createChart(stats) {
             beginAtZero: true,
             ticks: {
               stepSize: 1,
+              callback: function (value) {
+                return toArabicNumbers(value);
+              },
             },
           },
         },
@@ -521,14 +549,16 @@ function exportToPDF() {
 
     studentsListHTML += `
       <tr style="border-bottom: 1px solid #dee2e6;">
-        <td style="padding: 8px; text-align: center; font-weight: bold;">${
+        <td style="padding: 8px; text-align: center; font-weight: bold;">${toArabicNumbers(
           index + 1
+        )}</td>
+        <td style="padding: 8px; text-align: center; width: 40%;">${
+          student.name
         }</td>
-        <td style="padding: 8px; text-align: right;">${student.name}</td>
-        <td style="padding: 8px; text-align: center; font-weight: bold; color: #3c7db8;">${
+        <td style="padding: 8px; text-align: center; font-weight: bold; color: #3c7db8; width: 20%;">${toArabicNumbers(
           student.grade
-        }</td>
-        <td style="padding: 8px; text-align: center;">
+        )}</td>
+        <td style="padding: 8px; text-align: center; width: 30%;">
           <span style="color: white !important; background: ${gradeColor} !important; padding: 4px 8px; border-radius: 12px; font-size: 12px; font-weight: bold;">${gradeText}</span>
         </td>
       </tr>
@@ -555,9 +585,9 @@ function exportToPDF() {
       <text x="80" y="195" text-anchor="middle" style="font-size: 12px; fill: white !important;">ممتاز</text>
       <text x="80" y="${
         175 - (stats.excellent / maxValue) * 140
-      }" text-anchor="middle" style="font-size: 12px; font-weight: bold; fill: white !important;">${
+      }" text-anchor="middle" style="font-size: 12px; font-weight: bold; fill: white !important;">${toArabicNumbers(
     stats.excellent
-  }</text>
+  )}</text>
       
       <rect x="130" y="${
         180 - (stats.veryGood / maxValue) * 140
@@ -567,9 +597,9 @@ function exportToPDF() {
       <text x="160" y="195" text-anchor="middle" style="font-size: 12px; fill: white !important;">جيد جداً</text>
       <text x="160" y="${
         175 - (stats.veryGood / maxValue) * 140
-      }" text-anchor="middle" style="font-size: 12px; font-weight: bold; fill: white !important;">${
+      }" text-anchor="middle" style="font-size: 12px; font-weight: bold; fill: white !important;">${toArabicNumbers(
     stats.veryGood
-  }</text>
+  )}</text>
       
       <rect x="210" y="${
         180 - (stats.good / maxValue) * 140
@@ -579,9 +609,9 @@ function exportToPDF() {
       <text x="240" y="195" text-anchor="middle" style="font-size: 12px; fill: white !important;">جيد</text>
       <text x="240" y="${
         175 - (stats.good / maxValue) * 140
-      }" text-anchor="middle" style="font-size: 12px; font-weight: bold; fill: white !important;">${
+      }" text-anchor="middle" style="font-size: 12px; font-weight: bold; fill: white !important;">${toArabicNumbers(
     stats.good
-  }</text>
+  )}</text>
       
       <rect x="290" y="${
         180 - (stats.acceptable / maxValue) * 140
@@ -591,9 +621,9 @@ function exportToPDF() {
       <text x="320" y="195" text-anchor="middle" style="font-size: 12px; fill: white !important;">مقبول</text>
       <text x="320" y="${
         175 - (stats.acceptable / maxValue) * 140
-      }" text-anchor="middle" style="font-size: 12px; font-weight: bold; fill: white !important;">${
+      }" text-anchor="middle" style="font-size: 12px; font-weight: bold; fill: white !important;">${toArabicNumbers(
     stats.acceptable
-  }</text>
+  )}</text>
       
       <rect x="370" y="${
         180 - (stats.weak / maxValue) * 140
@@ -603,9 +633,9 @@ function exportToPDF() {
       <text x="400" y="195" text-anchor="middle" style="font-size: 12px; fill: white !important;">ضعيف</text>
       <text x="400" y="${
         175 - (stats.weak / maxValue) * 140
-      }" text-anchor="middle" style="font-size: 12px; font-weight: bold; fill: white !important;">${
+      }" text-anchor="middle" style="font-size: 12px; font-weight: bold; fill: white !important;">${toArabicNumbers(
     stats.weak
-  }</text>
+  )}</text>
     </svg>
   `;
 
@@ -744,6 +774,7 @@ function exportToPDF() {
           padding: 8px; 
           border-bottom: 1px solid #dee2e6 !important;
           font-size: 13px;
+          text-align: center;
         }
         .section-title {
           color: #14445A !important;
@@ -846,7 +877,7 @@ function exportToPDF() {
       <table class="info-table">
         <tr><td>${teacherLabel}</td><td>${teacherName}</td></tr>
         <tr><td>المادة</td><td>${subjectName}</td></tr>
-        <tr><td>الدرجة النهائية</td><td>${totalGrade}</td></tr>
+        <tr><td>الدرجة النهائية</td><td>${toArabicNumbers(totalGrade)}</td></tr>
         <tr><td>الفصل الدراسي</td><td>${semester}</td></tr>
         <tr><td>الصف</td><td>${classLevel}</td></tr>
         <tr><td>الفصل</td><td>${classSection}</td></tr>
@@ -864,21 +895,23 @@ function exportToPDF() {
           <th>المجموع</th>
         </tr>
         <tr>
-          <td class="stat-excellent">${stats.excellent}</td>
-          <td class="stat-very-good">${stats.veryGood}</td>
-          <td class="stat-good">${stats.good}</td>
-          <td class="stat-acceptable">${stats.acceptable}</td>
-          <td class="stat-weak">${stats.weak}</td>
-          <td style="background: #14445A !important; color: white !important; print-color-adjust: exact !important;">${
+          <td class="stat-excellent">${toArabicNumbers(stats.excellent)}</td>
+          <td class="stat-very-good">${toArabicNumbers(stats.veryGood)}</td>
+          <td class="stat-good">${toArabicNumbers(stats.good)}</td>
+          <td class="stat-acceptable">${toArabicNumbers(stats.acceptable)}</td>
+          <td class="stat-weak">${toArabicNumbers(stats.weak)}</td>
+          <td style="background: #14445A !important; color: white !important; print-color-adjust: exact !important;">${toArabicNumbers(
             stats.total
-          }</td>
+          )}</td>
         </tr>
       </table>
       
       <div class="average-info">
-        متوسط الدرجات: ${stats.average.toFixed(
-          2
-        )} من ${totalGrade} (${stats.averagePercentage.toFixed(1)}%)
+        متوسط الدرجات: ${toArabicNumbers(
+          stats.average.toFixed(2)
+        )} من ${toArabicNumbers(totalGrade)} (${toArabicNumbers(
+    stats.averagePercentage.toFixed(1)
+  )}%)
       </div>
       
       <div class="section-title">الرسم البياني</div>
