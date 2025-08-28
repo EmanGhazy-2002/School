@@ -359,11 +359,11 @@ function displayStudentsResults(students, totalGrade) {
             <span style="width: 40%; display: inline-block; text-align: right;">${
               student.name
             }</span>
-            <div style="width: 60%; display: flex; justify-content: space-between; align-items: center;">
-                <span class="me-2" style="width: 20%; text-align: center;">${toArabicNumbers(
+            <div style="width: 60%; display: flex; justify-content: space-between; align-items: center; gap: 1px;">
+                <span class="me-2" style="width: 15%; text-align: center; font-size: 0.9rem;">${toArabicNumbers(
                   student.grade
                 )}</span>
-                <span class="student-grade ${gradeClass}" style="width: 20%; text-align: center;">${gradeText}</span>
+                <span class="student-grade ${gradeClass}" style="width: 35%; text-align: center; font-size: 0.9rem; padding: 2px 4px;">${gradeText}</span>
             </div>
         `;
     container.appendChild(div);
@@ -549,17 +549,17 @@ function exportToPDF() {
 
     studentsListHTML += `
       <tr style="border-bottom: 1px solid #dee2e6;">
-        <td style="padding: 8px; text-align: center; font-weight: bold;">${toArabicNumbers(
+        <td style="padding: 4px; text-align: center; font-weight: bold;">${toArabicNumbers(
           index + 1
         )}</td>
-        <td style="padding: 8px; text-align: center; width: 40%;">${
+        <td style="padding: 2px; text-align: center; width: 40%;">${
           student.name
         }</td>
-        <td style="padding: 8px; text-align: center; font-weight: bold; color: #3c7db8; width: 20%;">${toArabicNumbers(
+        <td style="padding: 2px; text-align: center; font-weight: bold; color: #3c7db8; width: 15%;">${toArabicNumbers(
           student.grade
         )}</td>
-        <td style="padding: 8px; text-align: center; width: 30%;">
-          <span style="color: white !important; background: ${gradeColor} !important; padding: 4px 8px; border-radius: 12px; font-size: 12px; font-weight: bold;">${gradeText}</span>
+        <td style="padding: 2px; text-align: center; width: 35%;">
+          <span style="color: white !important; background: ${gradeColor} !important; padding: 2px 4px; border-radius: 12px; font-size: 12px; font-weight: bold;">${gradeText}</span>
         </td>
       </tr>
     `;
@@ -771,7 +771,7 @@ function exportToPDF() {
           print-color-adjust: exact !important;
         }
         .students-table td { 
-          padding: 8px; 
+          padding: 4px; 
           border-bottom: 1px solid #dee2e6 !important;
           font-size: 13px;
           text-align: center;
@@ -861,6 +861,20 @@ function exportToPDF() {
             print-color-adjust: exact !important;
           }
         }
+        @media (max-width: 768px) {
+          .students-table td {
+            padding: 2px;
+          }
+          .students-table th {
+            padding: 6px;
+          }
+          .students-table td:nth-child(3) {
+            width: 15%;
+          }
+          .students-table td:nth-child(4) {
+            width: 35%;
+          }
+        }
       </style>
     </head>
     <body>
@@ -922,8 +936,8 @@ function exportToPDF() {
         <tr>
           <th style="width: 10%;">الترتيب</th>
           <th style="width: 40%;">اسم الطالب</th>
-          <th style="width: 20%;">الدرجة</th>
-          <th style="width: 30%;">التقدير</th>
+          <th style="width: 15%;">الدرجة</th>
+          <th style="width: 35%;">التقدير</th>
         </tr>
         ${studentsListHTML}
       </table>

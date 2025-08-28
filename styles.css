@@ -513,3 +513,17 @@ body {
     background: rgba(255, 255, 255, 0.2);
     border-color: rgba(255, 255, 255, 0.3);
 }
+
+/* Students List in Mobile */
+@media (max-width: 768px) {
+    .student-item span {
+        white-space: nowrap;
+        row-gap: 0.1rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .student-item div span {
+        font-size: 0.8rem;
+    }
+}
