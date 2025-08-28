@@ -10,6 +10,9 @@ body {
     background: white;
     min-height: 100vh;
     color: #333;
+    overflow-x: hidden;
+    /* Prevent horizontal scrolling */
+    width: 100%;
 }
 
 /* Header Styles */
@@ -284,18 +287,27 @@ body {
 .student-item {
     background: #f8f9fa;
     border-radius: 10px;
-    padding: 1rem;
-    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    /* Reduced vertical padding */
+    margin-bottom: 0.2rem;
+    /* Reduced vertical spacing */
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
+    /* Ensure full width without overflow */
+    overflow-x: hidden;
+    /* Prevent horizontal overflow */
 }
 
 .student-grade {
     font-weight: bold;
-    padding: 0.25rem 0.75rem;
+    padding: 0.25rem 0.5rem;
+    /* Adjusted padding for compactness */
     border-radius: 20px;
     color: white;
+    font-size: 0.9rem;
+    /* Slightly reduced font size */
 }
 
 .grade-excellent {
@@ -447,6 +459,44 @@ body {
         max-height: calc(100vh - 120px);
         overflow-y: auto;
     }
+
+    /* Adjusted for mobile students list */
+    .student-item {
+        padding: 0.3rem;
+        /* Further reduced padding */
+        margin-bottom: 0.1rem;
+        /* Minimized vertical spacing */
+        font-size: 0.9rem;
+        /* Reduced font size for compactness */
+    }
+
+    .student-item span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 50%;
+        /* Limit width to prevent overflow */
+    }
+
+    .student-item div {
+        display: flex;
+        gap: 2px;
+        /* Reduced gap between elements */
+    }
+
+    .student-item div span {
+        font-size: 0.8rem;
+        /* Adjusted font size */
+        padding: 0.1rem 0.3rem;
+        /* Reduced padding */
+    }
+
+    .student-grade {
+        padding: 0.1rem 0.3rem;
+        /* Further reduced padding */
+        font-size: 0.8rem;
+        /* Smaller font size */
+    }
 }
 
 /* تحسينات إضافية للشاشات الصغيرة جداً */
@@ -478,6 +528,25 @@ body {
 
     .container {
         padding: 0.3rem;
+    }
+
+    .student-item {
+        padding: 0.2rem;
+        /* Even tighter padding for very small screens */
+        margin-bottom: 0.05rem;
+        /* Minimal vertical spacing */
+    }
+
+    .student-item span {
+        max-width: 45%;
+        /* Further limit width */
+    }
+
+    .student-grade {
+        padding: 0.1rem 0.2rem;
+        /* Tightest padding */
+        font-size: 0.7rem;
+        /* Smallest font size */
     }
 }
 
@@ -518,7 +587,6 @@ body {
 @media (max-width: 768px) {
     .student-item span {
         white-space: nowrap;
-        row-gap: 0.1rem;
         overflow: hidden;
         text-overflow: ellipsis;
     }

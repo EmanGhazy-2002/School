@@ -356,14 +356,14 @@ function displayStudentsResults(students, totalGrade) {
     const div = document.createElement("div");
     div.className = "student-item";
     div.innerHTML = `
-            <span style="width: 40%; display: inline-block; text-align: right;">${
+            <span style="width: 40%; display: inline-block; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.9rem; padding: 0.1rem;">${
               student.name
             }</span>
-            <div style="width: 60%; display: flex; justify-content: space-between; align-items: center; gap: 1px;">
-                <span class="me-2" style="width: 15%; text-align: center; font-size: 0.9rem;">${toArabicNumbers(
+            <div style="width: 60%; display: flex; justify-content: space-between; align-items: center; gap: 1px; font-size: 0.9rem;">
+                <span class="me-2" style="width: 15%; text-align: center; padding: 0.1rem; font-size: 0.9rem;">${toArabicNumbers(
                   student.grade
                 )}</span>
-                <span class="student-grade ${gradeClass}" style="width: 35%; text-align: center; font-size: 0.9rem; padding: 2px 4px;">${gradeText}</span>
+                <span class="student-grade ${gradeClass}" style="width: 35%; text-align: center; padding: 0.1rem 0.3rem; font-size: 0.9rem;">${gradeText}</span>
             </div>
         `;
     container.appendChild(div);
@@ -426,6 +426,7 @@ function createChart(stats) {
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           title: {
             display: true,
@@ -446,6 +447,13 @@ function createChart(stats) {
               stepSize: 1,
               callback: function (value) {
                 return toArabicNumbers(value);
+              },
+            },
+          },
+          x: {
+            ticks: {
+              font: {
+                size: 12,
               },
             },
           },
@@ -549,17 +557,17 @@ function exportToPDF() {
 
     studentsListHTML += `
       <tr style="border-bottom: 1px solid #dee2e6;">
-        <td style="padding: 4px; text-align: center; font-weight: bold;">${toArabicNumbers(
+        <td style="padding: 2px; text-align: center; font-weight: bold; width: 10%;">${toArabicNumbers(
           index + 1
         )}</td>
-        <td style="padding: 2px; text-align: center; width: 40%;">${
+        <td style="padding: 2px; text-align: center; width: 40%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${
           student.name
         }</td>
         <td style="padding: 2px; text-align: center; font-weight: bold; color: #3c7db8; width: 15%;">${toArabicNumbers(
           student.grade
         )}</td>
         <td style="padding: 2px; text-align: center; width: 35%;">
-          <span style="color: white !important; background: ${gradeColor} !important; padding: 2px 4px; border-radius: 12px; font-size: 12px; font-weight: bold;">${gradeText}</span>
+          <span style="color: white !important; background: ${gradeColor} !important; padding: 2px 4px; border-radius: 12px; font-size: 0.9rem; font-weight: bold;">${gradeText}</span>
         </td>
       </tr>
     `;
@@ -574,18 +582,18 @@ function exportToPDF() {
     1
   );
   const chartHTML = `
-    <svg width="100%" height="200" viewBox="0 0 500 200" style="background: linear-gradient(135deg, #3C7DB8, #06A869) !important; border-radius: 8px; margin: 20px 0;">
-      <text x="250" y="20" text-anchor="middle" style="font-size: 14px; font-weight: bold; fill: white !important;">توزيع الطلاب حسب الفئات</text>
+    <svg width="100%" height="200" viewBox="0 0 500 200" style="background: linear-gradient(135deg, #3C7DB8, #06A869) !important; border-radius: 8px; margin: 10px 0;">
+      <text x="250" y="20" text-anchor="middle" style="font-size: 12px; font-weight: bold; fill: white !important;">توزيع الطلاب حسب الفئات</text>
       
       <rect x="50" y="${
         180 - (stats.excellent / maxValue) * 140
       }" width="60" height="${
     (stats.excellent / maxValue) * 140
   }" fill="#28a745" rx="4"/>
-      <text x="80" y="195" text-anchor="middle" style="font-size: 12px; fill: white !important;">ممتاز</text>
+      <text x="80" y="195" text-anchor="middle" style="font-size: 10px; fill: white !important;">ممتاز</text>
       <text x="80" y="${
         175 - (stats.excellent / maxValue) * 140
-      }" text-anchor="middle" style="font-size: 12px; font-weight: bold; fill: white !important;">${toArabicNumbers(
+      }" text-anchor="middle" style="font-size: 10px; font-weight: bold; fill: white !important;">${toArabicNumbers(
     stats.excellent
   )}</text>
       
@@ -594,10 +602,10 @@ function exportToPDF() {
       }" width="60" height="${
     (stats.veryGood / maxValue) * 140
   }" fill="#17a2b8" rx="4"/>
-      <text x="160" y="195" text-anchor="middle" style="font-size: 12px; fill: white !important;">جيد جداً</text>
+      <text x="160" y="195" text-anchor="middle" style="font-size: 10px; fill: white !important;">جيد جداً</text>
       <text x="160" y="${
         175 - (stats.veryGood / maxValue) * 140
-      }" text-anchor="middle" style="font-size: 12px; font-weight: bold; fill: white !important;">${toArabicNumbers(
+      }" text-anchor="middle" style="font-size: 10px; font-weight: bold; fill: white !important;">${toArabicNumbers(
     stats.veryGood
   )}</text>
       
@@ -606,10 +614,10 @@ function exportToPDF() {
       }" width="60" height="${
     (stats.good / maxValue) * 140
   }" fill="#ffc107" rx="4"/>
-      <text x="240" y="195" text-anchor="middle" style="font-size: 12px; fill: white !important;">جيد</text>
+      <text x="240" y="195" text-anchor="middle" style="font-size: 10px; fill: white !important;">جيد</text>
       <text x="240" y="${
         175 - (stats.good / maxValue) * 140
-      }" text-anchor="middle" style="font-size: 12px; font-weight: bold; fill: white !important;">${toArabicNumbers(
+      }" text-anchor="middle" style="font-size: 10px; font-weight: bold; fill: white !important;">${toArabicNumbers(
     stats.good
   )}</text>
       
@@ -618,10 +626,10 @@ function exportToPDF() {
       }" width="60" height="${
     (stats.acceptable / maxValue) * 140
   }" fill="#fd7e14" rx="4"/>
-      <text x="320" y="195" text-anchor="middle" style="font-size: 12px; fill: white !important;">مقبول</text>
+      <text x="320" y="195" text-anchor="middle" style="font-size: 10px; fill: white !important;">مقبول</text>
       <text x="320" y="${
         175 - (stats.acceptable / maxValue) * 140
-      }" text-anchor="middle" style="font-size: 12px; font-weight: bold; fill: white !important;">${toArabicNumbers(
+      }" text-anchor="middle" style="font-size: 10px; font-weight: bold; fill: white !important;">${toArabicNumbers(
     stats.acceptable
   )}</text>
       
@@ -630,10 +638,10 @@ function exportToPDF() {
       }" width="60" height="${
     (stats.weak / maxValue) * 140
   }" fill="#dc3545" rx="4"/>
-      <text x="400" y="195" text-anchor="middle" style="font-size: 12px; fill: white !important;">ضعيف</text>
+      <text x="400" y="195" text-anchor="middle" style="font-size: 10px; fill: white !important;">ضعيف</text>
       <text x="400" y="${
         175 - (stats.weak / maxValue) * 140
-      }" text-anchor="middle" style="font-size: 12px; font-weight: bold; fill: white !important;">${toArabicNumbers(
+      }" text-anchor="middle" style="font-size: 10px; font-weight: bold; fill: white !important;">${toArabicNumbers(
     stats.weak
   )}</text>
     </svg>
@@ -653,50 +661,52 @@ function exportToPDF() {
         }
         body { 
           font-family: 'Segoe UI', Tahoma, Arial, sans-serif; 
-          margin: 15px; 
+          margin: 10px; 
           direction: rtl; 
-          line-height: 1.4;
+          line-height: 1.3;
           color: #333 !important;
           font-size: 14px;
+          overflow-x: hidden; /* Prevent horizontal scrolling */
+          width: 100%;
           print-color-adjust: exact !important;
         }
         .header { 
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: 20px;
+          padding: 15px;
           background: #14445A !important;
           color: white !important;
-          border-radius: 10px;
-          margin-bottom: 25px;
+          border-radius: 8px;
+          margin-bottom: 15px;
           print-color-adjust: exact !important;
         }
         .header-logo {
-          width: 140px;
+          width: 120px;
           height: auto;
-          margin-left: 20px;
+          margin-left: 15px;
         }
         .header-text {
           flex: 1;
           text-align: center;
         }
         .header-text h2 { 
-          margin: 0 0 6px 0; 
-          font-size: 16px; 
+          margin: 0 0 5px 0; 
+          font-size: 15px; 
           color: white !important; 
           font-weight: bold;
         }
         .header-text h3 { 
-          margin: 0 0 8px 0; 
-          font-size: 14px; 
+          margin: 0 0 5px 0; 
+          font-size: 13px; 
           color: white !important; 
           font-weight: normal;
         }
         .header-text .report-title { 
           background: rgba(255,255,255,0.2) !important; 
-          padding: 6px 12px; 
-          border-radius: 8px; 
-          font-size: 14px;
+          padding: 5px 10px; 
+          border-radius: 6px; 
+          font-size: 13px;
           font-weight: bold;
           color: white !important;
           print-color-adjust: exact !important;
@@ -704,17 +714,17 @@ function exportToPDF() {
         .info-table { 
           width: 100%;
           border-collapse: collapse;
-          margin-bottom: 20px;
+          margin-bottom: 15px;
           background: #f8f9fa !important;
           border: 2px solid #14445A !important;
-          border-radius: 8px;
+          border-radius: 6px;
           overflow: hidden;
           print-color-adjust: exact !important;
         }
         .info-table td { 
-          padding: 8px 12px; 
+          padding: 6px 10px; 
           border-bottom: 1px solid #dee2e6 !important;
-          font-size: 14px;
+          font-size: 13px;
         }
         .info-table td:first-child { 
           font-weight: bold; 
@@ -729,23 +739,23 @@ function exportToPDF() {
           margin: 15px 0;
           background: white !important;
           border: 2px solid #14445A !important;
-          border-radius: 8px;
+          border-radius: 6px;
           overflow: hidden;
           print-color-adjust: exact !important;
         }
         .stats-table th { 
           background: #14445A !important; 
           color: white !important; 
-          padding: 10px 8px; 
+          padding: 8px; 
           text-align: center;
-          font-size: 13px;
+          font-size: 12px;
           print-color-adjust: exact !important;
         }
         .stats-table td { 
-          padding: 8px; 
+          padding: 6px; 
           text-align: center; 
           font-weight: bold;
-          font-size: 14px;
+          font-size: 13px;
         }
         .stat-excellent { background: #d4edda !important; color: #155724 !important; print-color-adjust: exact !important; }
         .stat-very-good { background: #d1ecf1 !important; color: #0c5460 !important; print-color-adjust: exact !important; }
@@ -758,67 +768,70 @@ function exportToPDF() {
           margin: 15px 0;
           background: white !important;
           border: 2px solid #14445A !important;
-          border-radius: 8px;
+          border-radius: 6px;
           overflow: hidden;
           print-color-adjust: exact !important;
         }
         .students-table th { 
           background: #14445A !important; 
           color: white !important; 
-          padding: 10px 8px; 
+          padding: 6px; 
           text-align: center;
-          font-size: 13px;
+          font-size: 12px;
           print-color-adjust: exact !important;
         }
         .students-table td { 
-          padding: 4px; 
+          padding: 2px; 
           border-bottom: 1px solid #dee2e6 !important;
-          font-size: 13px;
+          font-size: 12px;
           text-align: center;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         .section-title {
           color: #14445A !important;
-          font-size: 16px;
+          font-size: 15px;
           font-weight: bold;
-          margin: 20px 0 10px 0;
+          margin: 15px 0 8px 0;
           text-align: center;
-          padding: 8px;
+          padding: 6px;
           background: linear-gradient(135deg, rgba(20,68,90,0.1), rgba(6,168,105,0.1)) !important;
-          border-radius: 8px;
+          border-radius: 6px;
           print-color-adjust: exact !important;
         }
         .average-info {
           background: linear-gradient(135deg, rgba(20,68,90,0.1), rgba(6,168,105,0.1)) !important;
-          padding: 10px;
-          border-radius: 8px;
-          margin: 15px 0;
+          padding: 8px;
+          border-radius: 6px;
+          margin: 10px 0;
           text-align: center;
-          font-size: 15px;
+          font-size: 14px;
           font-weight: bold;
           color: #14445A !important;
           print-color-adjust: exact !important;
         }
         .final-notes { 
-          margin-top: 25px; 
+          margin-top: 20px; 
           text-align: center;
-          padding: 12px;
+          padding: 10px;
           background: #14445A !important;
-          border-radius: 8px;
+          border-radius: 6px;
           border: 2px solid #14445A !important;
           print-color-adjust: exact !important;
         }
         .director-name {
-          font-size: 15px;
+          font-size: 14px;
           font-weight: bold;
-          color: 14445A !important;
+          color: #14445A !important;
           margin-bottom: 5px;
         }
-         .footer { 
-          margin-top: 25px; 
+        .footer { 
+          margin-top: 20px; 
           text-align: center;
-          padding: 12px;
+          padding: 10px;
           background: #14445A !important;
-          border-radius: 8px;
+          border-radius: 6px;
           border: 2px solid #14445A !important;
           print-color-adjust: exact !important;
         }
@@ -830,7 +843,7 @@ function exportToPDF() {
           }
           body { 
             margin: 0; 
-            font-size: 12px; 
+            font-size: 11px; 
             print-color-adjust: exact !important;
           }
           .header { 
@@ -863,16 +876,55 @@ function exportToPDF() {
         }
         @media (max-width: 768px) {
           .students-table td {
-            padding: 2px;
+            padding: 1px;
+            font-size: 11px;
           }
           .students-table th {
-            padding: 6px;
+            padding: 4px;
+            font-size: 11px;
           }
           .students-table td:nth-child(3) {
             width: 15%;
           }
           .students-table td:nth-child(4) {
             width: 35%;
+          }
+          body {
+            margin: 5px;
+          }
+          .header {
+            padding: 10px;
+          }
+          .header-logo {
+            width: 100px;
+          }
+          .header-text h2 {
+            font-size: 14px;
+          }
+          .header-text h3 {
+            font-size: 12px;
+          }
+          .info-table td {
+            padding: 4px 8px;
+            font-size: 12px;
+          }
+          .stats-table th {
+            padding: 6px;
+            font-size: 11px;
+          }
+          .stats-table td {
+            padding: 4px;
+            font-size: 12px;
+          }
+          .section-title {
+            font-size: 14px;
+            margin: 10px 0 5px 0;
+            padding: 4px;
+          }
+          .average-info {
+            padding: 6px;
+            font-size: 13px;
+            margin: 8px 0;
           }
         }
       </style>
