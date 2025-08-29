@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>شواهد الأداء</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link href="performance-styles.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header-section">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center py-3">
+          <button class="btn btn-outline-light" onclick="goHome()">
+            <i class="fas fa-home"></i> الرئيسية
+          </button>
+          <h1 class="main-title mb-0">شواهد الأداء</h1>
+          <div></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+      <!-- نموذج الاستراتيجيات -->
+      <div class="strategies-form" id="strategiesSection">
+        <div class="section-header">
+          <i class="fas fa-lightbulb me-2"></i>
+          نموذج الاستراتيجيات
+        </div>
+
+        <div class="form-sections">
+          <form id="strategiesForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="educationDepartment" class="form-label"
+                  >اسم الإدارة التعليمية</label
+                >
+                <input
+                  type="text"
+                  id="educationDepartment"
+                  name="educationDepartment"
+                  class="form-control"
+                  value="الإدارة العامة للتعليم بمحافظة "
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="schoolName" class="form-label">اسم المدرسة</label>
+                <input
+                  type="text"
+                  id="schoolName"
+                  name="schoolName"
+                  class="form-control"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">الاستراتيجية</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="strategy"
+                  name="strategy"
+                  placeholder="اكتب اسم الاستراتيجية"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <!-- حقل المعلم/المعلمة (قائمة منسدلة) -->
+              <div class="form-group">
+                <label for="teacherGender" class="form-label"
+                  >المعلم/المعلمة</label
+                >
+                <select
+                  id="teacherGender"
+                  name="teacherGender"
+                  class="form-control"
+                  required
+                >
+                  <option value="معلم">معلم</option>
+                  <option value="معلمة">معلمة</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="teacherName" class="form-label"
+                  >اسم المعلم/المعلمة</label
+                >
+                <input
+                  type="text"
+                  id="teacherName"
+                  name="teacherName"
+                  class="form-control"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">تاريخ التنفيذ الهجري</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="implementationDate"
+                  name="implementationDate"
+                  placeholder="مثلا ١٤٤٦/١٢/١٢"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">المادة</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="subject"
+                  name="subject"
+                  placeholder="اسم المادة"
+                  required
+                />
+              </div>
+              <!-- حقل الصف (قائمة منسدلة) -->
+              <div class="form-group">
+                <label for="grade" class="form-label">الصف</label>
+                <input
+                  id="grade"
+                  name="grade"
+                  placeholder="مثال:الاول ثانوي"
+                  class="form-control"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">عدد الطلاب</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="studentsCount"
+                  name="studentsCount"
+                  placeholder="عدد الطلاب"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label">الفصل</label>
+                <select
+                  class="form-control form-select"
+                  id="classroom"
+                  name="classroom"
+                  required
+                >
+                  <option value="">اختر الفصل</option>
+                  <option value="1">١</option>
+                  <option value="2">٢</option>
+                  <option value="3">٣</option>
+                  <option value="4">٤</option>
+                  <option value="5">٥</option>
+                  <option value="جميع الفصول">جميع الفصول</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">المرحلة الدراسية</label>
+                <select
+                  class="form-control form-select"
+                  id="grade"
+                  name="grade"
+                  required
+                >
+                  <option value="">اختر المرحلة الدراسية</option>
+                  <option value="الأول ثانوي">الأول ثانوي</option>
+                  <option value="الثاني ثانوي">الثاني ثانوي</option>
+                  <option value="الثالث ثانوي">الثالث ثانوي</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <!-- حقل مدير/مديرة (قائمة منسدلة) -->
+              <div class="form-group">
+                <label for="directorGender" class="form-label"
+                  >مدير/مديرة</label
+                >
+                <select
+                  id="directorGender"
+                  name="directorGender"
+                  class="form-control"
+                  required
+                >
+                  <option value="مدير">مدير</option>
+                  <option value="مديرة">مديرة</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="directorName" class="form-label"
+                  >اسم المدير/المديرة</label
+                >
+                <input
+                  type="text"
+                  id="directorName"
+                  name="directorName"
+                  class="form-control"
+                  required
+                />
+              </div>
+              <div class="form-group full-width">
+                <label class="form-label">الدرس</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lesson"
+                  name="lesson"
+                  placeholder="اكتب اسم الدرس"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="objectives-tools-grid">
+              <div class="objectives-section">
+                <div class="objectives-title">الأهداف</div>
+                <textarea
+                  class="objectives-textarea"
+                  id="objectives"
+                  name="objectives"
+                  placeholder="اكتب الأهداف هنا ويفضل خمس أهداف تحت بعض:&#10;1. الهدف الأول&#10;2. الهدف الثاني&#10;3. الهدف الثالث&#10;4. الهدف الرابع&#10;5. الهدف الخامس"
+                  required
+                ></textarea>
+              </div>
+
+              <div class="tools-section">
+                <div class="tools-title">الأدوات والوسائل التعليمية</div>
+                <div class="tools-grid">
+                  <div class="tool-item">
+                    <input
+                      type="checkbox"
+                      class="tool-checkbox"
+                      id="projector"
+                      name="tools"
+                      value="جهاز عرض"
+                    />
+                    <label for="projector">جهاز عرض</label>
+                  </div>
+                  <div class="tool-item">
+                    <input
+                      type="checkbox"
+                      class="tool-checkbox"
+                      id="smartBoard"
+                      name="tools"
+                      value="سبورة تفاعلية"
+                    />
+                    <label for="smartBoard">سبورة تفاعلية</label>
+                  </div>
+                  <div class="tool-item">
+                    <input
+                      type="checkbox"
+                      class="tool-checkbox"
+                      id="computer"
+                      name="tools"
+                      value="جهاز الحاسب"
+                    />
+                    <label for="computer">جهاز الحاسب</label>
+                  </div>
+                  <div class="tool-item">
+                    <input
+                      type="checkbox"
+                      class="tool-checkbox"
+                      id="explanatoryCards"
+                      name="tools"
+                      value="بطاقات تعليمية"
+                    />
+                    <label for="explanatoryCards">بطاقات تعليمية</label>
+                  </div>
+                  <div class="tool-item">
+                    <input
+                      type="checkbox"
+                      class="tool-checkbox"
+                      id="mathTools"
+                      name="tools"
+                      value="أدوات رياضية"
+                    />
+                    <label for="mathTools">أدوات رياضية</label>
+                  </div>
+                  <div class="tool-item">
+                    <input
+                      type="checkbox"
+                      class="tool-checkbox"
+                      id="worksheets"
+                      name="tools"
+                      value="أوراق عمل"
+                    />
+                    <label for="worksheets">أوراق عمل</label>
+                  </div>
+                  <div class="tool-item">
+                    <input
+                      type="checkbox"
+                      class="tool-checkbox"
+                      id="presentation"
+                      name="tools"
+                      value="عرض تقديمي"
+                    />
+                    <label for="presentation">عرض تقديمي</label>
+                  </div>
+                  <div class="tool-item">
+                    <input
+                      type="checkbox"
+                      class="tool-checkbox"
+                      id="books"
+                      name="tools"
+                      value="كتب"
+                    />
+                    <label for="books">كتب</label>
+                  </div>
+                  <div class="tool-item">
+                    <input
+                      type="checkbox"
+                      class="tool-checkbox"
+                      id="sampleMachines"
+                      name="tools"
+                      value="نماذج"
+                    />
+                    <label for="sampleMachines">نماذج</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="evidence-section">
+              <div class="evidence-title">الشواهد والصور</div>
+              <!-- في قسم رفع الصور والشواهد (مثل evidence-upload-section) -->
+              <p style="color: red; font-weight: bold; text-align: center">
+                لا يتم الاحتفاظ بأي صور أو معلومات في الموقع
+              </p>
+              <div class="evidence-grid">
+                <div class="evidence-item">
+                  <div
+                    class="evidence-placeholder"
+                    onclick="document.getElementById('strategyEvidence1').click()"
+                  >
+                    <i class="fas fa-camera"></i>
+                  </div>
+                  <div class="evidence-label">صورة الشاهد الأول</div>
+                  <input
+                    type="file"
+                    id="strategyEvidence1"
+                    name="strategyEvidence1"
+                    accept="image/*"
+                    style="display: none"
+                  />
+                  <div
+                    id="strategyEvidence1-preview"
+                    class="image-preview"
+                  ></div>
+                </div>
+                <div class="evidence-item">
+                  <div
+                    class="evidence-placeholder"
+                    onclick="document.getElementById('strategyEvidence2').click()"
+                  >
+                    <i class="fas fa-camera"></i>
+                  </div>
+                  <div class="evidence-label">صورة الشاهد الثاني</div>
+                  <input
+                    type="file"
+                    id="strategyEvidence2"
+                    name="strategyEvidence2"
+                    accept="image/*"
+                    style="display: none"
+                  />
+                  <div
+                    id="strategyEvidence2-preview"
+                    class="image-preview"
+                  ></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="btn-group">
+              <button
+                type="button"
+                class="btn-success"
+                onclick="printStrategiesReport()"
+              >
+                <i class="fas fa-file-pdf me-2"></i>
+                طباعة تقرير الاستراتيجيات PDF
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="performance-script.js"></script>
+  </body>
+</html>

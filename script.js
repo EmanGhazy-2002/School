@@ -37,38 +37,38 @@ function updateCounters() {
 
 // Navigation functions
 function goToAnalysis() {
-  console.log("[v0] goToAnalysis function called");
+  console.log("[v1] goToAnalysis function called");
   try {
     if (typeof window !== "undefined" && window.location) {
-      window.location.href = "analysis.html";
+      window.location.href = "analysis.html"; // ✅ اللينك الجديد
     } else {
       document.location = "analysis.html";
     }
   } catch (error) {
-    console.error("[v0] Error navigating to analysis page:", error);
+    console.error("[v1] Error navigating to analysis page:", error);
     try {
       window.open("analysis.html", "_self");
     } catch (error2) {
-      console.error("[v0] Fallback navigation also failed:", error2);
+      console.error("[v1] Fallback navigation also failed:", error2);
       alert("خطأ في الانتقال إلى صفحة التحليل. يرجى المحاولة مرة أخرى.");
     }
   }
 }
 
 function goHome() {
-  console.log("[v0] goHome function called");
+  console.log("[v1] goHome function called");
   try {
     if (typeof window !== "undefined" && window.location) {
-      window.location.href = "index.html";
+      window.location.href = "index.html"; // ✅ الرئيسية من غير index.html
     } else {
       document.location = "index.html";
     }
   } catch (error) {
-    console.error("[v0] Error navigating to home page:", error);
+    console.error("[v1] Error navigating to home page:", error);
     try {
       window.open("index.html", "_self");
     } catch (error2) {
-      console.error("[v0] Fallback navigation also failed:", error2);
+      console.error("[v1] Fallback navigation also failed:", error2);
       alert("خطأ في الانتقال إلى الصفحة الرئيسية. يرجى المحاولة مرة أخرى.");
     }
   }
