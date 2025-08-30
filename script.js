@@ -112,12 +112,11 @@ function addStudent() {
     return;
   }
 
-  const studentName =
-    nameInput.value.trim() || `طالب ${studentsData.length + 1}`;
+  const studentName = nameInput.value.trim() || ` ${studentsData.length + 1}`;
 
   const studentGrade = Number.parseFloat(gradeInput.value);
   if (studentGrade > totalGrade) {
-    alert("درجة الطالب لا يمكن أن تكون أكبر من الدرجة النهائية");
+    alert("الدرجة لا يمكن أن تكون أكبر من الدرجة النهائية");
     return;
   }
 
@@ -220,7 +219,6 @@ function handleFileUpload(event) {
       }
     } catch (error) {
       console.error("[v0] Error reading Excel file:", error);
-      alert("خطأ في قراءة الملف. يرجى التأكد من صحة تنسيق الملف");
     }
   };
 
@@ -430,7 +428,7 @@ function createChart(stats) {
         plugins: {
           title: {
             display: true,
-            text: "توزيع الطلاب حسب الفئات",
+            text: "التوزيع حسب الفئات",
             font: {
               size: 16,
               weight: "bold",
@@ -583,7 +581,7 @@ function exportToPDF() {
   );
   const chartHTML = `
     <svg width="100%" height="200" viewBox="0 0 500 200" style="background: linear-gradient(135deg, #3C7DB8, #06A869) !important; border-radius: 8px; margin: 10px 0;">
-      <text x="250" y="20" text-anchor="middle" style="font-size: 12px; font-weight: bold; fill: white !important;">توزيع الطلاب حسب الفئات</text>
+      <text x="250" y="20" text-anchor="middle" style="font-size: 12px; font-weight: bold; fill: white !important;">التوزيع حسب الفئات</text>
       
       <rect x="50" y="${
         180 - (stats.excellent / maxValue) * 140
@@ -983,11 +981,11 @@ function exportToPDF() {
       <div class="section-title">الرسم البياني</div>
       ${chartHTML}
       
-      <div class="section-title">قائمة الطلاب مرتبة حسب الدرجات</div>
+      <div class="section-title"> الترتيب حسب الدرجات</div>
       <table class="students-table">
         <tr>
           <th style="width: 10%;">الترتيب</th>
-          <th style="width: 40%;">اسم الطالب</th>
+          <th style="width: 40%;">الاسم </th>
           <th style="width: 15%;">الدرجة</th>
           <th style="width: 35%;">التقدير</th>
         </tr>
