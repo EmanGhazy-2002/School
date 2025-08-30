@@ -64,7 +64,104 @@
                   required
                 />
               </div>
+              <div class="form-group">
+                <label for="schoolGender" class="form-label">نوع المدرسة</label>
+                <select
+                  id="schoolGender"
+                  name="schoolGender"
+                  class="form-control"
+                  onchange="toggleSchoolFields()"
+                  required
+                >
+                  <option value="boys">مدرسة بنين</option>
+                  <option value="girls">مدرسة بنات</option>
+                </select>
+              </div>
+            </div>
 
+            <div class="form-row">
+              <!-- Fields for boys school -->
+              <div id="boysFields" style="display: block">
+                <div class="form-group">
+                  <label for="studentsCount" class="form-label"
+                    >عدد الطلاب</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="studentsCount"
+                    name="studentsCount"
+                    placeholder="عدد الطلاب"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="teacherName" class="form-label">اسم المعلم</label>
+                  <input
+                    type="text"
+                    id="teacherName"
+                    name="teacherName"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="directorName" class="form-label"
+                    >اسم المدير</label
+                  >
+                  <input
+                    type="text"
+                    id="directorName"
+                    name="directorName"
+                    class="form-control"
+                    required
+                  />
+                </div>
+              </div>
+
+              <!-- Fields for girls school -->
+              <div id="girlsFields" style="display: none">
+                <div class="form-group">
+                  <label for="studentsCount" class="form-label"
+                    >عدد الطالبات</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="studentsCount"
+                    name="studentsCount"
+                    placeholder="عدد الطالبات"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="teacherName" class="form-label"
+                    >اسم المعلمة</label
+                  >
+                  <input
+                    type="text"
+                    id="teacherName"
+                    name="teacherName"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="directorName" class="form-label"
+                    >اسم المديرة</label
+                  >
+                  <input
+                    type="text"
+                    id="directorName"
+                    name="directorName"
+                    class="form-control"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row">
               <div class="form-group">
                 <label class="form-label">الاستراتيجية</label>
                 <input
@@ -76,38 +173,6 @@
                   required
                 />
               </div>
-            </div>
-
-            <div class="form-row">
-              <!-- حقل المعلم/المعلمة (قائمة منسدلة) -->
-              <div class="form-group">
-                <label for="teacherGender" class="form-label"
-                  >المعلم/المعلمة</label
-                >
-                <select
-                  id="teacherGender"
-                  name="teacherGender"
-                  class="form-control"
-                  required
-                >
-                  <option value="معلم">معلم</option>
-                  <option value="معلمة">معلمة</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="teacherName" class="form-label"
-                  >اسم المعلم/المعلمة</label
-                >
-                <input
-                  type="text"
-                  id="teacherName"
-                  name="teacherName"
-                  class="form-control"
-                  required
-                />
-              </div>
-
               <div class="form-group">
                 <label class="form-label">تاريخ التنفيذ الهجري</label>
                 <input
@@ -119,9 +184,6 @@
                   required
                 />
               </div>
-            </div>
-
-            <div class="form-row">
               <div class="form-group">
                 <label class="form-label">المادة</label>
                 <input
@@ -148,82 +210,16 @@
 
             <div class="form-row">
               <div class="form-group">
-                <label class="form-label">عدد الطلاب</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="studentsCount"
-                  name="studentsCount"
-                  placeholder="عدد الطلاب"
-                  required
-                />
-              </div>
-              <div class="form-group">
                 <label class="form-label">الفصل</label>
-                <select
+                <input
                   class="form-control form-select"
                   id="classroom"
                   name="classroom"
                   required
                 >
-                  <option value="">اختر الفصل</option>
-                  <option value="1">١</option>
-                  <option value="2">٢</option>
-                  <option value="3">٣</option>
-                  <option value="4">٤</option>
-                  <option value="5">٥</option>
-                  <option value="جميع الفصول">جميع الفصول</option>
-                </select>
+                </input>
               </div>
-              <!-- <div class="form-group">
-                <label class="form-label">الفصل الدراسي</label>
-                <select
-                  class="form-control form-select"
-                  id="grade"
-                  name="grade"
-                  required
-                >
-                  <option value="">اختر الفصل الدراسي</option>
-                  <option value="الفصل الدراسي الأول">
-                    الفصل الدراسي الأول
-                  </option>
-                  <option value="الفصل الدراسي الثاني">
-                    الفصل الدراسي الثاني
-                  </option>
-                </select>
-              </div> -->
-            </div>
-
-            <div class="form-row">
-              <!-- حقل مدير/مديرة (قائمة منسدلة) -->
-              <div class="form-group">
-                <label for="directorGender" class="form-label"
-                  >مدير/مديرة</label
-                >
-                <select
-                  id="directorGender"
-                  name="directorGender"
-                  class="form-control"
-                  required
-                >
-                  <option value="مدير">مدير</option>
-                  <option value="مديرة">مديرة</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label for="directorName" class="form-label"
-                  >اسم المدير/المديرة</label
-                >
-                <input
-                  type="text"
-                  id="directorName"
-                  name="directorName"
-                  class="form-control"
-                  required
-                />
-              </div>
-              <div class="form-group full-width">
+              <div class="form-group ">
                 <label class="form-label">الدرس</label>
                 <input
                   type="text"

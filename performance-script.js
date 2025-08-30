@@ -78,6 +78,22 @@ function removeImage(button, inputId, index) {
   input.files = dt.files;
 }
 
+function toggleSchoolFields() {
+  var schoolGender = document.getElementById("schoolGender").value;
+  if (schoolGender === "boys") {
+    document.getElementById("boysFields").style.display = "block";
+    document.getElementById("girlsFields").style.display = "none";
+  } else if (schoolGender === "girls") {
+    document.getElementById("boysFields").style.display = "none";
+    document.getElementById("girlsFields").style.display = "block";
+  }
+}
+
+// Initialize on page load
+window.onload = function () {
+  toggleSchoolFields(); // To ensure fields are correctly displayed based on the default selection
+};
+
 function printForm(formId) {
   const form = document.getElementById(formId);
   if (!form) return;
@@ -137,10 +153,14 @@ function printStrategiesReport() {
   formData.educationDepartment =
     formData.educationDepartment || "الإدارة العامة للتعليم بمحافظة ";
   formData.schoolName = formData.schoolName || "مدرسة غير محددة";
-  formData.teacherGender = formData.teacherGender || "معلم";
-  formData.teacherName = formData.teacherName || "غير محدد"; // استبدال teacherNameStrategy
-  formData.directorGender = formData.directorGender || "مدير";
-  formData.directorName = formData.directorName || " غير محدد"; // استبدال directorNameStrategy
+  formData.teacherName = formData.teacherName || "غير محدد";
+  formData.directorName = formData.directorName || "غير محدد";
+
+  // تحديد التسميات بناءً على نوع المدرسة
+  const studentsLabel =
+    formData.schoolGender === "girls" ? "عدد الطالبات" : "عدد الطلاب";
+  const teacherGender = formData.schoolGender === "girls" ? "معلمة" : "معلم";
+  const directorGender = formData.schoolGender === "girls" ? "مديرة" : "مدير";
 
   const printWindow = window.open("", "_blank");
   const htmlContent = `
@@ -422,16 +442,15 @@ function printStrategiesReport() {
               <div class="info-item"><div class="info-label">تاريخ التنفيذ:</div><div class="info-value">${
                 formData.implementationDate || "غير محدد"
               }</div></div>
-              <div class="info-item"><div class="info-label">عدد الطلاب:</div><div class="info-value">${
-                formData.studentsCount || "غير محدد"
-              }</div></div>
+              <div class="info-item"><div class="info-label">${studentsLabel}:</div><div class="info-value">${
+    formData.studentsCount || "غير محدد"
+  }</div></div>
               <div class="info-item"><div class="info-label">الصف:</div><div class="info-value">${
                 formData.grade || "غير محدد"
               }</div></div>
               <div class="info-item"><div class="info-label">الفصل:</div><div class="info-value">${getPeriodText(
                 formData.classroom || "غير محدد"
               )}</div></div>
-             
           </div>
           
           <div class="lesson-section">
@@ -487,15 +506,11 @@ function printStrategiesReport() {
           
           <div class="signature-section">
               <div class="signature-item">
-                  <div class="signature-title">اسم ال${
-                    formData.teacherGender
-                  }</div>
+                  <div class="signature-title">اسم ${teacherGender}</div>
                   <div class="signature-name">${formData.teacherName}</div>
               </div>
               <div class="signature-item">
-                  <div class="signature-title">${
-                    formData.directorGender
-                  } المدرسة</div>
+                  <div class="signature-title">${directorGender} المدرسة</div>
                   <div class="signature-name">${formData.directorName}</div>
               </div>
           </div>

@@ -38,43 +38,61 @@
           <form id="examForm">
             <div class="row">
               <div class="col-md-6 mb-3">
+                <label class="form-label">اسم الإدارة التعليمية</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="eduAdminName"
+                  value="الإدارة العامة للتعليم بمحافظة "
+                  placeholder="أدخل اسم الإدارة التعليمية"
+                  required
+                />
+              </div>
+              <div class="col-md-6 mb-3">
                 <label class="form-label">اسم المدرسة</label>
                 <input
                   type="text"
                   class="form-control"
                   id="schoolName"
-                  value="ثانوية دار التوحيد"
-                  readonly
-                  style="background-color: #f8f9fa"
+                  placeholder="أدخل اسم المدرسة"
+                  required
                 />
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">الصف</label>
-                <select class="form-control" id="classLevel" required>
-                  <option value="">اختر الصف</option>
-                  <option value="الأول الثانوي">الأول الثانوي</option>
-                  <option value="الثاني الثانوي">الثاني الثانوي</option>
-                  <option value="الثالث الثانوي">الثالث الثانوي</option>
-                </select>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="classLevel"
+                  placeholder="أدخل الصف (مثال: الثالث الثانوي)"
+                  required
+                />
               </div>
               <div class="col-md-6 mb-3">
                 <label class="form-label">الفصل</label>
-                <select class="form-control" id="classSection" required>
-                  <option value="">اختر الفصل</option>
-                  <option value="1">١</option>
-                  <option value="2">٢</option>
-                  <option value="3">٣</option>
-                  <option value="4">٤</option>
-                  <option value="5">٥</option>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="classSection"
+                  placeholder="أدخل الفصل (مثال: أولى أ)"
+                  required
+                />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">المعلم/المعلمة</label>
+                <select class="form-control" id="teacherType" required>
+                  <option value="">اختر</option>
+                  <option value="معلم">معلم</option>
+                  <option value="معلمة">معلمة</option>
                 </select>
               </div>
               <div class="col-md-6 mb-3">
-                <label class="form-label">اسم المعلم</label>
+                <label class="form-label">اسم المعلم/المعلمة</label>
                 <input
                   type="text"
                   class="form-control"
                   id="teacherName"
-                  placeholder="أدخل اسم المعلم"
+                  placeholder="أدخل اسم المعلم/المعلمة"
                   required
                 />
               </div>
@@ -116,6 +134,24 @@
                   <option value="الاختبار النهائي">الاختبار النهائي</option>
                 </select>
               </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">المدير/المديرة</label>
+                <select class="form-control" id="directorType" required>
+                  <option value="">اختر</option>
+                  <option value="مدير">مدير</option>
+                  <option value="مديرة">مديرة</option>
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label">اسم المدير/المديرة</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="directorName"
+                  placeholder="أدخل اسم المدير/المديرة"
+                  required
+                />
+              </div>
             </div>
           </form>
         </div>
@@ -142,8 +178,12 @@
               >
             </div>
             <div class="col-md-6 mb-3" id="manualInputButtonContainer">
-              <h5>أو إدخال البيانات يدوياً</h5>
-              <button class="btn btn-primary" onclick="showManualInput()">
+              <h5>أو إدخال يدوي</h5>
+              <button
+                class="btn btn-primary"
+                id="manualInputButton"
+                onclick="showManualInput()"
+              >
                 <i class="fas fa-keyboard"></i> إدخال البيانات يدوياً
               </button>
             </div>
@@ -154,7 +194,7 @@
       <!-- Manual Input Section -->
       <div class="card mb-4" id="manualInputSection" style="display: none">
         <div class="card-header">
-          <h3><i class="fas fa-edit"></i> إدخال البيانات يدوياً</h3>
+          <h3><i class="fas fa-edit"></i> أو إدخال البيانات يدوياً</h3>
         </div>
         <div class="card-body">
           <div class="row mb-3">
@@ -314,7 +354,7 @@
             وزارة التعليم
           </h1>
           <h2 style="color: #6c757d; margin: 10px 0; font-size: 20px">
-            الإدارة العامة للتعليم بمحافظة الطائف
+            <span id="pdfEduAdminName"></span>
           </h2>
           <h3
             style="
@@ -326,7 +366,7 @@
               border-radius: 10px;
             "
           >
-            تحليل النتائج
+            <span id="pdfSchoolName"></span>
           </h3>
         </div>
 
@@ -357,10 +397,23 @@
             "
           >
             <div>
-              <strong>اسم المدرسة:</strong> <span id="pdfSchoolName"></span>
+              <strong>اسم الإدارة التعليمية:</strong>
+              <span id="pdfEduAdminName"></span>
             </div>
             <div>
-              <strong>اسم المعلم:</strong> <span id="pdfTeacherName"></span>
+              <strong>اسم المدرسة:</strong>
+              <span id="pdfSchoolName"></span>
+            </div>
+            <div><strong>الصف:</strong> <span id="pdfClassLevel"></span></div>
+            <div>
+              <strong>الفصل:</strong> <span id="pdfClassSection"></span>
+            </div>
+            <div>
+              <strong>المعلم/المعلمة:</strong> <span id="pdfTeacherType"></span>
+            </div>
+            <div>
+              <strong>اسم المعلم/المعلمة:</strong>
+              <span id="pdfTeacherName"></span>
             </div>
             <div>
               <strong>المادة:</strong> <span id="pdfSubjectName"></span>
@@ -373,6 +426,14 @@
             </div>
             <div>
               <strong>نوع الاختبار:</strong> <span id="pdfExamType"></span>
+            </div>
+            <div>
+              <strong>المدير/المديرة:</strong>
+              <span id="pdfDirectorType"></span>
+            </div>
+            <div>
+              <strong>اسم المدير/المديرة:</strong>
+              <span id="pdfDirectorName"></span>
             </div>
           </div>
         </div>
@@ -542,14 +603,14 @@
           <p>تاريخ الإنشاء: <span id="pdfDate"></span></p>
           <div style="margin-top: 20px; text-align: left">
             <p style="font-weight: bold; color: #007bff">
-              مدير المدرسة: فهد بن حسن القحطاني
+              مدير/مديرة المدرسة: <span id="pdfDirectorType"></span>
+              <span id="pdfDirectorName"></span>
             </p>
           </div>
         </div>
       </div>
     </main>
-    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
